@@ -46,7 +46,7 @@
 		</div> -->
 		<div class="list">
 			<ul class="itemlist">
-				<li class="item item1" >我发布的<span class="number" v-if="login">{{33}}</span></li>
+				<li class="item item1" @click="goMyPublish">我发布的<span class="number" v-if="login">{{33}}</span></li>
 				<li class="item item2">我卖出的<span class="number" v-if="login">{{33}}</span></li>
 				<li class="item item3" >我买到的<span class="number" v-if="login">{{44}}</span></li>
 				<li class="item item4">我赞过的<span class="number" v-if="login">{{44}}</span></li>
@@ -87,14 +87,17 @@ export default {
     }
   },
   methods: {
-    loadImg () {
-      console.log(334)
-		     let vm = this;
-		     let add = document.querySelector('input[type=file]')
-		     add.click()
+	loadImg () {
+		console.log(334)
+				let vm = this;
+				let add = document.querySelector('input[type=file]')
+				add.click()
 
-		     return false;
+				return false;
 		},
+		goMyPublish() {
+			this.$router.push('/myPublish')
+		}
   }
 }
 </script>

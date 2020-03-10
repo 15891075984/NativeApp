@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-03-08 18:05:34
+ * @LastEditTime: 2020-03-10 11:15:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -55,6 +55,14 @@ export default new Router({
         path:'/kinds',
         name:'kinds',
         component: () => import('@/pages/Kinds')
+    },{
+        path:'/myPublish',
+        name:'myPublish',
+        component: () => import('@/pages/myPublish')
+    },{
+        path:'/goods/:goodsId',
+        name:'goods',
+        component: () => import('@/pages/Goods')
     },
     // ,{
     //   path:'/category',

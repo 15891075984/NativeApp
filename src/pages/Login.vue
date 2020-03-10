@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-03-08 15:33:38
+ * @LastEditTime: 2020-03-10 13:48:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -26,6 +26,7 @@
 import { Field,Button,Indicator  } from 'mint-ui';
 import headerBar from '../components/headerBar'
 import axios from '../utils/request'
+import { mapActions } from 'vuex'
 export default {
     components: {
         Field,
@@ -39,6 +40,9 @@ export default {
         }
     },
     methods: {
+        ...mapActions({
+            'getUserInfo':'user/getUserInfo'
+        }),
         handleSubmit () {
             const params = {
                 username: this.username,
@@ -46,14 +50,15 @@ export default {
             }
             Indicator.open('加载中...');
             axios({
-                url: '/second-hand/login',
+                url: '/login',
                 method: 'post',
                 data: {...params},
                 headers: {'Content-Type': 'application/json'}
             }).then( res => {
                 Indicator.close()
-                if (res.returnObject && res.returnObject.length >= 1){
-                    window.localStorage["token"] = JSON.stringify(res.returnObject);
+                if (res && res.length >= 1){
+                    window.localStorage["token"] = JSON.stringify(res);
+                    this.getUserInfo()
                     this.$router.push('/');
                 }else {
                     window.localStorage["token"] = ''

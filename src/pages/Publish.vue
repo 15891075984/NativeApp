@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-08 19:44:19
+ * @LastEditTime: 2020-03-10 11:35:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -10,8 +10,8 @@
   <div>
       <headerBar title="发布"></headerBar>
       <div class="publish">
-          <mt-field label="商品标题" placeholder="品类品牌类型都是买家喜欢搜索的" v-model="username"></mt-field>
-          <mt-field label="商品描述" placeholder="描述一下你的闲置"  v-model="email"></mt-field>
+          <mt-field label="商品标题" placeholder="品类品牌类型都是买家喜欢搜索的" v-model="title"></mt-field>
+          <mt-field label="商品描述" placeholder="描述一下你的闲置"  v-model="desc"></mt-field>
           <div class="goods-upload">
             <!-- <input type="file">
             <img src="../assets/img/相机.png" alt="" style="widht:50px;height:50px;margin:auto;margin-top:10px;margin-bottom:10px"> -->
@@ -30,7 +30,7 @@
 
           <div class="price">
             <mt-button type="default" style="width:90%;margin-left:5%;border-radius:20px;background:#ffda44;color:#fff">开个价</mt-button>
-            <mt-field label="商品价格" placeholder="请输入商品价格" type="number" v-model="number" style="margin-top:30px"></mt-field>
+            <mt-field label="商品价格" placeholder="请输入商品价格" type="number" v-model="price" style="margin-top:30px"></mt-field>
             <div @click="goKinds">
               <mt-cell title="分类" label="选择类别" is-link
                       :value="goods.upload.productTag"
@@ -58,6 +58,13 @@ export default {
       Field,
       headerBar,
       Cell
+  },
+  data () {
+    return {
+      title:'',
+      desc:'',
+      price:'',
+    }
   },
   computed:{
     ...mapState({
@@ -95,7 +102,7 @@ export default {
           headers: {'Content-Type': 'multipart/form-data'}
         }
         // 添加请求头
-        axios.post('upload/upImg', param, config)
+        axios.post('/upload/upImg', param, config)
           .then(response => {
             if (response.data.status == 200) {
               self.form.img = response.data.data.img;

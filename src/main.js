@@ -11,6 +11,7 @@ import 'mint-ui/lib/style.css'
 import './styles/weui.scss';
 import './styles/fish.scss';
 import { Toast } from 'mint-ui';
+import vUploader from 'v-uploader';
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
@@ -24,7 +25,19 @@ Vue.use(VueI18n);
 // });
 Vue.use(MintUI)
 Vue.use(VueAwesomeSwiper)
-
+const uploaderConfig = {
+    // file uploader service url
+    uploadFileUrl: 'http://xxx/upload/publicFileUpload',
+    // file delete service url
+    deleteFileUrl: 'http://xxx/upload/deleteUploadFile',
+    // set the way to show upload message(upload fail message)
+    showMessage: (vue, message) => {
+      //using v-dialogs to show message
+        vue.$dlg.alert(message, {messageType: 'error'});
+        }
+    };
+  // install plugin with options
+  Vue.use(vUploader, uploaderConfig);
 const i18n = new VueI18n({
     locale: 'zh'
 });

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-18 20:02:47
- * @LastEditTime: 2020-03-08 17:28:59
+ * @LastEditTime: 2020-03-10 13:47:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\utils\request.js
@@ -43,20 +43,21 @@ axios.interceptors.response.use(config=>{
     const message = httpCodeMap.get(status)
     if ( message ) {
         Toast(message)
+        return
     }
     //对后端接口code码进行拦截code 0 success 1 failed
     const code = config.data.code
-    console.log('code', code)
     if (code != 0) {
         //全局提示信息
         Toast(config.data.message)
+        return
         // let instance = Toast( config.data.message );
         // setTimeout(() => {
         //     instance.close();
         // }, 2000);
     }
-    return config.data
+    return config.data.returnObject
 },function(err){
-    console.log('err',err)
+    Toast('网络错误')
 })
 export default axios
