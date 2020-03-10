@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-18 20:02:47
- * @LastEditTime: 2020-03-10 13:47:35
+ * @LastEditTime: 2020-03-10 15:25:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\utils\request.js
@@ -58,6 +58,6 @@ axios.interceptors.response.use(config=>{
     }
     return config.data.returnObject
 },function(err){
-    Toast('网络错误')
+    Toast('请求失败，请重试')
 })
 export default axios

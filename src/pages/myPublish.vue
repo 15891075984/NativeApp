@@ -1,39 +1,38 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-10 11:09:45
+ * @LastEditTime: 2020-03-10 15:35:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
  -->
 <template>
-  <div class="publish-list">
-      <headerBar title="我发布的"></headerBar>
-      <div class="publish-item" v-for="(item) in myPublishData" :key="item.id">
-          <div class="item-header">
-              <div class="header-img">
-                  <img src="../assets/img/avatar.jpg" alt="">
-                  <span>334名字</span>
-              </div>
-              
-              <div class="price">￥{{item.price}}</div>
-          </div>
-          <div class="item-content">
-              <div class="content-img">
-                  <img src="../assets/img/fangwu.png" alt="">
-              </div>
-              <p class="desc">{{item.desc}}</p>
-              <div class="item-bottom">
-                  <div class="kinds">
-                      类别:{{item.kinds}}
-                  </div>
-                  <div class="update-time">
-                      发布时间:{{item.updateTime}}
-                  </div>
-              </div>
-          </div>
+    <div class="publish-list">
+        <headerBar title="我发布的"></headerBar>
+        <div class="publish-item" v-for="(item) in myPublishData" :key="item.id">
+            <div class="item-header">
+                <div class="header-img">
+                    <img src="../assets/img/avatar.jpg" alt="">
+                    <span>334名字</span>
+                </div>
+                <div class="price">￥{{item.price}}</div>
+            </div>
+            <div class="item-content">
+                <div class="content-img">
+                    <img src="../assets/img/fangwu.png" alt="">
+                </div>
+                <p class="desc">{{item.desc}}</p>
+                <div class="item-bottom">
+                    <div class="kinds">
+                        类别:{{item.kinds}}
+                    </div>
+                    <div class="update-time">
+                        发布时间:{{item.updateTime}}
+                    </div>
+                </div>
+            </div>
             <div class="item-delete">
-                <mt-button plain type="primary" size="small" @click="deleteMyPublish" class="delete-btn">删除</mt-button>
+                <mt-button plain type="primary" size="small" @click="deleteMyPublish" class="delete-btn">下架</mt-button>
             </div>
       </div>
   </div>
@@ -42,7 +41,7 @@
 <script>
 import headerBar from '../components/headerBar'
 import { Button } from 'mint-ui';
-
+import { mapState,mapMutations,mapActions } from 'vuex';
 export default {
     components: {
         headerBar,
@@ -110,12 +109,21 @@ export default {
     },
     mounted () {
         //TODO 用户去拉取发布列表
+        this
     },
-    methods: {
-        deleteMyPublish () {
-            console.log(123)
-        }
-    },
+    computed:{
+    ...mapState({
+        'goods':'goods'
+    })
+  },
+  methods: {
+    ...mapActions({
+      'submitPublish':'goods/submitPublish'
+    }),
+    ...mapMutations({
+      'setPublishImg':'goods/setPublishImg'
+    })
+  }
 }
 </script>
 

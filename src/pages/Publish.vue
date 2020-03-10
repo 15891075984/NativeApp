@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-10 14:01:17
+ * @LastEditTime: 2020-03-10 15:32:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -10,8 +10,8 @@
   <div>
       <headerBar title="发布"></headerBar>
       <div class="publish">
-          <mt-field label="商品标题" placeholder="品类品牌类型都是买家喜欢搜索的" v-model="title"></mt-field>
-          <mt-field label="商品描述" placeholder="描述一下你的闲置"  v-model="desc"></mt-field>
+          <mt-field label="商品标题" placeholder="品类品牌类型都是买家喜欢搜索的" v-model="goods.upload.productName"></mt-field>
+          <mt-field label="商品描述" placeholder="描述一下你的闲置"  v-model="goods.upload.productContent"></mt-field>
           <div class="goods-upload">
             <!-- <input type="file">
             <img src="../assets/img/相机.png" alt="" style="widht:50px;height:50px;margin:auto;margin-top:10px;margin-bottom:10px"> -->
@@ -25,37 +25,36 @@
             style="widht:50px;height:50px;
                     position:absolute;
                     left:45%;top:10px;"> -->
-            
             <p class="goods-upload-desc">请选择拍照片或者上传图片</p>
           </div>
           <div class="upload-img-list">
-              <img :src="item" alt="" style="width:100px;height:100px" v-for="(item,index) in imgUrl" :key="index">
+              <!-- <img :src="item" alt="" style="width:100px;height:100px" v-for="(item,index) in imgUrl" :key="index"> -->
+              <img :src="goods.upload.productPic" alt="" style="width:100px;height:100px">
           </div>
 
           <div class="price">
             <mt-button type="default" style="width:90%;margin-left:5%;border-radius:20px;background:#ffda44;color:#fff">开个价</mt-button>
-            <mt-field label="商品价格" placeholder="请输入商品价格" type="number" v-model="price" style="margin-top:30px"></mt-field>
+            <mt-field label="商品价格" placeholder="请输入商品价格" type="number" v-model="goods.upload.productPrice" style="margin-top:30px"></mt-field>
             <div @click="goKinds">
               <mt-cell title="分类" label="选择类别" is-link
                       :value="goods.upload.productTag"
                       ></mt-cell>
             </div>
             <div class="publish-submit">
-              <mt-button type="default" style="width:96%;font-size:14px;margin-left:2%;background:red;color:#fff">确定发布</mt-button>
+              <mt-button type="default" style="width:96%;font-size:14px;margin-left:2%;background:red;color:#fff" @click="handleclick">确定发布</mt-button>
             </div>
           </div>
       </div>
-
       <tabBar></tabBar>
   </div>
 </template>
 
 <script>
-import { Field,Button,Cell  } from 'mint-ui';
+import { Field,Button,Cell,Indicator  } from 'mint-ui';
 import headerBar from '../components/headerBar'
 import tabBar from '../components/tabBar'
 import axios from '../utils/request'
-import { mapState,mapMutations } from 'vuex';
+import { mapState,mapMutations,mapActions } from 'vuex';
 export default {
   components: {
       tabBar,
@@ -68,7 +67,7 @@ export default {
       title:'',
       desc:'',
       price:'',
-      imgUrl:[]
+      imgUrl:''
     }
   },
   computed:{
@@ -77,20 +76,14 @@ export default {
     })
   },
   methods: {
-    handleSubmit () {
-      // axios.get('/second-hand/api/user/info').then(res => {
-      //   console.log(res)
-      // })
-
-      axios({
-        url: '/second-hand/api/user/getUserInfoWithPerms',
-        method: 'post',
-        data: {},
-        headers: {'Content-Type': 'application/json'}
-      })
-    },
+    ...mapActions({
+      'submitPublish':'goods/submitPublish'
+    }),
+    ...mapMutations({
+      'setPublishImg':'goods/setPublishImg'
+    }),
+    //去分类页
     goKinds () {
-      console.log(445)
       this.$router.push({
         path:'/kinds'
       })
@@ -106,11 +99,20 @@ export default {
         let config = {
           headers: {'Content-Type': 'multipart/form-data'}
         }
+        Indicator.open('上传图片中...');
         // 添加请求头
         axios.post('/fileSystem/upLoadImage', param, config)
           .then(response => {
-            this.imgUrl.push( response )
+            Indicator.close()
+            //TODO 限制上传一张
+            //this.imgUrl.push( response )
+            // this.imgUrl = response
+            this.setPublishImg(response)
           })
+    },
+
+    handleclick () {
+      this.submitPublish(this.$router)
     }
   }
 }

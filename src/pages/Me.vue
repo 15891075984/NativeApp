@@ -67,7 +67,7 @@
 			</ul>
 		</div>
 		<div class="buttonwrap">
-			<button class="logout" v-if="login" >退出登录</button>
+			<button class="logout" v-if="login" @click="logout">退出登录</button>
 		</div>
 		<div class="block"></div>
 	</div>
@@ -89,15 +89,18 @@ export default {
   methods: {
 	loadImg () {
 		console.log(334)
-				let vm = this;
-				let add = document.querySelector('input[type=file]')
-				add.click()
-
-				return false;
-		},
-		goMyPublish() {
-			this.$router.push('/myPublish')
-		}
+		let vm = this;
+		let add = document.querySelector('input[type=file]')
+		add.click()
+		return false;
+	},
+	goMyPublish() {
+		this.$router.push('/myPublish')
+	},
+	logout () {
+		this.$router.push('/login')
+		localStorage.setItem('token','')
+	}
   }
 }
 </script>

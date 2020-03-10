@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 12:31:54
- * @LastEditTime: 2020-03-10 12:50:16
+ * @LastEditTime: 2020-03-10 15:52:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsCard.vue
  -->
 <template>
   <div class="goods-card">
-      <div class="mt-cell" v-for="data in news" key="data.id">
+      <div class="mt-cell" v-for="data in news" key="data.id" @click="goGoodsDetail(data)">
     	<div class="head" style="display:flex">
             <div class="head-img">
                 <img src="../assets/img/avatar.jpg" class="avatar" alt="">
@@ -44,7 +44,18 @@ export default {
     },
     mounted () {
         console.log(this.news)
-    }
+	},
+	methods: {
+		goGoodsDetail (item) {
+			const goodsId = item.id
+			this.$router.push({
+				name:'goods',
+				params: {
+					goodsId
+				}
+			})
+		}
+	}
 }
 </script>
 

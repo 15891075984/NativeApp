@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-10 12:53:55
+ * @LastEditTime: 2020-03-10 15:57:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -25,7 +25,13 @@
         <!-- tab-container -->
         <mt-tab-container v-model="selected" style="overflow:auto;height:60vh">
             <mt-tab-container-item id="1">
-                <goodsCard :news="goodsList"></goodsCard>
+				<ul
+					v-infinite-scroll="loadMore"
+					infinite-scroll-disabled="loading"
+					infinite-scroll-distance="100">
+					<goodsCard :news="goodsList"></goodsCard>
+				</ul>
+                
             </mt-tab-container-item>
             <mt-tab-container-item id="2">
                 <goodsCard :news="nearsList"></goodsCard>
@@ -39,7 +45,8 @@
 
 <script>
 import tabBar from '../components/tabBar'
-import { Search,Cell, Navbar, TabItem  } from 'mint-ui';
+import { mapState,mapMutations,mapActions } from 'vuex';
+import { Search,Cell, Navbar, TabItem, InfiniteScroll  } from 'mint-ui';
 import { Swiper, Slide } from 'vue-swiper-component';
 import myswipper from '../components/swipper'
 import goodsCard from '../components/goodsCard'
@@ -58,7 +65,8 @@ export default {
     data () {
         return {
             value:'',
-            selected:'1',
+			selected:'1',
+			loading: false,
             result : [
                 {
                     id:2,
@@ -270,14 +278,44 @@ export default {
 				}
 			],
         }
+	},
+	computed:{
+        ...mapState({
+            'goods':'goods'
+        })
     },
     methods: {
-        handleClick () {
-        },
-        handleSearch () {
-            alert(this.value)
-        }
-    }
+        ...mapActions({
+			'submitPublish':'goods/submitPublish',
+			'getGoodsList':'goods/getGoodsList'
+        }),
+        ...mapMutations({
+            
+		}),
+		loadMore() {
+			this.loading = true;
+			setTimeout(() => {
+				let last = this.goodsList[this.goodsList.length - 1];
+				for (let i = 1; i <= 10; i++) {
+				this.goodsList.push({
+					'avatar': './static/4.png',
+					'name': '万莉佳',
+					'time': '8小时前来过',
+					'price': '￥80',
+					'img': './static/04.png',
+					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
+					'add': '来自南昌',
+					'kind': '鱼塘|众鑫城上城'
+				});
+				}
+				this.loading = false;
+			}, 1000);
+		}
+	},
+	mounted () {
+		console.log(123)
+		this.getGoodsList()
+	}
 }
 </script>
 
