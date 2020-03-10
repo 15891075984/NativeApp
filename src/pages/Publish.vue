@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-10 11:35:43
+ * @LastEditTime: 2020-03-10 14:01:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -25,7 +25,11 @@
             style="widht:50px;height:50px;
                     position:absolute;
                     left:45%;top:10px;"> -->
+            
             <p class="goods-upload-desc">请选择拍照片或者上传图片</p>
+          </div>
+          <div class="upload-img-list">
+              <img :src="item" alt="" style="width:100px;height:100px" v-for="(item,index) in imgUrl" :key="index">
           </div>
 
           <div class="price">
@@ -64,6 +68,7 @@ export default {
       title:'',
       desc:'',
       price:'',
+      imgUrl:[]
     }
   },
   computed:{
@@ -96,18 +101,15 @@ export default {
         let file = event.target.files[0]
         let param = new FormData() // 创建form对象
         param.append('file', file, file.name) // 通过append向form对象添加数据
-        param.append('type', '1') // 添加form表单中其他数据
+        // param.append('type', '1') // 添加form表单中其他数据
         console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
         let config = {
           headers: {'Content-Type': 'multipart/form-data'}
         }
         // 添加请求头
-        axios.post('/upload/upImg', param, config)
+        axios.post('/fileSystem/upLoadImage', param, config)
           .then(response => {
-            if (response.data.status == 200) {
-              self.form.img = response.data.data.img;
-              self.form.imgURL  ='http://www.baidu.com/'+response.data.data.img;
-            }
+            this.imgUrl.push( response )
           })
     }
   }
@@ -139,7 +141,7 @@ export default {
   bottom: 10px;
 }
 .price{
-  margin-top: 50px;
+  margin-top: 10px;
 }
 .publish-submit{
 
