@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-10 16:06:51
+ * @LastEditTime: 2020-03-10 16:18:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -25,16 +25,21 @@
         <!-- tab-container -->
         <mt-tab-container v-model="selected" style="overflow:auto;height:60vh">
             <mt-tab-container-item id="1">
-				<ul
+				<ul	v-if="selected == '1'"
 					v-infinite-scroll="loadMore"
 					infinite-scroll-disabled="loading"
-					infinite-scroll-distance="100">
+					infinite-scroll-distance="50">
 					<goodsCard :news="goodsList"></goodsCard>
 				</ul>
                 
             </mt-tab-container-item>
             <mt-tab-container-item id="2">
-                <goodsCard :news="nearsList"></goodsCard>
+				<ul	v-if="selected == '2'"
+					v-infinite-scroll="loadMoreNears"
+					infinite-scroll-disabled="loadingNears"
+					infinite-scroll-distance="50">
+					<goodsCard :news="nearsList"></goodsCard>
+				</ul>
             </mt-tab-container-item>
         </mt-tab-container>
         
@@ -67,6 +72,7 @@ export default {
             value:'',
 			selected:'1',
 			loading: false,
+			loadingNears: false,
 			page: 1,
             result : [
                 {
@@ -303,6 +309,7 @@ export default {
 			setTimeout(() => {
 				// let last = this.goodsList[this.goodsList.length - 1];
 				for (let i = 1; i <= 10; i++) {
+					console.log(444)
 				this.goodsList.push({
 					'avatar': './static/4.png',
 					'name': '万莉佳',
@@ -319,7 +326,34 @@ export default {
 				this.loading = false;
 				Indicator.close()
 			}, 1000);
-		}
+		},
+		loadMoreNears() {
+			//TODO 下拉无限加载
+			this.loadingNears = true;
+			Indicator.open({
+				text: '加载中...',
+				spinnerType: 'fading-circle'
+			});
+			setTimeout(() => {
+				for (let i = 1; i <= 10; i++) {
+					console.log(444)
+				this.nearsList.push({
+					'avatar': './static/4.png',
+					'name': '万莉佳',
+					'time': '8小时前来过',
+					'price': '￥80',
+					'img': './static/04.png',
+					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
+					'add': '来自南昌',
+					'kind': '鱼塘|众鑫城上城'
+				});
+				}
+				this.page ++ 
+				console.log(this.page)
+				this.loadingNears = false;
+				Indicator.close()
+			}, 1000);
+		},
 	},
 	mounted () {
 		console.log(123)
