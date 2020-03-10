@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="wrapper" style="height:100vh;overflow:auto">
+    <div class="wrapper" style="height:93vh;overflow:auto">
 		<div class="top">
 			<div class="loginhead">
 				<div class="flex border">

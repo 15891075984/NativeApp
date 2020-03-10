@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-10 15:32:15
+ * @LastEditTime: 2020-03-10 18:24:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -121,7 +121,7 @@ export default {
 <style>
 .publish{
   /* margin-top:39px; */
-  height: 87vh;
+  height: 80vh;
   position: relative;
 }
 .goods-upload{

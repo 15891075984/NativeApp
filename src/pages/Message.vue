@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-10 17:16:03
+ * @LastEditTime: 2020-03-10 18:26:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
  -->
 <template>
-  <div style="height:100vh;overflow:auto;background:#eee">
+  <div style="height:93vh;overflow:auto;background:#eee">
 
     <mt-loadmore :top-method="loadTop"
                   topPullText='下拉加载...'
@@ -20,7 +20,7 @@
     <div slot="top" class="mint-loadmore-top ">
       <div v-show="allLoaded !== 'loading'">
         加载最新...
-        <div style="height:50px" class="an">
+        <div style="height:40px;" class="an">
           <img src="../assets/img/加载4.png" alt="" style="height:100%">
         </div>
       </div>

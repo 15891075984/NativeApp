@@ -25,23 +25,23 @@ Vue.use(VueI18n);
 // });
 Vue.use(MintUI)
 Vue.use(VueAwesomeSwiper)
-const uploaderConfig = {
-    // file uploader service url
-    uploadFileUrl: 'http://xxx/upload/publicFileUpload',
-    // file delete service url
-    deleteFileUrl: 'http://xxx/upload/deleteUploadFile',
-    // set the way to show upload message(upload fail message)
-    showMessage: (vue, message) => {
-      //using v-dialogs to show message
-        vue.$dlg.alert(message, {messageType: 'error'});
-        }
-    };
-  // install plugin with options
-  Vue.use(vUploader, uploaderConfig);
+// const uploaderConfig = {
+//     // file uploader service url
+//     uploadFileUrl: 'http://xxx/upload/publicFileUpload',
+//     // file delete service url
+//     deleteFileUrl: 'http://xxx/upload/deleteUploadFile',
+//     // set the way to show upload message(upload fail message)
+//     showMessage: (vue, message) => {
+//       //using v-dialogs to show message
+//         vue.$dlg.alert(message, {messageType: 'error'});
+//         }
+//     };
+//   // install plugin with options
+//   Vue.use(vUploader, uploaderConfig);
 const i18n = new VueI18n({
     locale: 'zh'
 });
-
+localStorage.setItem('token','334')
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
     const routerName = to.name

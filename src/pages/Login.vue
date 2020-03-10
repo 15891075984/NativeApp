@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-03-10 13:48:41
+ * @LastEditTime: 2020-03-10 19:10:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -49,6 +49,7 @@ export default {
                 password: this.password
             }
             Indicator.open('加载中...');
+            localStorage.setItem('token','334')
             axios({
                 url: '/login',
                 method: 'post',
