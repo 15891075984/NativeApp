@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-03-10 19:10:35
+ * @LastEditTime: 2020-03-10 20:31:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -11,7 +11,7 @@
         <!-- <div class="topbar bg"></div> -->
         <headerBar title="发布"></headerBar>
         <div class="logo">
-            <img src="../assets/img/闲鱼.png" style="width:100px;height:100px" alt="">
+            <img src="../assets/img/闲鱼.png" style="width:100px;height:100px;margin-top:25px" alt="">
         </div>
         <mt-field label="用户名" placeholder="请输入用户名" v-model="username"></mt-field>
         <mt-field label="登录密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
