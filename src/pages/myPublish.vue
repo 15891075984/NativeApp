@@ -112,18 +112,18 @@ export default {
         this
     },
     computed:{
-    ...mapState({
-        'goods':'goods'
-    })
-  },
-  methods: {
-    ...mapActions({
-      'submitPublish':'goods/submitPublish'
-    }),
-    ...mapMutations({
-      'setPublishImg':'goods/setPublishImg'
-    })
-  }
+        ...mapState({
+            'goods':'goods'
+        })
+    },
+    methods: {
+        ...mapActions({
+            'submitPublish':'goods/submitPublish'
+        }),
+        ...mapMutations({
+            'setPublishImg':'goods/setPublishImg'
+        })
+    }
 }
 </script>
 

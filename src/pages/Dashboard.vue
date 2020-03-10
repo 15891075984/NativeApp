@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-10 15:57:18
+ * @LastEditTime: 2020-03-10 16:06:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -46,7 +46,7 @@
 <script>
 import tabBar from '../components/tabBar'
 import { mapState,mapMutations,mapActions } from 'vuex';
-import { Search,Cell, Navbar, TabItem, InfiniteScroll  } from 'mint-ui';
+import { Search,Cell, Navbar, TabItem, InfiniteScroll,Indicator } from 'mint-ui';
 import { Swiper, Slide } from 'vue-swiper-component';
 import myswipper from '../components/swipper'
 import goodsCard from '../components/goodsCard'
@@ -67,6 +67,7 @@ export default {
             value:'',
 			selected:'1',
 			loading: false,
+			page: 1,
             result : [
                 {
                     id:2,
@@ -293,9 +294,14 @@ export default {
             
 		}),
 		loadMore() {
+			//TODO 下拉无限加载
 			this.loading = true;
+			Indicator.open({
+				text: '加载中...',
+				spinnerType: 'fading-circle'
+			});
 			setTimeout(() => {
-				let last = this.goodsList[this.goodsList.length - 1];
+				// let last = this.goodsList[this.goodsList.length - 1];
 				for (let i = 1; i <= 10; i++) {
 				this.goodsList.push({
 					'avatar': './static/4.png',
@@ -308,7 +314,10 @@ export default {
 					'kind': '鱼塘|众鑫城上城'
 				});
 				}
+				this.page ++ 
+				console.log(this.page)
 				this.loading = false;
+				Indicator.close()
 			}, 1000);
 		}
 	},
