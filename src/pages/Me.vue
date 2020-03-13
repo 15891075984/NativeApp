@@ -19,12 +19,12 @@
 						<span class="num">{{334}}</span>
 						<span class="numname">被赞数</span>
 					</div>
-					<div class="numbox">
+					<div class="numbox" @click="goFollow">
 						<span class="num">{{34}}</span>
 						<span class="numname">关注数</span>
 					</div>
-					<div class="numbox">
-						<span class="num">{{34}}</span>
+					<div class="numbox" @click="goFans">
+						<span class="num" >{{34}}</span>
 						<span class="numname">粉丝数</span>
 					</div>
 				</div>
@@ -100,6 +100,24 @@ export default {
 	logout () {
 		this.$router.push('/login')
 		localStorage.setItem('token','')
+	},
+	//去关注页面
+	goFollow () {
+		this.$router.push({
+			name: 'follow',
+			params: {
+				followId:123
+			}
+		})
+	},
+	// 去粉丝页
+	goFans () {
+		this.$router.push({
+			name: 'fans',
+			params: {
+				fansId:123
+			}
+		})
 	}
   }
 }

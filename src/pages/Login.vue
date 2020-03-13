@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-03-13 22:02:29
+ * @LastEditTime: 2020-03-13 22:21:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -9,7 +9,7 @@
 <template>
     <div class="login">
         <!-- <div class="topbar bg"></div> -->
-        <headerBar title="发布"></headerBar>
+        <headerBar title="登录"></headerBar>
         <div class="logo">
             <img src="../assets/img/闲鱼.png" style="width:100px;height:100px;margin-top:25px" alt="">
         </div>
