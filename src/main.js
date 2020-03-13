@@ -41,14 +41,18 @@ Vue.use(VueAwesomeSwiper)
 const i18n = new VueI18n({
     locale: 'zh'
 });
-localStorage.setItem('token','334')
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
     const routerName = to.name
     router.app.$options.store.commit('user/setSelected',routerName)
     const token = localStorage['token']
-    console.log('token', !token)
-    if (!token && to.path !== '/login') {
+    const path = to.path
+    const limitRoute = ['/publish','/message','/me']
+    if( path === '/register') {
+        next()
+        return
+    }
+    if ( !token && limitRoute.indexOf( path ) >= 0 ) {
         //需要return 不然会走next()
         next('/login');
         Toast('未查询到用户登录，请登录')

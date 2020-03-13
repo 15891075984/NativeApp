@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-10 17:34:38
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-03-13 20:52:53
+ * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
  */

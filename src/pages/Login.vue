@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-03-10 20:31:19
+ * @LastEditTime: 2020-03-13 22:02:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -17,7 +17,8 @@
         <mt-field label="登录密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
         <mt-field ></mt-field>
         <div>
-            <mt-button type="primary" style="width:96%;margin-left:2%" @click="handleSubmit">登     录</mt-button>
+            <mt-button type="primary" style="width:96%;margin-left:2%" @click="handleSubmit">立即登录</mt-button>
+            <mt-button type="primary" style="width:96%;margin-left:2%;margin-top:5px" @click="goRegister">去注册</mt-button>
         </div>
     </div>
 </template>
@@ -35,8 +36,8 @@ export default {
     },
     data () {
         return {
-            username:"admin",
-            password:"admin"
+            username:"bai123456",
+            password:"123456"
         }
     },
     methods: {
@@ -65,6 +66,10 @@ export default {
                     window.localStorage["token"] = ''
                 }
             })
+        },
+        //去注册页面
+        goRegister () {
+            this.$router.push('/register');
         }
     }
 }

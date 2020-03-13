@@ -1,12 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-02-18 20:02:47
- * @LastEditTime: 2020-03-10 15:25:26
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \SellingPlat\src\utils\request.js
- */
-
 import axios from 'axios'
 import { Toast } from 'mint-ui';
 
@@ -36,10 +27,9 @@ axios.interceptors.request.use(config=>{
     return config
 })
 axios.interceptors.response.use(config=>{
-    console.log(config)
-
     //对请求status进行拦截，提示用户
     const status = config.status
+    console.log(9999,status)
     const message = httpCodeMap.get(status)
     if ( message ) {
         Toast(message)
@@ -51,13 +41,14 @@ axios.interceptors.response.use(config=>{
         //全局提示信息
         Toast(config.data.message)
         return
-        // let instance = Toast( config.data.message );
-        // setTimeout(() => {
-        //     instance.close();
-        // }, 2000);
     }
-    return config.data.returnObject
+    return config.data.data
 },function(err){
-    Toast('请求失败，请重试')
+    console.log(err)
+    Toast({
+        message: '服务器请求失败，请重试',
+        duration: 1000
+    })
+    return 
 })
 export default axios
