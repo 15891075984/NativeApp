@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:12:15
- * @LastEditTime: 2020-03-15 12:36:39
+ * @LastEditTime: 2020-03-15 12:46:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\vue.config.js
@@ -41,10 +41,6 @@ module.exports = {
               {
                 path: '/dashboard', //和router.js中的路径一样就行
                 skeletonId: 'skeleton1' //之前的id
-              },
-              {
-                path: '/me',
-                skeletonId: 'skeleton2'
               }
             ]
           }
