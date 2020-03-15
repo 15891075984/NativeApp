@@ -54,6 +54,7 @@ router.beforeEach((to, from, next) => {
     }
     if ( !token && limitRoute.indexOf( path ) >= 0 ) {
         //需要return 不然会走next()
+        //TODO
         next('/login');
         Toast('未查询到用户登录，请登录')
         return

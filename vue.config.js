@@ -1,11 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:12:15
- * @LastEditTime: 2020-03-10 12:25:05
- * @LastEditors: your name
+ * @LastEditTime: 2020-03-15 12:36:39
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\vue.config.js
  */
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
+const path = require('path')
 module.exports = {
     baseUrl: './',
     assetsDir: 'static',
@@ -21,5 +23,31 @@ module.exports = {
                 changeOrigin:true
             }
         }
-    }
+    },
+
+
+    configureWebpack: (config) => {
+        config.plugins.push(new SkeletonWebpackPlugin({
+          webpackConfig: {
+            entry: {
+              app: path.join(__dirname, './src/skeleton/entry-skeleton.js'),//这里为上面的entry-skeleton.js
+            }
+          },
+          minimize: true,
+          quiet: true,
+          router: {
+            mode: 'hash',
+            routes: [
+              {
+                path: '/dashboard', //和router.js中的路径一样就行
+                skeletonId: 'skeleton1' //之前的id
+              },
+              {
+                path: '/me',
+                skeletonId: 'skeleton2'
+              }
+            ]
+          }
+        }))
+      }
 }
