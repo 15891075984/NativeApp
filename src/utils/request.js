@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-03-08 11:14:35
+ * @LastEditTime: 2020-03-17 09:26:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \SellingPlat_APP\src\utils\request.js
+ */
 import axios from 'axios'
 import { Toast } from 'mint-ui';
 
@@ -43,8 +51,10 @@ axios.interceptors.response.use(config=>{
     const status = err.response.status
     const message = err.response.data.message
     //const message = httpCodeMap.get(status)
-    console.log(111,status)
-    console.log(333,message)
+    // 如果token过期，让去登录页
+    if (status.toString().startsWith('4')) {
+        localStorage.setItem('token','')
+    }
     if ( message ) {
         Toast({
             message,

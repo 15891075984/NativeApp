@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-03-08 11:14:35
+ * @LastEditTime: 2020-03-17 09:25:27
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \SellingPlat_APP\src\main.js
+ */
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
