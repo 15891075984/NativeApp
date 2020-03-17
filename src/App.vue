@@ -9,8 +9,8 @@ import { mapActions } from 'vuex'
 export default {
     mounted () {
         const hashUrl = window.location.hash
-        if ( hashUrl.indexOf('/login') || hashUrl.indexOf('/register')) {
-            return 
+        if ( hashUrl.indexOf('/login') >= 0  || hashUrl.indexOf('/register') >= 0) {
+            return
         }
         this.getUserInfo()
     },

@@ -6,25 +6,26 @@
 			<div class="loginhead">
 				<div class="flex border">
 					<div class="flexprimary">
-						<div class="name">223</div>
+						<div class="name">{{user.userInfo.uname}}</div>
 						<div class="somedesc">虽然没挣到钱，但在闲鱼开心就好</div>
 					</div>
 					<div class="useravatar" >
-						<img src="../assets/img/avatar.jpg" alt="" class="avatar"  @click="loadImg">
-						<input hidden type="file" accept="image/jpeg,image/jpg,image/png" capture="camera">
+						<img :src="user.userInfo.icon" alt="" class="avatar"  @click="loadImg">
+						<input hidden name="file" id="fileUpload"
+              					@change ="tirggerFile($event)" type="file" accept="image/jpeg,image/jpg,image/png" capture="camera">
 					</div>
 				</div>
 				<div class="flex">
 					<div class="numbox">
-						<span class="num">{{334}}</span>
+						<span class="num">{{user.userInfo.startNum}}</span>
 						<span class="numname">被赞数</span>
 					</div>
 					<div class="numbox" @click="goFollow">
-						<span class="num">{{34}}</span>
+						<span class="num">{{user.userInfo.followNum}}</span>
 						<span class="numname">关注数</span>
 					</div>
 					<div class="numbox" @click="goFans">
-						<span class="num" >{{34}}</span>
+						<span class="num" >{{334}}</span>
 						<span class="numname">粉丝数</span>
 					</div>
 				</div>
@@ -37,21 +38,13 @@
 					<button class="on">开通</button>
 			</div>
 		</div>
-		<!-- <div  class="head" v-if="login">
-			<div class="welcome">
-				欢迎来到闲鱼
-			</div>
-			<button class="login" @click="tologin">马上登录</button>
-			<div class="animate"></div>
-		</div> -->
 		<div class="list">
 			<ul class="itemlist">
-				<li class="item item1" @click="goMyPublish">我发布的<span class="number" v-if="login">{{33}}</span></li>
-				<li class="item item2">我卖出的<span class="number" v-if="login">{{33}}</span></li>
-				<li class="item item3" >我买到的<span class="number" v-if="login">{{44}}</span></li>
-				<li class="item item4">我赞过的<span class="number" v-if="login">{{44}}</span></li>
-				<li class="item item5">我的拍卖</li>
-				<li class="item item6">我的鱼贝<span class="number" v-if="login">{{33}}</span></li>
+				<li class="item item1" @click="goMyPublish">我发布的<span class="number" v-if="login">{{user.userInfo.issuseNum}}</span></li>
+				<li class="item item2">我卖出的<span class="number" v-if="login">{{user.userInfo.sellNum}}</span></li>
+				<li class="item item3" >我买到的<span class="number" v-if="login">{{user.userInfo.buyNum}}</span></li>
+				<li class="item item4">我赞过的<span class="number" v-if="login">{{user.userInfo.likeNum}}</span></li>
+				<li class="item item5">我收藏的<span class="number" v-if="login">{{user.userInfo.noticeNum}}</span></li>
 			</ul>
 		</div>
 		<div class="list" v-if="login">
@@ -77,23 +70,36 @@
 
 <script>
 import tabBar from '../components/tabBar'
+import axios from '../utils/request'
+import { Field,Button,Cell,Indicator,MessageBox } from 'mint-ui';
+import { mapState, mapMutations} from 'vuex';
 export default {
-  components: {
-    tabBar
-  },
-  data () {
-    return {
-      login: true
-    }
-  },
-  methods: {
-	loadImg () {
-		console.log(334)
-		let vm = this;
-		let add = document.querySelector('input[type=file]')
-		add.click()
-		return false;
+	components: {
+		tabBar
 	},
+	data () {
+		return {
+		login: true
+		}
+	},
+	computed:{
+		...mapState({
+			'user':'user'
+		})
+	},
+	mounted () {
+		console.log(this.user)
+	},
+	methods: {
+		...mapMutations({
+			setUserInfoAvatar:'user/setUserInfoAvatar'
+		}),
+		loadImg () {
+			let vm = this;
+			let add = document.querySelector('input[type=file]')
+			add.click()
+			return false;
+		},
 	goMyPublish() {
 		this.$router.push('/myPublish')
 	},
@@ -106,7 +112,7 @@ export default {
 		this.$router.push({
 			name: 'follow',
 			params: {
-				followId:123
+				followId:this.user.userInfo.id
 			}
 		})
 	},
@@ -115,10 +121,44 @@ export default {
 		this.$router.push({
 			name: 'fans',
 			params: {
-				fansId:123
+				fansId:this.user.userInfo.id
 			}
 		})
-	}
+	},
+
+	//自动上传文件
+    tirggerFile (event) {
+        let self = this;
+        let file = event.target.files[0]
+        let param = new FormData() // 创建form对象
+        param.append('file', file, file.name) // 通过append向form对象添加数据
+        console.log(param.get('file')) // FormData私有类对象，访问不到，可以通过get判断值是否传进去
+        let config = {
+        	headers: {'Content-Type': 'multipart/form-data'}
+        }
+        Indicator.open('上传图片中...');
+        // 添加请求头
+        axios.post('/fileSystem/upLoadImage', param, config)
+		.then(response => {
+			Indicator.close()
+			this.setUserInfoAvatar(response)
+			if(response) {
+				MessageBox({
+					title: '保存头像',
+					message: '确定保存新头像?',
+					showCancelButton: true
+				}).then(action => {
+					if(action === 'confirm') {
+						//发送更换头像请求
+						
+					}else if (action === 'cancel'){
+						this.setUserInfoAvatar(this.user.previousAvatar)
+					}
+					
+				})
+			}
+		})
+    },
   }
 }
 </script>
@@ -238,7 +278,8 @@ ul,li {
 	justify-content: center;
 }
 .useravatar img{
-	width: 100%;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 }
 .numbox {

@@ -28,27 +28,29 @@ axios.interceptors.request.use(config=>{
 })
 axios.interceptors.response.use(config=>{
     //对请求status进行拦截，提示用户
-    const status = config.status
-    console.log(9999,status)
-    const message = httpCodeMap.get(status)
-    if ( message ) {
-        Toast(message)
-        return
-    }
     //对后端接口code码进行拦截code 0 success 1 failed
     const code = config.data.code
     if (code != 0) {
         //全局提示信息
-        Toast(config.data.message)
+        Toast({
+            message: config.data.message,
+            duration: 1000
+        })
         return
     }
     return config.data.data
 },function(err){
-    console.log(err)
-    Toast({
-        message: '服务器请求失败，请重试',
-        duration: 1000
-    })
-    return 
+    const status = err.response.status
+    const message = err.response.data.message
+    //const message = httpCodeMap.get(status)
+    console.log(111,status)
+    console.log(333,message)
+    if ( message ) {
+        Toast({
+            message,
+            duration: 1000
+        })
+    }
+    return
 })
 export default axios

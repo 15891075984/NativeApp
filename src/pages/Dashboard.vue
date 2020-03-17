@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-10 16:18:35
+ * @LastEditTime: 2020-03-16 22:45:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -9,13 +9,22 @@
 <template>
 <div>
     <div class="dashboard">
-        <mt-search
-            v-model="value"
-            class="search"
-            style="height:100%"
-            @keyup.enter.native="handleSearch"
-            placeholder="搜索宝贝/鱼塘/用户">
-        </mt-search>
+		<div class="search">
+
+		
+			<mt-search
+				v-model="value"
+				class="search"
+				style="height:100%"
+				@keyup.enter.native="handleSearch"
+				placeholder="搜索宝贝/鱼塘/用户">
+			</mt-search>
+			<div class="search-list" v-if="value.length > 0">
+				<li v-for="item in 50">
+					{{item}}
+				</li>
+			</div>
+		</div>
         <myswipper :swiperData="result"></myswipper>
         <mt-navbar v-model="selected">
             <mt-tab-item id="1">新鲜的</mt-tab-item>
@@ -363,6 +372,9 @@ export default {
 </script>
 
 <style scoped>
+.search{
+	position: relative;
+}
 .search >>> .mint-searchbar{
     background: #ffda44;
 }
@@ -371,5 +383,15 @@ export default {
 }
 .search >>> .mint-searchbar-inner{
     border-radius: 20px;
+}
+
+.search-list{
+	position: absolute;
+    top: 52px;
+    left: 0;
+    right: 0;
+    height: 93vh;
+    background: #eee;
+    z-index: 99999;
 }
 </style>
