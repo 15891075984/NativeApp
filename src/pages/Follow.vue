@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-03-18 22:24:58
+ * @LastEditTime: 2020-03-19 00:41:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -9,15 +9,16 @@
 <template>
     <div style="height:100vh;overflow:auto;background:#eee">
         <headerBar title="我的关注"></headerBar>
-        <div class="follow-wrapper">
-            <userlist v-for="item in foollowList" :key="item.uid" :userValue="item"></userlist>
-        </div>
-        <div class="no-data" v-if="foollowList.length == 0">
+        <div class="no-data" v-if="foollowList.length === 0">
             <img src="../assets/img/yutang.png" alt="">
             <p>
                 一个人都没有，快去关注吧 ! ! !
             </p>
         </div>
+        <div class="follow-wrapper" v-else>
+            <userlist v-for="item in foollowList" :key="item.uid" :userValue="item"></userlist>
+        </div>
+        
     </div>
 </template>
 
@@ -39,7 +40,7 @@ export default {
     },
     mounted () {
         const followId = this.$route.params.followId
-        console.log(followId)
+        console.log(this.foollowList)
         axios.get(`/api/Graph/${followId}/followList`).then(res=>{
             if(!res){
                 this.foollowList = [] ;

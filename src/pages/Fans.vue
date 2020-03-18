@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-03-18 22:26:03
+ * @LastEditTime: 2020-03-19 00:41:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -36,7 +36,7 @@ export default {
     data () {
         return {
             allLoaded:true,
-            fansList:[{}]
+            fansList:[]
         }
     },
     mounted () {
@@ -57,5 +57,13 @@ export default {
 <style scoped>
 .fans-wrapper{
     padding: 1px 5px 80px 5px
+}
+.no-data{
+    height:100vh;
+    text-align: center;
+    line-height: 100%;
+    font-size: 20px;
+    max-width: 80%;
+    margin:0 auto;
 }
 </style>
