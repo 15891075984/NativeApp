@@ -6,13 +6,13 @@
 			<div class="loginhead">
 				<div class="flex border">
 					<div class="flexprimary">
-						<div class="name">{{user.userInfo.uname}}</div>
+						<div class="name">{{user.userInfo.uname || ''}}</div>
 						<div class="somedesc">虽然没挣到钱，但在闲鱼开心就好</div>
 					</div>
 					<div class="useravatar" >
-						<img :src="user.userInfo.icon" alt="" class="avatar"  @click="loadImg">
+						<img :src="user.userInfo.icon" alt="" class="avatar"  @click="sheetVisible = true">
 						<input hidden name="file" id="fileUpload"
-              					@change ="tirggerFile($event)" type="file" accept="image/jpeg,image/jpg,image/png" capture="camera">
+              					@change ="tirggerFile($event)" type="file"  capture="camera">
 					</div>
 				</div>
 				<div class="flex">
@@ -25,26 +25,26 @@
 						<span class="numname">关注数</span>
 					</div>
 					<div class="numbox" @click="goFans">
-						<span class="num" >{{334}}</span>
+						<span class="num" >{{user.userInfo.fansNum}}</span>
 						<span class="numname">粉丝数</span>
 					</div>
 				</div>
 			</div>
 			<div class="open flex">
 					<div class="flexprimary">
-						<p class="openvip">开通闲鱼号！</p>
-						<p class="tipinfo">就可以看到sei关注你啦</p>
+						<p class="openvip">来到闲鱼号！</p>
+						<p class="tipinfo">快来整理一下你的闲置物品吧</p>
 					</div>
-					<button class="on">开通</button>
+					<button class="on" @click="goHome">去看看</button>
 			</div>
 		</div>
 		<div class="list">
 			<ul class="itemlist">
-				<li class="item item1" @click="goMyPublish">我发布的<span class="number" v-if="login">{{user.userInfo.issuseNum}}</span></li>
+				<li class="item item1" @click="goMyPublish">我发布的<span class="number" v-if="login">{{user.userInfo.publishNum}}</span></li>
 				<li class="item item2">我卖出的<span class="number" v-if="login">{{user.userInfo.sellNum}}</span></li>
 				<li class="item item3" >我买到的<span class="number" v-if="login">{{user.userInfo.buyNum}}</span></li>
-				<li class="item item4">我赞过的<span class="number" v-if="login">{{user.userInfo.likeNum}}</span></li>
-				<li class="item item5">我收藏的<span class="number" v-if="login">{{user.userInfo.noticeNum}}</span></li>
+				<li class="item item4">我赞过的<span class="number" v-if="login">{{user.userInfo.starNum}}</span></li>
+				<li class="item item5">我收藏的<span class="number" v-if="login">{{user.userInfo.collectNum}}</span></li>
 			</ul>
 		</div>
 		<div class="list" v-if="login">
@@ -63,6 +63,10 @@
 			<button class="logout" v-if="login" @click="logout">退出登录</button>
 		</div>
 		<div class="block"></div>
+		<mt-actionsheet
+			:actions="actions"
+			v-model="sheetVisible">
+		</mt-actionsheet>
 	</div>
      <tabBar></tabBar>
   </div>
@@ -71,15 +75,24 @@
 <script>
 import tabBar from '../components/tabBar'
 import axios from '../utils/request'
-import { Field,Button,Cell,Indicator,MessageBox } from 'mint-ui';
+import { Field,Button, Cell,Indicator, MessageBox, Actionsheet } from 'mint-ui';
 import { mapState, mapMutations} from 'vuex';
 export default {
 	components: {
-		tabBar
+		tabBar,
+		Actionsheet,
 	},
 	data () {
 		return {
-		login: true
+			login: true,
+			sheetVisible: false,
+			actions: [{
+		        name: '拍照',
+		        method : this.photo
+				},{
+				name: '从相册中选择',
+		        method : this.img
+			}],
 		}
 	},
 	computed:{
@@ -94,14 +107,27 @@ export default {
 		...mapMutations({
 			setUserInfoAvatar:'user/setUserInfoAvatar'
 		}),
-		loadImg () {
+		photo () {
+			this.loadImg("image/jpg;capture=camera")
+		},
+		img () {
+			this.loadImg('image/jpeg,image/jpg,image/png')
+		},
+		setSheetVisible () {
+			this.sheetVisible = false
+		},
+		loadImg (params) {
 			let vm = this;
 			let add = document.querySelector('input[type=file]')
+			add.setAttribute('accept', params)
 			add.click()
 			return false;
 		},
 	goMyPublish() {
 		this.$router.push('/myPublish')
+	},
+	goHome() {
+		this.$router.push('/')
 	},
 	logout () {
 		this.$router.push('/login')

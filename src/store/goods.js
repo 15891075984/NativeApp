@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-13 20:52:53
- * @LastEditors: your name
+ * @LastEditTime: 2020-03-18 22:48:25
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
  */
@@ -19,9 +19,8 @@ const goods = {
             productPrice:'',
             productContent:'',
             productTag:'',
-            productAddress:'',
             productStatus:0,
-            productPic:''
+            productPic:[]
         }
         //
     },
@@ -31,15 +30,21 @@ const goods = {
             console.log(data)
         },
         setPublishImg (state, data) {
-            state.upload.productPic = data
+            state.upload.productPic.push(data)
+            console.log(444,state.upload.productPic)
         }
     },
     actions: {
         // 发布商品
         submitPublish ({ state , rootState}, router) {
+            
             let params = {...state.upload}
+            console.log(rootState)
             params.userAddress = rootState.user.userAddress
-            params = Object.assign(params, rootState.user.userInfo )
+            params.username = rootState.user.username
+            params.userId = rootState.user.userInfo.uid
+            params.productPic = params.productPic.flat(Infinity)
+            // params = Object.assign(params, rootState.user.userInfo )
             Indicator.open('发布商品中...')
             axios({
                 url: '/api/product/issue',
@@ -48,10 +53,12 @@ const goods = {
                 headers: {'Content-Type': 'application/json'}
             }).then(res => {
                 Indicator.close()
-                console.log(this.$router)
+                if (!res) {return}
                 router.push({
                     path:'/me'
                 })
+            }).catch(err=>{
+                Indicator.close()
             })
         },
 

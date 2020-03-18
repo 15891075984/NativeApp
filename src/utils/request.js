@@ -1,14 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-17 09:26:06
+ * @LastEditTime: 2020-03-18 22:27:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\utils\request.js
  */
+
 import axios from 'axios'
 import { Toast } from 'mint-ui';
-
+import router from '../router/index'
 let httpCode = [      //这里我简单列出一些常见的http状态码信息，可以自己去调整配置
     [400,'请求参数错误'],
     [401,'权限不足, 请重新登录'],
@@ -42,7 +43,7 @@ axios.interceptors.response.use(config=>{
         //全局提示信息
         Toast({
             message: config.data.message,
-            duration: 1000
+            duration: 2000
         })
         return
     }
@@ -52,13 +53,17 @@ axios.interceptors.response.use(config=>{
     const message = err.response.data.message
     //const message = httpCodeMap.get(status)
     // 如果token过期，让去登录页
-    if (status.toString().startsWith('4')) {
+    if (status.toString() === '401') {
         localStorage.setItem('token','')
+        // window.location.href = '/login'
+        router.push({
+            path:'/login'
+        })
     }
     if ( message ) {
         Toast({
             message,
-            duration: 1000
+            duration: 2000
         })
     }
     return

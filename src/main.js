@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-17 09:25:27
- * @LastEditors: your name
+ * @LastEditTime: 2020-03-18 23:17:53
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\main.js
  */
@@ -18,7 +18,9 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import './styles/weui.scss';
 import './styles/fish.scss';
-import { Toast } from 'mint-ui';
+//import { Toast, Lazyload, Actionsheet  } from 'mint-ui';
+import Mint from'mint-ui'
+import 'mint-ui/lib/style.css'
 import vUploader from 'v-uploader';
 //轮播图
 import VueAwesomeSwiper from 'vue-awesome-swiper'
@@ -31,7 +33,8 @@ Vue.use(VueI18n);
 // Vue.use(ElementUI, {
 //     size: 'small'
 // });
-Vue.use(MintUI)
+Vue.use(Mint)
+// Vue.use(Lazyload)
 Vue.use(VueAwesomeSwiper)
 // const uploaderConfig = {
 //     // file uploader service url

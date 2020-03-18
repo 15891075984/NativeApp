@@ -1,17 +1,22 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-03-13 22:54:21
+ * @LastEditTime: 2020-03-18 22:24:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
  -->
-
 <template>
     <div style="height:100vh;overflow:auto;background:#eee">
         <headerBar title="我的关注"></headerBar>
         <div class="follow-wrapper">
-            
+            <userlist v-for="item in foollowList" :key="item.uid" :userValue="item"></userlist>
+        </div>
+        <div class="no-data" v-if="foollowList.length == 0">
+            <img src="../assets/img/yutang.png" alt="">
+            <p>
+                一个人都没有，快去关注吧 ! ! !
+            </p>
         </div>
     </div>
 </template>
@@ -19,44 +24,45 @@
 <script>
 import headerBar from '../components/headerBar'
 import { Loadmore,Indicator } from 'mint-ui';
+import userlist from '../components/userList'
 import axios from '../utils/request'
 export default {
     components: {
-        headerBar
+        headerBar,
+        userlist
     },
     data () {
         return {
             allLoaded:true,
-            foollowList:[1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8,1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8]
+            foollowList:[]
         }
     },
     mounted () {
         const followId = this.$route.params.followId
-        axios.get(`/api/Graph/${followId}/followList`)
+        console.log(followId)
+        axios.get(`/api/Graph/${followId}/followList`).then(res=>{
+            if(!res){
+                this.foollowList = [] ;
+                return
+            }
+            this.foollowList = res
+        })
     },
     methods: {
-        loadTop() {
-            this.$refs.loadmore.onTopLoaded();
-            Indicator.open('正在加载数据中...')
-            setTimeout(()=>{
-                this.list.splice(0,0,'334')
-                Indicator.close()
-            },2000)
-        }
     }
 }
 </script>
 
-<style scoped>
-@-webkit-keyframes rotation{
-    from {-webkit-transform: rotate(0deg);}
-    to {-webkit-transform: rotate(360deg);}
+<style>
+.follow-wrapper{
+    padding: 1px 5px 80px 5px
 }
-.an{
-    -webkit-transform: rotate(360deg);
-    animation: rotation 2s linear infinite;
-    -moz-animation: rotation 2s linear infinite;
-    -webkit-animation: rotation 2s linear infinite;
-    -o-animation: rotation 2s linear infinite;
+.no-data{
+    height:100vh;
+    text-align: center;
+    line-height: 100%;
+    font-size: 20px;
+    max-width: 80%;
+    margin:0 auto;
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-16 21:54:41
+ * @LastEditTime: 2020-03-17 10:42:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -29,7 +29,7 @@
           </div>
           <div class="upload-img-list">
               <!-- <img :src="item" alt="" style="width:100px;height:100px" v-for="(item,index) in imgUrl" :key="index"> -->
-              <img :src="goods.upload.productPic" alt="" style="width:100px;height:100px">
+              <img :src="item" alt="" style="width:100px;height:100px" v-for="item in goods.upload.productPic">
           </div>
 
           <div class="price">

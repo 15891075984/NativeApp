@@ -1,61 +1,61 @@
 <!--
  * @Author: your name
- * @Date: 2020-03-13 23:01:37
- * @LastEditTime: 2020-03-15 12:28:27
+ * @Date: 2020-03-13 22:33:30
+ * @LastEditTime: 2020-03-18 22:26:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \SellingPlat_APP\src\pages\Fans.vue
+ * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
  -->
+
 <template>
     <div style="height:100vh;overflow:auto;background:#eee">
         <headerBar title="我的粉丝"></headerBar>
-        <div class="follow-wrapper">
-            
+        <div class="no-data" v-if="fansList.length == 0">
+            <img src="../assets/img/yutang.png" alt="" >
+            <p>
+                一个粉丝都没有，你真菜 ! ! !
+            </p>
         </div>
+        <div class="fans-wrapper">
+            <userlist v-for="item in fansList" :key="item.uid" :userValue="item"></userlist>
+        </div>
+        
     </div>
 </template>
 
 <script>
 import headerBar from '../components/headerBar'
 import { Loadmore,Indicator } from 'mint-ui';
+import userlist from '../components/userList'
 import axios from '../utils/request'
 export default {
     components: {
-        headerBar
+        headerBar,
+        userlist
     },
     data () {
         return {
             allLoaded:true,
-            foollowList:[1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8,1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8]
+            fansList:[{}]
         }
     },
     mounted () {
         const fansId = this.$route.params.fansId
-        axios.get(`/api/Graph/${fansId}/userList`)
+        axios.get(`/api/Graph/${fansId}/userList`).then(res=>{
+            if(!res){
+                this.fansList = [] ;
+                return
+            }
+            this.fansList = res
+        })
     },
     methods: {
-        loadTop() {
-            this.$refs.loadmore.onTopLoaded();
-            Indicator.open('正在加载数据中...')
-            setTimeout(()=>{
-                this.list.splice(0,0,'334')
-                Indicator.close()
-            },2000)
-        }
     }
 }
 </script>
 
 <style scoped>
-@-webkit-keyframes rotation{
-    from {-webkit-transform: rotate(0deg);}
-    to {-webkit-transform: rotate(360deg);}
-}
-.an{
-    -webkit-transform: rotate(360deg);
-    animation: rotation 2s linear infinite;
-    -moz-animation: rotation 2s linear infinite;
-    -webkit-animation: rotation 2s linear infinite;
-    -o-animation: rotation 2s linear infinite;
+.fans-wrapper{
+    padding: 1px 5px 80px 5px
 }
 </style>
