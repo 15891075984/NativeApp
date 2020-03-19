@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-03-19 00:41:21
+ * @LastEditTime: 2020-03-19 09:30:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -19,7 +19,6 @@
         <div class="fans-wrapper">
             <userlist v-for="item in fansList" :key="item.uid" :userValue="item"></userlist>
         </div>
-        
     </div>
 </template>
 
@@ -36,12 +35,17 @@ export default {
     data () {
         return {
             allLoaded:true,
-            fansList:[]
+            fansList:[{}]
         }
     },
     mounted () {
         const fansId = this.$route.params.fansId
+        Indicator.open({
+            text: '加载中...',
+            spinnerType: 'fading-circle'
+        });
         axios.get(`/api/Graph/${fansId}/userList`).then(res=>{
+            Indicator.close()
             if(!res){
                 this.fansList = [] ;
                 return
