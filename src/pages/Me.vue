@@ -167,8 +167,11 @@ export default {
         axios.post('/fileSystem/upLoadImage', param, config)
 		.then(response => {
 			Indicator.close()
+			if(!response) {
+				this.setUserInfoAvatar(this.user.previousAvatar)
+				return
+			}
 			this.setUserInfoAvatar(response)
-			if(response) {
 				MessageBox({
 					title: '保存头像',
 					message: '确定保存新头像?',
@@ -176,13 +179,21 @@ export default {
 				}).then(action => {
 					if(action === 'confirm') {
 						//发送更换头像请求
-						
+						axios({
+							url: '/api/user/workspace/icon',
+							method: 'put',
+							data: {icon: response[0]},
+                			headers: {'Content-Type': 'application/json'}
+						})
+						axios.put('/api/user/workspace/icon',{
+							icon: response[0]
+						},{
+							headers: {'Content-Type': 'application/json'}
+						})
 					}else if (action === 'cancel'){
 						this.setUserInfoAvatar(this.user.previousAvatar)
 					}
-					
 				})
-			}
 		})
     },
   }
