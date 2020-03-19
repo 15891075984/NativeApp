@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-07 21:23:24
- * @LastEditTime: 2020-03-18 20:46:55
+ * @LastEditTime: 2020-03-19 09:14:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\store\user.js
@@ -21,7 +21,7 @@ const user = {
             createTime: null,
             fansNum: 0,
             followNum: 0,
-            icon: "http://47.93.117.14:8080/second-hand/fileSystem/files/images.jpg",
+            icon: "",
             id: 0,
             publishNum: 0,
             sellNum: 0,

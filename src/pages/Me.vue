@@ -185,11 +185,6 @@ export default {
 							data: {icon: response[0]},
                 			headers: {'Content-Type': 'application/json'}
 						})
-						axios.put('/api/user/workspace/icon',{
-							icon: response[0]
-						},{
-							headers: {'Content-Type': 'application/json'}
-						})
 					}else if (action === 'cancel'){
 						this.setUserInfoAvatar(this.user.previousAvatar)
 					}
