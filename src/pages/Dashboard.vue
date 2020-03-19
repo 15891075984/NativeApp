@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-18 22:12:20
+ * @LastEditTime: 2020-03-19 10:14:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -16,11 +16,12 @@
 				v-model="value"
 				class="search"
 				style="height:100%"
+				@change.native="handleSearch"
 				@keyup.enter.native="handleSearch"
 				placeholder="搜索宝贝/鱼塘/用户">
 			</mt-search>
 			<div class="search-list" v-if="value.length > 0">
-				<li v-for="item in 50">
+				<li v-for="item in product">
 					{{item}}
 				</li>
 			</div>
@@ -64,6 +65,7 @@ import { Search,Cell, Navbar, TabItem, InfiniteScroll,Indicator } from 'mint-ui'
 import { Swiper, Slide } from 'vue-swiper-component';
 import myswipper from '../components/swipper'
 import goodsCard from '../components/goodsCard'
+import axios from '../utils/request'
 export default {
     components: {
         tabBar,
@@ -293,13 +295,28 @@ export default {
 					'kind': '鱼塘|众鑫城上城'
 				}
 			],
+			product: [1,2]
         }
 	},
 	computed:{
         ...mapState({
             'goods':'goods'
         })
-    },
+	},
+	watch: {
+		value () {
+			// alert(123)
+			console.log()
+			this.page ++
+			axios.get('/api/search',{
+				params:{
+					keyword: this.value
+				}
+			}).then(res=>{
+				this.product.push(this.value)
+			})
+		}
+	},
     methods: {
         ...mapActions({
 			'submitPublish':'goods/submitPublish',
@@ -363,6 +380,15 @@ export default {
 				Indicator.close()
 			}, 1000);
 		},
+		handleSearch () {
+			axios.get('/api/search',{
+				params:{
+					keyword: this.value
+				}
+			}).then(res=>{
+				console.log(888,res)
+			})
+		}
 	},
 	mounted () {
 		console.log(123)
