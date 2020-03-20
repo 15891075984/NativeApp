@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-17 10:42:35
+ * @LastEditTime: 2020-03-19 20:49:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -150,6 +150,6 @@ export default {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 60px;
 }
 </style>

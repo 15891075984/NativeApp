@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-18 22:27:53
+ * @LastEditTime: 2020-03-19 20:57:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\utils\request.js
@@ -59,6 +59,10 @@ axios.interceptors.response.use(config=>{
         router.push({
             path:'/login'
         })
+    }
+    if (status.toString() === '400') {
+        // window.location.href = '/login'
+        return 
     }
     if ( message ) {
         Toast({

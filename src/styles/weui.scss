@@ -3,6 +3,7 @@ $color-primary: #ffda44;
 
 .mint-header {
   background-color: $color-primary;
+  height: 60px;
 }
 .mint-button:not(.is-disabled):active::after {
     opacity: .2 /* .6 */

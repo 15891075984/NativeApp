@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="wrapper" style="height:100vh;overflow:auto">
+    <div class="wrapper" style="height:93vh;overflow:auto;padding-bottom:120px">
 		<div class="top">
 			<div class="loginhead">
 				<div class="flex border">
@@ -184,6 +184,9 @@ export default {
 							method: 'put',
 							data: {icon: response[0]},
                 			headers: {'Content-Type': 'application/json'}
+						}).then( r => {
+							if (!r) {}
+							console.log(r)
 						})
 					}else if (action === 'cancel'){
 						this.setUserInfoAvatar(this.user.previousAvatar)

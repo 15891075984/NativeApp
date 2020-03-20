@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:59:10
- * @LastEditTime: 2020-03-18 22:00:28
+ * @LastEditTime: 2020-03-20 08:31:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\headerBar.vue
@@ -32,8 +32,8 @@ export default {
 
 <style scoped>
 .headerBar{
-    margin-bottom: 39px;
     box-sizing: border-box;
+    height: 60px;
 }
 /* .headerbar-wrapper{
     height: 70px;
