@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 15:14:24
- * @LastEditTime: 2020-03-22 16:04:23
+ * @LastEditTime: 2020-03-22 17:26:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\dynamicList.vue
@@ -9,7 +9,9 @@
 <template>
     <div class="dynamic">
         <div class="dynamic-time">
-            {{dynamic.time}}
+            <p v-for="(item,index) in time" :key="index">{{item}}</p>
+            <!-- <p>03月06日</p> -->
+            
         </div>
         <div class="dynamic-content">
             <div class="dynamic-title">
@@ -20,7 +22,7 @@
                 @click="goGoodDetail(item.id)"
                 :key="item.id">
                 <div class="dynamic-img">
-                    <img :src="item.productPic" alt="" style="width:90px;height:90px;border-radius: 9px  0 0 9px; ">
+                    <img :src="item.productPic" alt="" v-lazy="item.productPic" style="width:90px;height:90px;border-radius: 9px  0 0 9px; ">
                 </div>
                 <div class="dynamic-desc">
                     <div class="dynamic-price">
@@ -41,6 +43,28 @@
 <script>
 export default {
     props:['dynamic'],
+    computed: {
+        time () {
+            const timeArr = this.dynamic.time.split('-')
+            let tempArr =  timeArr.map((item,index) => {
+                let result = ""
+                if (index === 0) {
+                    result = item + '年'
+                }
+                if (index === 1) {
+                    result = item + '月'
+                }
+                if (index === 2) {
+                    result = item + '日'
+                }
+                return result
+            })
+            let arr = []
+            arr[0] = tempArr[0]
+            arr[1] = tempArr[1]+tempArr[2]
+            return arr
+        }
+    },
     methods: {
         goGoodDetail (goodsId) {
             this.$router.push({
@@ -60,7 +84,7 @@ export default {
     font-size: 14px;
     color: #000;
     .dynamic-time{
-        width: 20vw;
+        width: 22vw;
         font-size: 18px;
         box-sizing: border-box;
         padding-left: 5px;
@@ -71,7 +95,7 @@ export default {
         padding: 15px;
         padding-top: 0;
         .dynamic-title{
-            line-height: 30px;
+            line-height: 25px;
         }
         .dynamic-item{
             display: flex;
