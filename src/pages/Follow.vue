@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-03-19 09:31:15
+ * @LastEditTime: 2020-03-22 16:06:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -35,7 +35,7 @@ export default {
     data () {
         return {
             allLoaded:true,
-            foollowList:[{}]
+            foollowList:[]
         }
     },
     mounted () {
@@ -46,11 +46,11 @@ export default {
         });
         axios.get(`/api/Graph/${followId}/followList`).then(res=>{
             Indicator.close();
-            if(!res){
+            if(res.code !== 0 ){
                 this.foollowList = [] ;
                 return
             }
-            this.foollowList = res
+            this.foollowList = res.data
         })
     },
     methods: {

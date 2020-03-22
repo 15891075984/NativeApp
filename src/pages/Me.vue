@@ -75,7 +75,7 @@
 <script>
 import tabBar from '../components/tabBar'
 import axios from '../utils/request'
-import { Field,Button, Cell,Indicator, MessageBox, Actionsheet } from 'mint-ui';
+import { Field,Button, Cell,Indicator, MessageBox, Actionsheet, Toast } from 'mint-ui';
 import { mapState, mapMutations} from 'vuex';
 export default {
 	components: {
@@ -167,11 +167,11 @@ export default {
         axios.post('/fileSystem/upLoadImage', param, config)
 		.then(response => {
 			Indicator.close()
-			if(!response) {
+			if(response.code !== 0) {
 				this.setUserInfoAvatar(this.user.previousAvatar)
 				return
 			}
-			this.setUserInfoAvatar(response)
+			this.setUserInfoAvatar(response.data)
 				MessageBox({
 					title: '保存头像',
 					message: '确定保存新头像?',
@@ -182,11 +182,17 @@ export default {
 						axios({
 							url: '/api/user/workspace/icon',
 							method: 'put',
-							data: {icon: response[0]},
+							data: {icon: response.data[0]},
                 			headers: {'Content-Type': 'application/json'}
 						}).then( r => {
-							if (!r) {}
-							console.log(r)
+							if (r.code !== 0) {
+								this.setUserInfoAvatar(this.user.previousAvatar)
+								return
+							}
+							Toast({
+								message: '头像更换成功',
+								duration: 1500
+							});
 						})
 					}else if (action === 'cancel'){
 						this.setUserInfoAvatar(this.user.previousAvatar)
@@ -429,5 +435,12 @@ ul,li {
 }
 .item10{
   background-image: url('../assets/img/帮助.png');
+}
+.iconss{
+	width: 100%;
+	height: 100%;
+}
+.icon-success{
+	background-image: url('../assets/img/对号.png');
 }
 </style>

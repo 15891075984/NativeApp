@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 20:53:54
- * @LastEditTime: 2020-03-13 22:05:11
+ * @LastEditTime: 2020-03-22 15:27:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Register.vue
@@ -100,10 +100,9 @@ export default {
                 data: {...params},
                 headers: {'Content-Type': 'application/json'}
             }).then( res => {
-                console.log(4444, res)
                 Indicator.close()
+                if (res.code !== 0 ) return
                 this.$router.push('/login');
-                console.log(123)
                 window.localStorage["token"] = ''
             })
         }

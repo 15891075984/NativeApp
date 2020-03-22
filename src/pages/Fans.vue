@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-03-19 09:30:57
+ * @LastEditTime: 2020-03-22 14:14:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -46,11 +46,11 @@ export default {
         });
         axios.get(`/api/Graph/${fansId}/userList`).then(res=>{
             Indicator.close()
-            if(!res){
+            if(res.code !== 0){
                 this.fansList = [] ;
                 return
             }
-            this.fansList = res
+            this.fansList = res.data
         })
     },
     methods: {

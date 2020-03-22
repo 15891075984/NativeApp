@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-19 20:57:30
+ * @LastEditTime: 2020-03-22 15:31:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\utils\request.js
@@ -39,15 +39,14 @@ axios.interceptors.response.use(config=>{
     //对请求status进行拦截，提示用户
     //对后端接口code码进行拦截code 0 success 1 failed
     const code = config.data.code
-    if (code != 0) {
+    if (code !== 0) {
         //全局提示信息
         Toast({
             message: config.data.message,
             duration: 2000
         })
-        return
     }
-    return config.data.data
+    return config.data
 },function(err){
     const status = err.response.status
     const message = err.response.data.message

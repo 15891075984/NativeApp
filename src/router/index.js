@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-03-13 23:05:11
+ * @LastEditTime: 2020-03-22 16:03:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -25,7 +25,7 @@ export default new Router({
     },
     {
         path: '/dashboard',
-        name: '闲鱼',
+        name: 'dashboard',
         component: () => import('@/pages/Dashboard')
     },{
         path:'/404',
@@ -33,19 +33,19 @@ export default new Router({
         component: () => import('@/pages/NotFound')
     },{
         path:'/fishpond',
-        name:'鱼塘',
+        name:'fishpond',
         component: () => import('@/pages/Fishpond')
     },{
         path:'/publish',
-        name:'发布',
+        name:'publish',
         component: () => import('@/pages/Publish')
     },{
         path:'/message',
-        name:'消息',
+        name:'message',
         component: () => import('@/pages/Message')
     },{
         path:'/me',
-        name:'我的',
+        name:'me',
         component: () => import('@/pages/Me')
     },{
         path:'/login',
@@ -75,6 +75,10 @@ export default new Router({
         path:'/fans/:fansId',
         name:'fans',
         component: () => import('@/pages/Fans')
+    },{
+        path:'/userDetail/:userId',
+        name:'UserDetail',
+        component: () => import('@/pages/UserDetail')
     },
     // ,{
     //   path:'/category',

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-18 22:48:25
+ * @LastEditTime: 2020-03-22 16:08:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -31,7 +31,6 @@ const goods = {
         },
         setPublishImg (state, data) {
             state.upload.productPic.push(data)
-            console.log(444,state.upload.productPic)
         }
     },
     actions: {
@@ -39,9 +38,8 @@ const goods = {
         submitPublish ({ state , rootState}, router) {
             
             let params = {...state.upload}
-            console.log(rootState)
             params.userAddress = rootState.user.userAddress
-            params.username = rootState.user.username
+            params.userName = rootState.user.username
             params.userId = rootState.user.userInfo.uid
             params.productPic = params.productPic.flat(Infinity)
             // params = Object.assign(params, rootState.user.userInfo )
@@ -53,7 +51,7 @@ const goods = {
                 headers: {'Content-Type': 'application/json'}
             }).then(res => {
                 Indicator.close()
-                if (!res) {return}
+                if (res.code !== 0) {return}
                 router.push({
                     path:'/me'
                 })
@@ -66,7 +64,7 @@ const goods = {
         //获取商品列表
         getGoodsList (state, params) {
             axios.get('/api/product/search/33').then(res => {
-                console.log(res)
+                //console.log(res)
             })
         }
     },

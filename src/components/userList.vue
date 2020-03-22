@@ -1,8 +1,8 @@
 
 <template>
     <div class="user">
-        <img :src="userValue.icon" alt="" v-lazy="userValue.icon">
-        <div class="username">
+        <img :src="userValue.icon" alt="" v-lazy="userValue.icon" @click="goUserDetail">
+        <div class="username" @click="goUserDetail">
             <p class="name">{{userValue.uname}}</p>
             <p class="desc">{{userValue.userResume || '这个人很懒，什么都没留下'}}</p>
         </div>
@@ -35,6 +35,16 @@ export default {
             //         uid: this.status
             //     }
             // })
+        },
+
+        //用户详情
+        goUserDetail () {
+            this.$router.push({
+                name: 'UserDetail',
+                params: {
+                    userId: this.userValue.uid
+                }
+            })
         }
     },
     watch: {

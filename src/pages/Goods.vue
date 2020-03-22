@@ -3,8 +3,12 @@
 		<headerBar title="宝贝详情"></headerBar>
 		<div class="goods">
 			<div class="good_top">
-				<div class="good_top-avatar">
+				<div class="good_top-avatar" style="display:flex">
 					<img src="../assets/img/avatar.jpg" alt="" class="avatar">
+					<div class="user-info" style="font-size:14px">
+						{{goods.userName}}
+						<div>{{goods.userAddress}}</div>
+					</div>
 				</div>
 				<div class="good_top-info">
 					<div class="username">{{goods.name}}</div>
@@ -18,6 +22,9 @@
 				<p class="desc">{{goods.desc}}</p>
 			</div>
 			<div class="good_img">
+				<img src="../assets/img/avatar.jpg" alt="">
+				<img src="../assets/img/avatar.jpg" alt="">
+				<img src="../assets/img/avatar.jpg" alt="">
 				<img src="../assets/img/avatar.jpg" alt="">
 			</div>
 		</div>
@@ -50,6 +57,7 @@
 <script>
 import {mapGetters,mapActions} from 'vuex'
 import headerBar from '../components/headerBar'
+import axios from '../utils/request'
 export default {
 	data () {
 		return {
@@ -70,7 +78,11 @@ export default {
     },
 	mounted () {
         //TODO 拿到商品id，传给后端，然后拿取到数据
-        const goodsId = this.$route.params.goodsId
+		const goodsId = this.$route.params.goodsId
+		axios.get(`/api/product/search/${goodsId}`).then(res => {
+			if( res.code !== 0) return
+			this.goods = res.data
+		})
 	},
 	methods: {
 		msg () {
@@ -104,6 +116,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	background-color: #f7f7f7;
+	overflow: auto;
 }
 .head {
 	width: 100%;

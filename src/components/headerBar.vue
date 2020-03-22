@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:59:10
- * @LastEditTime: 2020-03-20 08:43:27
+ * @LastEditTime: 2020-03-22 14:15:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\headerBar.vue
@@ -18,20 +18,20 @@
 <script>
 import { Header } from 'mint-ui';
 export default {
-    props:['title'],
+    props: ['title'],
     components: {
         Header
     },
     methods: {
-        goBack () {
-            this.$router.go(-1)
+        goBack() {
+            this.$router.go(-1);
         }
     }
-}
+};
 </script>
 
 <style scoped>
-.headerBar{
+.headerBar {
     margin-bottom: 39px;
     box-sizing: border-box;
 }

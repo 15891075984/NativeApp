@@ -1,14 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2020-03-07 21:23:24
- * @LastEditTime: 2020-03-19 09:14:02
+ * @LastEditTime: 2020-03-22 14:08:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\store\user.js
  */
 import axios from '../utils/request'
 const user = {
-    namespaced: true,   
+    namespaced: true,
     types: {},
     state: {
         isLogin: true,
@@ -45,7 +45,6 @@ const user = {
         setUserInfo (state, data) {
             //解析ip地址成 真实地址 粒度 省市
             state.userInfo = data
-            console.log(33433,data)
             state.previousAvatar = data.icon
             const userAddress = returnCitySN
             if(Object.keys(userAddress).length >= 1) {
@@ -59,8 +58,8 @@ const user = {
     actions: {
         getUserInfo ({commit}) {
             axios.get('/api/user/workspace/info').then( data => {
-                if (!data) {return }
-                commit('setUserInfo', data)
+                if (data.code !== 0) {return }
+                commit('setUserInfo', data.data)
             })
         }
     }
