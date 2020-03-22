@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-22 16:08:39
+ * @LastEditTime: 2020-03-23 00:18:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -31,12 +31,14 @@ const goods = {
         },
         setPublishImg (state, data) {
             state.upload.productPic.push(data)
+        },
+        delelteProductImg (state, index) {
+            state.upload.productPic.splice(index, 1)
         }
     },
     actions: {
         // 发布商品
         submitPublish ({ state , rootState}, router) {
-            
             let params = {...state.upload}
             params.userAddress = rootState.user.userAddress
             params.userName = rootState.user.username

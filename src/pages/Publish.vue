@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-22 16:31:22
+ * @LastEditTime: 2020-03-23 00:37:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -29,7 +29,7 @@
           </div>
           <div class="upload-img-list">
               <!-- <img :src="item" alt="" style="width:100px;height:100px" v-for="(item,index) in imgUrl" :key="index"> -->
-              <img :src="item" alt="" style="width:100px;height:100px" v-for="item in goods.upload.productPic">
+              <img :src="item" alt="" style="width:100px;height:100px" v-for="(item,index) in goods.upload.productPic" :key="index" @click="handleTabBar(index)">
           </div>
 
           <div class="price">
@@ -45,12 +45,16 @@
             </div>
           </div>
       </div>
+      <mt-actionsheet
+          :actions="actions"
+          v-model="sheetVisible">
+      </mt-actionsheet>
       <tabBar></tabBar>
   </div>
 </template>
 
 <script>
-import { Field,Button,Cell,Indicator  } from 'mint-ui';
+import { Field,Button,Cell,Indicator,Actionsheet} from 'mint-ui';
 import headerBar from '../components/headerBar'
 import tabBar from '../components/tabBar'
 import axios from '../utils/request'
@@ -60,14 +64,24 @@ export default {
       tabBar,
       Field,
       headerBar,
-      Cell
+      Cell,
+      Actionsheet
   },
   data () {
     return {
       title:'',
       desc:'',
       price:'',
-      imgUrl:''
+      imgUrl:'',
+      sheetVisible: false,
+      imgIndex: '',
+			actions: [{
+				name: '删除',
+		    method : this.delelteImg
+			  },{
+        name: '查看大图',
+        method : this.watchBigImg
+			}],
     }
   },
   computed:{
@@ -80,13 +94,23 @@ export default {
       'submitPublish':'goods/submitPublish'
     }),
     ...mapMutations({
-      'setPublishImg':'goods/setPublishImg'
+      'setPublishImg':'goods/setPublishImg',
+      'delelteProductImg':'goods/delelteProductImg'
     }),
     //去分类页
     goKinds () {
       this.$router.push({
         path:'/kinds'
       })
+    },
+    //删除图片和查看大图tabbar
+    handleTabBar(index) {
+      this.sheetVisible = true
+      this.imgIndex = index
+    },
+    // 删除图片
+    delelteImg () {
+      this.delelteProductImg(this.imgIndex)
     },
     //自动上传文件
     tirggerFile (event) {
