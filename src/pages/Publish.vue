@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-23 00:37:21
+ * @LastEditTime: 2020-03-23 01:02:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -47,6 +47,7 @@
       </div>
       <mt-actionsheet
           :actions="actions"
+          cancelText=""
           v-model="sheetVisible">
       </mt-actionsheet>
       <tabBar></tabBar>
