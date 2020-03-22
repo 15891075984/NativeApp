@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-03-22 16:03:30
+ * @LastEditTime: 2020-03-22 22:05:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -79,6 +79,22 @@ export default new Router({
         path:'/userDetail/:userId',
         name:'UserDetail',
         component: () => import('@/pages/UserDetail')
+    },{
+        path:'/myBuy',
+        name:'myBuy',
+        component: () => import('@/pages/myBuy')
+    },{
+        path:'/myCollect',
+        name:'myCollect',
+        component: () => import('@/pages/myCollect')
+    },{
+        path:'/mySell',
+        name:'mySell',
+        component: () => import('@/pages/mySell')
+    },{
+        path:'/myLike',
+        name:'myLike',
+        component: () => import('@/pages/myLike')
     },
     // ,{
     //   path:'/category',

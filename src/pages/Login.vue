@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-03-22 15:26:39
+ * @LastEditTime: 2020-03-22 22:32:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -36,8 +36,8 @@ export default {
     },
     data () {
         return {
-            username:"bai123456",
-            password:"123456"
+            username:"123456789",
+            password:"123456789"
         }
     },
     methods: {

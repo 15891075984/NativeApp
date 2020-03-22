@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-22 21:56:09
+ * @LastEditTime: 2020-03-22 22:07:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
  -->
 <template>
     <div class="publish-list">
-        <headerBar title="我发布的"></headerBar>
+        <headerBar title="我赞过的"></headerBar>
         <div class="publish-item" v-for="(item) in myPublishData" :key="item.id">
             <myCardList :goods="item"></myCardList>
       </div>

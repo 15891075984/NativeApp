@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-22 16:25:24
+ * @LastEditTime: 2020-03-22 22:30:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\utils\request.js
@@ -41,10 +41,10 @@ axios.interceptors.response.use(config=>{
     const code = config.data.code
     if (code !== 0) {
         //全局提示信息
-        // Toast({
-        //     message: config.data.message,
-        //     duration: 2000
-        // })
+        Toast({
+            message: config.data.message,
+            duration: 2000
+        })
     }
     return config.data
 },function(err){

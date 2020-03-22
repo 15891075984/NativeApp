@@ -1,32 +1,50 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-22 21:56:09
+ * @LastEditTime: 2020-03-22 22:23:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
  -->
 <template>
-    <div class="publish-list">
-        <headerBar title="我发布的"></headerBar>
-        <div class="publish-item" v-for="(item) in myPublishData" :key="item.id">
-            <myCardList :goods="item"></myCardList>
-      </div>
-  </div>
+    <div>
+            <div class="item-header">
+                <div class="header-img">
+                    <img src="../assets/img/avatar.jpg" alt="">
+                    <span>{{goods.sellerName}}</span>
+                </div>
+                <div class="price">￥{{goods.productPrice}}</div>
+            </div>
+            <div class="item-content">
+                <div class="content-img">
+                    <img src="../assets/img/fangwu.png" alt="">
+                </div>
+                <p class="desc">{{goods.productName}}</p>
+                <div class="item-bottom">
+                    <div class="kinds">
+                        类别:{{goods.kinds}}
+                    </div>
+                    <div class="update-time">
+                        发布时间:{{goods.updateTime}}
+                    </div>
+                </div>
+            </div>
+            <div class="item-delete">
+                <mt-button plain type="primary" size="small" @click="deleteMyPublish" class="delete-btn">下架</mt-button>
+            </div>
+    </div>
 </template>
 
 <script>
 import headerBar from '../components/headerBar'
 import { Button } from 'mint-ui';
 import { mapState,mapMutations,mapActions } from 'vuex';
-import axios from '../utils/request'
-import myCardList from '../components/my-cardList'
 export default {
     components: {
         headerBar,
-        Button,
-        myCardList
+        Button
     },
+    props:['goods'],
     data () {
         return {
             myPublishData:[
@@ -50,7 +68,7 @@ export default {
                 },
                 {
                     url:"../assets/img/avatar.png",
-                    id:11,
+                    id:1,
                     name:'好吃的',
                     price: 22,
                     desc:'这真的是好吃的，你信吗',
@@ -60,7 +78,7 @@ export default {
                 {
                     url:"../assets/img/avatar.jpg",
                     name:'你打野',
-                    id:22,
+                    id:2,
                     price: 999,
                     desc:'真的是打野',
                     kinds:'蓝BUff',
@@ -68,7 +86,7 @@ export default {
                 },
                 {
                     url:"../assets/img/avatar.png",
-                    id:111,
+                    id:1,
                     name:'好吃的',
                     price: 22,
                     desc:'这真的是好吃的，你信吗',
@@ -78,7 +96,7 @@ export default {
                 {
                     url:"../assets/img/avatar.jpg",
                     name:'你打野',
-                    id:222,
+                    id:2,
                     price: 999,
                     desc:'真的是打野',
                     kinds:'蓝BUff',
@@ -88,13 +106,8 @@ export default {
         }
     },
     mounted () {
-        //TODO 用户去拉取发布列表
-        axios.get('/api/userBuy')
     },
     computed:{
-        ...mapState({
-            'goods':'goods'
-        })
     },
     methods: {
         ...mapActions({
@@ -102,7 +115,10 @@ export default {
         }),
         ...mapMutations({
             'setPublishImg':'goods/setPublishImg'
-        })
+        }),
+        deleteMyPublish() {
+            
+        }
     }
 }
 </script>
@@ -111,7 +127,7 @@ export default {
 .publish-list{
      height: 100vh;
     overflow: auto;
-    padding-top: 13px;
+    padding-top: 12px;
 }
     .publish-item{
         margin-top: 15px;
