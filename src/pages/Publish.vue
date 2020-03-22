@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-19 20:49:27
+ * @LastEditTime: 2020-03-22 16:31:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -107,7 +107,7 @@ export default {
             //TODO 限制上传一张
             //this.imgUrl.push( response )
             // this.imgUrl = response
-            this.setPublishImg(response)
+            this.setPublishImg(response.data)
           })
     },
 
@@ -122,6 +122,7 @@ export default {
 .publish{
   /* margin-top:39px; */
   height: 87vh;
+  padding-top: 11px;
   position: relative;
 }
 .goods-upload{
