@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:12:15
- * @LastEditTime: 2020-03-15 12:46:17
+ * @LastEditTime: 2020-03-23 00:47:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\vue.config.js
@@ -17,6 +17,7 @@ module.exports = {
     // },
     devServer: {
         disableHostCheck: true,
+        sockHost: 'http://localhost:8080',
         proxy: {
             '/':{
                 target:'http://47.93.117.14:8080/second-hand/',
