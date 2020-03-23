@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-23 23:05:28
+ * @LastEditTime: 2020-03-23 23:13:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
  -->
 <template>
     <div style="height:100vh;overflow:auto;padding:10px 0;background:#eee" ref="chat">
-        <headerBar title="与xxx聊天"></headerBar>
+        <headerBar title="与坚弟弟聊天"></headerBar>
         <div class="chat-wrapper" ref="chat-wrap">
             <ul style="padding-bottom: 100px; " ref="chat-ul">
                 <li class="chat-item" v-for="(item,index) in list" :key="index">
@@ -64,8 +64,6 @@ export default {
                 //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
                 this.$refs['chat'].scrollTop = (0 , height)
             })
-            
-            
         }
     }
 }

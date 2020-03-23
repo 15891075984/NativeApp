@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-23 15:55:37
+ * @LastEditTime: 2020-03-23 23:12:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -16,7 +16,7 @@
     <div>
     <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
       <!-- <li v-for="item in list" style="height:40px">{{ item }}</li> -->
-      <li class="message-item" v-for="item in 10">
+      <li class="message-item" v-for="item in 10" @click="goChatting(item)">
         <div>
           <img src="../assets/img/avatar.jpg" alt=""  class="avatar">
         </div>
@@ -74,6 +74,12 @@ export default {
         this.list.splice(0,0,'334')
         Indicator.close()
       },2000)
+    },
+
+    goChatting () {
+      this.$router.push({
+        name:'Chat'
+      })
     }
   }
 }
