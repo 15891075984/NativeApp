@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-22 22:06:13
+ * @LastEditTime: 2020-03-23 11:14:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -11,8 +11,8 @@
         <headerBar title="我收藏的"></headerBar>
         <div class="publish-item" v-for="(item) in myPublishData" :key="item.id">
             <myCardList :goods="item"></myCardList>
-      </div>
-  </div>
+        </div>
+    </div>
 </template>
 
 <script>

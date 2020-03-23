@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-22 22:23:16
+ * @LastEditTime: 2020-03-23 11:17:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
  -->
 <template>
-    <div>
-            <div class="item-header">
+    <div @click="goGoodDetail">
+            <div class="item-header" >
                 <div class="header-img">
                     <img src="../assets/img/avatar.jpg" alt="">
                     <span>{{goods.sellerName}}</span>
@@ -118,6 +118,14 @@ export default {
         }),
         deleteMyPublish() {
             
+        },
+        goGoodDetail () {
+            this.$router.push({
+                name:'goods',
+                params:{
+                    goodsId:this.goods.id
+                }
+            })
         }
     }
 }

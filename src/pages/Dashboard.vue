@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-22 16:11:18
+ * @LastEditTime: 2020-03-23 09:59:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -121,7 +121,7 @@ export default {
 					'freight': '10'
 				},
 				{
-					'id': '2',
+					'id': '23',
 					'avatar': '../assets/img/avatar.jpg',
 					'name': '糖果xt90',
 					'time': '1小时前来过',
@@ -133,7 +133,7 @@ export default {
 					'freight': '10'
 				},
 				{
-					'id': '2',
+					'id': '24',
 					'avatar': '../assets/img/avatar.jpg',
 					'name': '糖果xt90',
 					'time': '1小时前来过',
@@ -145,7 +145,7 @@ export default {
 					'freight': '10'
 				},
 				{
-					'id': '2',
+					'id': '25',
 					'avatar': '../assets/img/avatar.jpg',
 					'name': '糖果xt90',
 					'time': '1小时前来过',
@@ -157,7 +157,7 @@ export default {
 					'freight': '10'
 				},
 				{
-					'id': '2',
+					'id': '26',
 					'avatar': '../assets/img/avatar.jpg',
 					'name': '糖果xt90',
 					'time': '1小时前来过',
@@ -169,7 +169,7 @@ export default {
 					'freight': '10'
 				},
 				{
-					'id': '2',
+					'id': '27',
 					'avatar': '../assets/img/avatar.jpg',
 					'name': '糖果xt90',
 					'time': '1小时前来过',
@@ -181,7 +181,7 @@ export default {
 					'freight': '10'
 				},
 				{
-					'id': '2',
+					'id': '28',
 					'avatar': '../assets/img/avatar.jpg',
 					'name': '糖果xt90',
 					'time': '1小时前来过',
@@ -193,90 +193,6 @@ export default {
 					'freight': '10'
 				}
             ],
-            nearsList: [
-				{
-					'avatar': './static/3.png',
-					'name': '流浪在天际',
-					'time': '7小时前来过',
-					'price': '￥100',
-					'img': './static/03.png',
-					'desc': '席梦思床垫1.8米x2米 95新，换了乳胶，上门自提',
-					'add': '来自南昌',
-					'kind': '鱼塘|塘山镇',
-					'star': '点赞',
-					'num': '2'
-				},
-				{
-					'avatar': './static/4.png',
-					'name': '万莉佳',
-					'time': '8小时前来过',
-					'price': '￥80',
-					'img': './static/04.png',
-					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
-					'add': '来自南昌',
-					'kind': '鱼塘|众鑫城上城'
-				},
-				{
-					'avatar': './static/4.png',
-					'name': '万莉佳',
-					'time': '8小时前来过',
-					'price': '￥80',
-					'img': './static/04.png',
-					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
-					'add': '来自南昌',
-					'kind': '鱼塘|众鑫城上城'
-				},
-				{
-					'avatar': './static/4.png',
-					'name': '万莉佳',
-					'time': '8小时前来过',
-					'price': '￥80',
-					'img': './static/04.png',
-					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
-					'add': '来自南昌',
-					'kind': '鱼塘|众鑫城上城'
-				},
-				{
-					'avatar': './static/4.png',
-					'name': '万莉佳',
-					'time': '8小时前来过',
-					'price': '￥80',
-					'img': './static/04.png',
-					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
-					'add': '来自南昌',
-					'kind': '鱼塘|众鑫城上城'
-				},
-				{
-					'avatar': './static/4.png',
-					'name': '万莉佳',
-					'time': '8小时前来过',
-					'price': '￥80',
-					'img': './static/04.png',
-					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
-					'add': '来自南昌',
-					'kind': '鱼塘|众鑫城上城'
-				},
-				{
-					'avatar': './static/4.png',
-					'name': '万莉佳',
-					'time': '8小时前来过',
-					'price': '￥80',
-					'img': './static/04.png',
-					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
-					'add': '来自南昌',
-					'kind': '鱼塘|众鑫城上城'
-				},
-				{
-					'avatar': './static/4.png',
-					'name': '万莉佳',
-					'time': '8小时前来过',
-					'price': '￥80',
-					'img': './static/04.png',
-					'desc': '绑带细跟真皮凉鞋，清鞋柜，300多买来的，穿过两次，9.5新，34码，鞋跟10厘米左右，鞋子多，便宜处理',
-					'add': '来自南昌',
-					'kind': '鱼塘|众鑫城上城'
-				}
-			],
 			product: [1,2]
         }
 	},

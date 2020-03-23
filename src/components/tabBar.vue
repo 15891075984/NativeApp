@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:22:53
- * @LastEditTime: 2020-03-16 21:25:09
+ * @LastEditTime: 2020-03-23 10:09:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\tabBar.vue
@@ -11,13 +11,13 @@
     <div>
     </div>
     <mt-tabbar v-model="user.selected" >
-        <mt-tab-item id="闲鱼" >
+        <mt-tab-item id="dashboard" >
             <div @click="handleSelected('闲鱼')">
                 <div class="iconfont icon-jia bar-icon"></div>
                 <span class="bar-icon-title">闲鱼</span>
             </div>
         </mt-tab-item>
-        <mt-tab-item id="鱼塘"  @click="handleSelected('鱼塘')">
+        <mt-tab-item id="fishpond"  @click="handleSelected('鱼塘')">
             <div @click="handleSelected('鱼塘')">
                 <div class="iconfont icon-wodeyutang-copy bar-icon"></div>
                 <span class="bar-icon-title">
@@ -25,7 +25,7 @@
                 </span>
             </div>
         </mt-tab-item>
-        <mt-tab-item id="发布"  @click="handleSelected('发布')">
+        <mt-tab-item id="publish"  @click="handleSelected('发布')">
             <div @click="handleSelected('发布')">
                 <div class="iconfont  bar-icon">十</div>
                 <span class="bar-icon-title">
@@ -33,7 +33,7 @@
                 </span>
             </div>
         </mt-tab-item>
-        <mt-tab-item id="消息"  @click="handleSelected('消息')">
+        <mt-tab-item id="message"  @click="handleSelected('消息')">
             <div @click="handleSelected('消息')">
                 <div class="iconfont icon-icon03 bar-icon"></div>
                 <span class="bar-icon-title">
@@ -41,7 +41,7 @@
                 </span>
             </div>
         </mt-tab-item>
-        <mt-tab-item id="我的"  @click="handleSelected('我的')">
+        <mt-tab-item id="me"  @click="handleSelected('我的')">
             <div @click="handleSelected('我的')">
                 <div class="iconfont icon-lianxiaolianmanyi- bar-icon"></div>
                 <span class="bar-icon-title">
