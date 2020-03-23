@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-23 23:13:02
+ * @LastEditTime: 2020-03-23 23:56:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -9,8 +9,27 @@
 <template>
     <div style="height:100vh;overflow:auto;padding:10px 0;background:#eee" ref="chat">
         <headerBar title="与坚弟弟聊天"></headerBar>
+        
         <div class="chat-wrapper" ref="chat-wrap">
-            <ul style="padding-bottom: 100px; " ref="chat-ul">
+            <mt-loadmore    :top-method="loadTop"
+                            topPullText=""
+                            topDropText=""
+                            topLoadingText=""
+                            :topDistance="50"  ref="loadmore">
+                <ul style="padding-bottom: 160px;padding-top:50px;" ref="chat-ul">
+                    <li class="chat-item" v-for="(item,index) in list" :key="index">
+                        <div class="item-you" v-if="index % 2 == 0">
+                            <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
+                            <p class="item-message">{{item}}</p>
+                        </div>
+                        <div class="item-me" v-else>
+                            <p class="item-message">{{item}}</p>
+                            <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
+                        </div>
+                    </li>
+                </ul>
+            </mt-loadmore>
+            <!-- <ul style="padding-bottom: 100px; " ref="chat-ul">
                 <li class="chat-item" v-for="(item,index) in list" :key="index">
                     <div class="item-you" v-if="index % 2 == 0">
                         <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
@@ -21,7 +40,7 @@
                         <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
                     </div>
                 </li>
-            </ul>
+            </ul> -->
         </div>
         <div class="chat-input">
             <div class="textarea-wrapper">
@@ -39,11 +58,12 @@
 
 <script>
 import headerBar from '../components/headerBar'
-import { CellSwipe  } from 'mint-ui';
+import { CellSwipe,Loadmore   } from 'mint-ui';
 export default {
     components: {
         headerBar,
-        CellSwipe
+        CellSwipe,
+        Loadmore
     },
     data () {
         return {
@@ -56,7 +76,7 @@ export default {
     methods: {
         submit () {
             if( !this.value ) return
-            this.count ++
+            
             this.list.push(this.value)
             this.value = ''
             const height = this.$refs['chat-ul'].offsetHeight
@@ -64,6 +84,25 @@ export default {
                 //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
                 this.$refs['chat'].scrollTop = (0 , height)
             })
+        },
+        //加载之前聊天记录
+        loadTop () {
+            this.count ++
+            const data = `${this.count}我真的对她又爱又恨..
+
+                        之前觉得这个红好村哦 素颜涂得
+
+                        但是皮肤养白了点涂就更显白了emm竟然还有一点点喜欢？？ 我一般都薄涂一遍再从中间叠加 这样还挺好看的
+
+                        厚涂绝美哈 薄涂就一般 哑光颜色好看但是干的也快 害
+
+                        今天闲出屁来999叠涂雕牌唇蜜01 太好看了我去`
+            const tempArr = []
+            for(let i =0;i<=1;i++) {
+                tempArr.push(data)
+            }
+            console.log(tempArr.concat(tempArr))
+            this.list = tempArr.concat(this.list)
         }
     }
 }
@@ -86,6 +125,7 @@ export default {
 <style lang="scss" scoped>
 .chat-wrapper{
     padding-bottom: 18px;
+    height: 84vh;
 }
 .chat-item{
     padding: 7px;
