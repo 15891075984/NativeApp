@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-03-23 11:34:26
+ * @LastEditTime: 2020-03-23 20:56:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -95,6 +95,10 @@ export default new Router({
         path:'/myLike',
         name:'myLike',
         component: () => import('@/pages/myLike')
+    },{
+        path:'/Chat',
+        name:'Chat',
+        component: () => import('@/pages/Chat')
     },
     // ,{
     //   path:'/category',
