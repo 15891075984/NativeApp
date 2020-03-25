@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-03-25 18:44:35
+ * @LastEditTime: 2020-03-25 22:59:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -27,8 +27,8 @@
 				<span>{{goods.goods.productPrice}}</span>
 			</div>
 			<div class="content-title">
-				{{goods.goods.productName}} 包邮
-				<p style="line-height:25px;color:#aaa">{{goods.goods.updateTime}}</p>
+				{{goods.goods.productName}} （包邮）
+				<p style="line-height:25px;color:#aaa"> 发布时间 : {{goods.goods.updateTime}}</p>
 			</div>
 			<div class="content-con">
 				<p >商品描述：</p>
@@ -36,25 +36,29 @@
 					{{goods.goods.productContent}}
 				</p>
 				<div class="content-img">
-					<p>本交易仅支持邮寄</p>
-					<img :src="item.productPic"  v-for="item in goods.goods.productPics" :key="item.productPic">
+					<p style="color:red">本交易仅支持邮寄</p>
+					<img :src="item.productPic"  
+						v-for="item in goods.goods.productPics"
+						v-lazy="item.productPic"
+						:key="item.productPic">
+				</div>
+				<div class="goods-message">
+					<div class="message-title">
+						全部留言
+					</div>
+					<div class="message-item" v-for="item in goods.goods.leaveMessages">
+						<div class="item-img">
+							<img src="../assets/img/avatar.jpg" alt="" >
+						</div>
+						<div class="item-name">
+							<p class="name">{{item.uname}}</p>
+							<div class="message">{{item.message}}</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="goods-message">
-			<div class="message-title">
-				全部留言
-			</div>
-			<div class="message-item" v-for="item in goods.leaveMessages">
-				<div class="item-img">
-					<img src="../assets/img/avatar.jpg" alt="" >
-				</div>
-				<div class="item-name">
-					<p class="name">{{item.uname}}</p>
-					<div class="message">{{item.message}}</div>
-				</div>
-			</div>
-		</div>
+		
 		<div class="goods-bottom" v-if="!messageState">
 			<div class="goods-item-left">
 				<div class="goods-bottom-like items" @click="handleLike">
@@ -207,7 +211,30 @@ export default {
 		},
 		//收藏
 		handleCollect () {
-			this.collectActive = !this.collectActive
+			let data = {
+				productId: this.goods.goods.id,
+				status: 1
+			}
+			console.log(222,this.collectActive)
+			if (this.collectActive) {
+				//取消点赞
+			}else {
+				//点赞
+				data.status = 0
+				
+			}
+			axios({
+				url:'/api/userCollect/collectStatus',
+				method:'POST',
+				data,
+				header:{
+					'Content-Type':'application/json'
+				}
+			}).then(res=>{
+				this.collectActive = !this.collectActive
+				console.log(this.collectActive)
+			})
+			
 		},
 		//留言
 		handleMessage () {
@@ -293,6 +320,7 @@ export default {
 		}
 	}
 	.goods-message{
+		padding-bottom: 50px;
 		.message-title{
 			font-size: 16px;
 			font-weight: 600;

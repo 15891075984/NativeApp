@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-25 18:23:43
+ * @LastEditTime: 2020-03-25 23:39:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -74,7 +74,7 @@ const goods = {
 
         //获取商品列表
         getGoodsList (state, params) {
-            axios.get('/api/product/search/33').then(res => {
+            axios.get('/api/product/search').then(res => {
                 //console.log(res)
             })
         },

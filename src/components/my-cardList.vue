@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 12:19:49
+ * @LastEditTime: 2020-03-25 23:03:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -10,14 +10,14 @@
     <div>
             <div class="item-header" @click="goGoodDetail">
                 <div class="header-img">
-                    <img :src="goods.sellerHeaderPicture" alt="">
+                    <img :src="goods.userHeaderPicture" alt="" v-lazy="goods.userHeaderPicture">
                     <span>{{goods.sellerName}}</span>
                 </div>
                 <div class="price">￥{{goods.productPrice}}</div>
             </div>
             <div class="item-content" @click="goGoodDetail">
                 <div class="content-img">
-                    <img :src="goods.productPic" alt="">
+                    <img :src="goods.productPic" alt="" v-lazy="goods.productPic">
                 </div>
                 <p class="desc">{{goods.productName}}</p>
                 <div class="item-bottom">
@@ -29,8 +29,11 @@
                     </div>
                 </div>
             </div>
+            <div class="item-delete" style="right:60px" v-if="user.handle === 'down'">
+                <mt-button  plain type="primary" size="small" @click="upMyPublish" class="delete-btn">上架</mt-button>
+            </div>
             <div class="item-delete">
-                <mt-button v-if="user.handle === 'delete'" plain type="danger" size="small" @click="deleteMyPublish" class="delete-btn">删除</mt-button>
+                <mt-button v-if="user.handle === 'delete' || user.handle === 'down'" plain type="danger" size="small" @click="deleteMyPublish" class="delete-btn">删除</mt-button>
                 <mt-button v-else plain type="primary" size="small" @click="downMyPublish" class="delete-btn">下架</mt-button>
             </div>
     </div>
@@ -51,7 +54,7 @@ export default {
         return {}
     },
     mounted () {
-        console.log(this.goods)
+        console.log(this.user.handle)
     },
     computed:{
         ...mapState({
@@ -70,6 +73,9 @@ export default {
             axios.delete(`/api/product/delete/${this.goods.buyId}`)
         },
         downMyPublish () {
+
+        },
+        upMyPublish () {
 
         },
         goGoodDetail () {

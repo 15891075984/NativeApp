@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 12:18:53
+ * @LastEditTime: 2020-03-25 22:28:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -37,11 +37,16 @@ export default {
         axios.get('/api/product/soldOut').then(res=>{
             if(res.code !==0) return
             this.myDownData = res.data
+            this.myDownData.map(item=>{
+                item.userHeaderPicture = this.user.userInfo.icon
+                item.sellerName = this.user.userInfo.uname
+            })
         })
     },
     computed:{
         ...mapState({
-            'goods':'goods'
+            'goods':'goods',
+            user:'user'
         })
     },
     methods: {

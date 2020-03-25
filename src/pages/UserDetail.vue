@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-03-22 15:32:15
+ * @LastEditTime: 2020-03-25 23:35:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -15,11 +15,11 @@
                 </div>
             </div>
             <div class="header-title">
-                <div class="avatar">
-                    <img src="../assets/img/avatar.jpg" alt="">
+                <div class="">
+                    <img :src="userInfo.icon" v-lazy="userInfo.icon" alt="" style="border: 2px solid #fff;border-radius: 5px;width:50px;height:50px">
                 </div>
                 <div class="username">
-                    <p class="name">weiyaoyun95</p>
+                    <p class="name">{{userInfo.uname}}</p>
                     <p class="apptest">已认证</p>
                 </div>
                 <div class="" style="margin-top:11px;">
@@ -31,9 +31,9 @@
                 90后金牛座女生
             </div>
             <div class="header-num header-desc">
-                <div class="num-item">2126超赞</div>
-                <div class="num-item">52关注</div>
-                <div class="num-item">487粉丝</div>
+                <div class="num-item">{{userInfo.starNum}}超赞</div>
+                <div class="num-item">{{userInfo.followNum}}关注</div>
+                <div class="num-item">{{userInfo.fansNum}}粉丝</div>
             </div>
             <div class="content-nav">
                 <mt-navbar v-model="selected">
@@ -69,6 +69,7 @@ import goodsCard from '../components/goodsCard'
 import goodsListRow from '../components/goodsListRow'
 import evaluateList from '../components/evaluateList'
 import dynamicList from '../components/dynamicList'
+import { mapState } from 'vuex';
 export default {
     components: {
         goodsCard,
@@ -82,13 +83,19 @@ export default {
             status: 0,
             selected: '2',
             goodsList: [],
-            dynamicList: []
+            dynamicList: [],
+            userInfo:{}
         }
     },
     mounted () {
         this.userId = this.$route.params.userId
         this.getUserDetail()
         this.getDynamic()
+    },
+    computed:{
+        ...mapState({
+            user:'user'
+        })
     },
     methods: {
         //获取用户详情
@@ -100,10 +107,30 @@ export default {
                 if (res.code !== 0 ) return 
                 this.goodsList = res.data.productInfoVos
             })
+            axios.get(`/api/homePage/userInfo/${this.userId}`).then(res=>{
+                if(res.code !== 0) return
+                if(res.data && Object.keys(res.data).length !== 0) {
+                    this.userInfo = res.data
+                }
+            })
         },
         //关注
         handleStatus () {
             this.status = this.status ? 0 : 1
+            const data = {
+                uid:this.user.userInfo.uid,
+                followid: this.userInfo.uid
+            }
+            axios({
+                url:'/api/Graph',
+                method:'POST',
+                data,
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }).then(res=>{
+                
+            })
             //this.$emit('updateStatus', this.userValue.uid, this.status)
             //TODO 切换关注状态
             // axios.get('/api/Graph',{
