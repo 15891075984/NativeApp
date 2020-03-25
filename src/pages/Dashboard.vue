@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-25 23:39:38
+ * @LastEditTime: 2020-03-26 00:00:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -101,11 +101,11 @@ export default {
 		}),
 		loadMore() {
 			//TODO 下拉无限加载
-			this.loading = true;
-			Indicator.open({
-				text: '加载中...',
-				spinnerType: 'fading-circle'
-			});
+			// this.loading = true;
+			// Indicator.open({
+			// 	text: '加载中...',
+			// 	spinnerType: 'fading-circle'
+			// });
 			// setTimeout(() => {
 			// 	// let last = this.goodsList[this.goodsList.length - 1];
 			// 	for (let i = 1; i <= 10; i++) {
@@ -130,7 +130,7 @@ export default {
 		}
 	},
 	mounted () {
-		this.getGoodsList()
+		// this.getGoodsList()
 	}
 }
 </script>
