@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-23 23:56:47
+ * @LastEditTime: 2020-03-25 16:36:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -72,6 +72,12 @@ export default {
             value:'',
             list:[]
         }
+    },
+    mounted () {
+        // const from = this.$route.params.meta.from
+        // if (from === 'goods'){
+        //     console.log('goods')
+        // }
     },
     methods: {
         submit () {

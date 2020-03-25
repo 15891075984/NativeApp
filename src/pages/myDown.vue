@@ -1,85 +1,56 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 12:19:49
+ * @LastEditTime: 2020-03-25 12:18:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
  -->
 <template>
-    <div>
-            <div class="item-header" @click="goGoodDetail">
-                <div class="header-img">
-                    <img :src="goods.sellerHeaderPicture" alt="">
-                    <span>{{goods.sellerName}}</span>
-                </div>
-                <div class="price">￥{{goods.productPrice}}</div>
-            </div>
-            <div class="item-content" @click="goGoodDetail">
-                <div class="content-img">
-                    <img :src="goods.productPic" alt="">
-                </div>
-                <p class="desc">{{goods.productName}}</p>
-                <div class="item-bottom">
-                    <div class="kinds">
-                        类别:{{goods.productTag}}
-                    </div>
-                    <div class="update-time">
-                        发布时间:{{goods.productCreateTime}}
-                    </div>
-                </div>
-            </div>
-            <div class="item-delete">
-                <mt-button v-if="user.handle === 'delete'" plain type="danger" size="small" @click="deleteMyPublish" class="delete-btn">删除</mt-button>
-                <mt-button v-else plain type="primary" size="small" @click="downMyPublish" class="delete-btn">下架</mt-button>
-            </div>
-    </div>
+    <div class="publish-list">
+        <headerBar title="我下架的"></headerBar>
+        <div class="publish-item" v-for="(item) in myDownData" :key="item.id">
+            <myCardList :goods="item"></myCardList>
+      </div>
+  </div>
 </template>
 
 <script>
 import headerBar from '../components/headerBar'
 import { Button } from 'mint-ui';
-import axios from '../utils/request'
 import { mapState,mapMutations,mapActions } from 'vuex';
+import axios from '../utils/request'
+import myCardList from '../components/my-cardList'
 export default {
     components: {
         headerBar,
-        Button
+        Button,
+        myCardList
     },
-    props:['goods'],
     data () {
-        return {}
+        return {
+            myDownData:[]
+        }
     },
     mounted () {
-        console.log(this.goods)
+        //TODO 用户去拉取发布列表
+        axios.get('/api/product/soldOut').then(res=>{
+            if(res.code !==0) return
+            this.myDownData = res.data
+        })
     },
     computed:{
         ...mapState({
-            user:'user'
+            'goods':'goods'
         })
     },
     methods: {
         ...mapActions({
-            'submitPublish':'goods/submitPublish',
+            'submitPublish':'goods/submitPublish'
         }),
         ...mapMutations({
-            'setPublishImg':'goods/setPublishImg',
-            
-        }),
-        deleteMyPublish() {
-            axios.delete(`/api/product/delete/${this.goods.buyId}`)
-        },
-        downMyPublish () {
-
-        },
-        goGoodDetail () {
-            this.$router.push({
-                name:'goods',
-                params:{
-                    goodsId:this.goods.id
-                }
-            })
-        }
+            'setPublishImg':'goods/setPublishImg'
+        })
     }
 }
 </script>
@@ -88,7 +59,7 @@ export default {
 .publish-list{
      height: 100vh;
     overflow: auto;
-    padding-top: 12px;
+    padding-top: 13px;
 }
     .publish-item{
         margin-top: 15px;

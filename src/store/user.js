@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-07 21:23:24
- * @LastEditTime: 2020-03-23 10:08:19
+ * @LastEditTime: 2020-03-25 11:38:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\store\user.js
@@ -33,14 +33,14 @@ const user = {
             userSex: 0,
             userAddress: "广东省中山市"
         },
-        previousAvatar:''
+        previousAvatar:'',
+        handle:'delete'
     },
     mutations: {
         setUsername (state, data) {
             state.username = data
         },
         setSelected (state, data) {
-            console.log(222, data)
             state.selected = data
         },
         setUserInfo (state, data) {
@@ -52,8 +52,13 @@ const user = {
                 state.userAddress = userAddress.cname
             }
         },
+        //设置用户头像，用户可能取消或者确定
         setUserInfoAvatar (state, data)  {
             state.userInfo.icon = data
+        },
+
+        setHandle (state,data) {
+            state.handle = data
         }
     },
     actions: {

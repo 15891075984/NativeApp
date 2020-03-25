@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-23 10:06:40
+ * @LastEditTime: 2020-03-25 15:22:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\utils\request.js

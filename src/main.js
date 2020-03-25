@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-18 23:17:53
+ * @LastEditTime: 2020-03-25 12:02:52
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\main.js
@@ -69,6 +69,9 @@ router.beforeEach((to, from, next) => {
         next('/login');
         Toast('未查询到用户登录，请登录')
         return
+    }
+    if ( path ==='/myPublish' ) {
+        router.app.$options.store.commit('user/setHandle','publish')
     }
     // else if (to.meta.permission) {
     //     // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已

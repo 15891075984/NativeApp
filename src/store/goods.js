@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-23 00:18:47
+ * @LastEditTime: 2020-03-25 18:23:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -21,8 +21,11 @@ const goods = {
             productTag:'',
             productStatus:0,
             productPic:[]
-        }
-        //
+        },
+        //goods: 
+        goods:{},
+        //用户购买数量
+        goodsCount:1
     },
     mutations: {
         setProductTag (state, data) {
@@ -34,6 +37,12 @@ const goods = {
         },
         delelteProductImg (state, index) {
             state.upload.productPic.splice(index, 1)
+        },
+        setGoods(state, data) {
+            console.log(data)
+            if (data && Object.keys(data).length !== 0 ) {
+                state.goods = data
+            }
         }
     },
     actions: {
@@ -68,6 +77,13 @@ const goods = {
             axios.get('/api/product/search/33').then(res => {
                 //console.log(res)
             })
+        },
+
+        getGoods({state,commit},params) {
+            axios.get(`/api/product/search/${params.goodsId}`).then(res => {
+				if( res.code !== 0) return
+                commit('setGoods', res.data)
+			})
         }
     },
 

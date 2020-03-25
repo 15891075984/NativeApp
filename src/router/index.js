@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-03-23 20:56:48
+ * @LastEditTime: 2020-03-25 16:39:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -98,8 +98,19 @@ export default new Router({
     },{
         path:'/Chat',
         name:'Chat',
+        meta: { requiresAuth: true },
         component: () => import('@/pages/Chat')
+    },{
+        path:'/myDown',
+        name:'myDown',
+        component: () => import('@/pages/myDown')
+    },{
+        path:'/Buy',
+        name:'Buy',
+        component: () => import('@/pages/Buy')
     },
+    
+    
     // ,{
     //   path:'/category',
     //   name:'Category',

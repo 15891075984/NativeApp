@@ -40,11 +40,12 @@
 		</div>
 		<div class="list">
 			<ul class="itemlist">
-				<li class="item item1" @click="goMyPublish">我发布的<span class="number" v-if="login">{{user.userInfo.publishNum}}</span></li>
-				<li class="item item2" @click="goMySell">我卖出的<span class="number" v-if="login">{{user.userInfo.sellNum}}</span></li>
-				<li class="item item3" @click="goMyBuy">我买到的<span class="number" v-if="login">{{user.userInfo.buyNum}}</span></li>
-				<li class="item item4" @click="goMyLike">我赞过的<span class="number" v-if="login">{{user.userInfo.starNum}}</span></li>
-				<li class="item item5" @click="goMyCollect">我收藏的<span class="number" v-if="login">{{user.userInfo.collectNum}}</span></li>
+				<li class="item item1" @click="goMyPublish">我发布的<span class="number">{{user.userInfo.publishNum}}</span></li>
+				<li class="item item3" @click="goMyBuy">我买到的<span class="number">{{user.userInfo.buyNum}}</span></li>
+				<li class="item item2" @click="goMySell">我卖出的<span class="number">{{user.userInfo.sellNum}}</span></li>
+				<li class="item item3" @click="goMyDown">我下架的<span class="number">{{user.userInfo.downNum}}</span></li>
+				<li class="item item4" @click="goMyLike">我赞过的<span class="number">{{user.userInfo.starNum}}</span></li>
+				<li class="item item5" @click="goMyCollect">我收藏的<span class="number">{{user.userInfo.collectNum}}</span></li>
 			</ul>
 		</div>
 		<div class="list" v-if="login">
@@ -105,7 +106,8 @@ export default {
 	},
 	methods: {
 		...mapMutations({
-			setUserInfoAvatar:'user/setUserInfoAvatar'
+			setUserInfoAvatar:'user/setUserInfoAvatar',
+			setHandle:'user/setHandle',
 		}),
 		photo () {
 			this.loadImg("image/jpg;capture=camera")
@@ -124,21 +126,31 @@ export default {
 			return false;
 		},
 	goMyPublish() {
+		this.setHandle('publish')
 		this.$router.push('/myPublish')
 	},
 	goHome() {
 		this.$router.push('/')
 	},
 	goMyCollect() {
+		this.setHandle('delete')
 		this.$router.push('/myCollect')
 	},
 	goMySell() {
+		this.setHandle('delete')
 		this.$router.push('/mySell')
 	},
 	goMyBuy() {
+		this.setHandle('delete')
 		this.$router.push('/myBuy')
 	},
+
+	goMyDown () {
+		this.setHandle('delete')
+		this.$router.push('/myDown')
+	},
 	goMyLike() {
+		this.setHandle('delete')
 		this.$router.push('/myLike')
 	},
 	logout () {
