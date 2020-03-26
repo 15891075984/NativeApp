@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-25 16:39:27
- * @LastEditTime: 2020-03-25 18:34:46
+ * @LastEditTime: 2020-03-26 09:14:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Buy.vue
@@ -12,7 +12,7 @@
         <div class="buy-wrapper">
             <div class="title">
                 <div class="title-img">
-                    <img src="../assets/img/avatar.jpg" alt="" style="width:100px;height:100px">
+                    <img :src="goods.goods.productPics[0].productPic" alt="" style="width:100px;height:100px">
                 </div>
                 <div class="title-content">
                     <p class="title-content-con">

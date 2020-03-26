@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 11:47:45
+ * @LastEditTime: 2020-03-26 11:00:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -34,7 +34,7 @@ export default {
     },
     mounted () {
         //TODO 用户去拉取发布列表
-        axios.get('/api/userBuy').then(res=>{
+        axios.get('/api/product/userRelease').then(res=>{
             if(res.code !== 0 ) return
             if ( res.data && Object.keys(res.data) ){
                 this.myPublishData = res.data

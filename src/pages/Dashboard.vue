@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-26 00:00:39
+ * @LastEditTime: 2020-03-26 10:01:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -21,8 +21,21 @@
 				placeholder="搜索宝贝/鱼塘/用户">
 			</mt-search>
 			<div class="search-list" v-if="value.length > 0">
-				<li v-for="item in product">
-					{{item}}
+				<li v-for="item in goodsList.slice(0,4)" class="search-user search-goods" style="padding:10px 15px 10px 15px">
+					<div class="search-user-avatar">
+						<img src="../assets/img/avatar.jpg" alt="">
+					</div>
+					<div class="search-user-content" style="padding-left:10px;line-height:20px;flex:1">
+						<div class="search-goods-name" style="line-height:30px;text-align:left">{{item.productName}}</div>
+						<div class="search-goods-content" style="text-align:left">杜瓦瓶发票开发票个屁</div>
+					</div>
+					<div >
+						<mt-button type="default"  @click="handleStatus" :class="{follow: status === 0}">{{status === 0 ? '取关' : '关注'}}</mt-button>
+					</div>
+				</li>
+				<li v-for="item in goodsList" style="" class="search-goods">
+					<div class="search-goods-name">{{item.productName}}</div>
+					<div class="search-goods-content">{{item.productContent}}</div>
 				</li>
 			</div>
 		</div>
@@ -32,7 +45,7 @@
 			v-infinite-scroll="loadMore"
 			infinite-scroll-disabled="loading"
 			infinite-scroll-distance="50">
-			<goodsCard :news="goodsList"></goodsCard>
+			<goodsCard :news="goodsHomeList"></goodsCard>
 		</ul>
         
     </div>
@@ -66,10 +79,12 @@ export default {
 			selected:'1',
 			loading: false,
 			loadingNears: false,
+			status:1,
 			page: 1,
             result : [],
-            goodsList: [],
-			product: [1,2]
+			goodsList: [],
+			userList:[],
+			goodsHomeList:[]
         }
 	},
 	computed:{
@@ -79,15 +94,16 @@ export default {
 	},
 	watch: {
 		value () {
-			// alert(123)
-			console.log()
-			this.page ++
 			axios.get('/api/search',{
 				params:{
 					keyword: this.value
 				}
 			}).then(res=>{
-				this.product.push(this.value)
+				if (res.code !==0) return 
+				if(res.data && Object.keys(res.data).length !==0 ) {
+					this.userList = res.data.users
+					this.goodsList = res.data.product.slice(0, 6)
+				}
 			})
 		}
 	},
@@ -127,6 +143,9 @@ export default {
 			}).then(res=>{
 				console.log(888,res)
 			})
+		},
+		handleStatus () {
+			this.status = this.status ? 0 : 1
 		}
 	},
 	mounted () {
@@ -157,5 +176,30 @@ export default {
     height: 93vh;
     background: #eee;
     z-index: 99999;
+}
+.search-goods{
+	height:50px;
+	display:flex;
+	/* align-items: center; */
+	padding: 0 40px 0 25px;
+	font-size:14px;
+	background: #fff;
+	line-height: 50px;
+}
+.search-goods-name{
+	line-height: 50px;
+	margin-right: 15px;
+}
+.search-goods-content{
+	flex:1;
+	text-align: right;
+	color:#bbb;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.follow{
+	background: #ffda44;
+	border-radius: 5px;
 }
 </style>

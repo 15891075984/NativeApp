@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-03-25 16:39:19
+ * @LastEditTime: 2020-03-26 10:15:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -108,49 +108,13 @@ export default new Router({
         path:'/Buy',
         name:'Buy',
         component: () => import('@/pages/Buy')
-    },
-    
-    
-    // ,{
-    //   path:'/category',
-    //   name:'Category',
-    //   component: () => import('@/pages/Category')
-    // },{
-    //   path: '/search',
-    //   name:'search',
-    //   component: () => import('@/pages/Search')
-    // },{
-    //   path: '/buy/:id',
-    //   name:'buy',
-    //   component: () => import('@/pages/Buy')
-    // },{
-    //   path:'/404',
-    //   name:'404',
-    //   component: () => import('@/pages/notFound')
-    // },{
-    //   path:'/fishpond',
-    //   name:'fishpond',
-    //   component: () => import('@/pages/Fishpond')
-    // },{
-    //   path:'/publish',
-    //   name:'publish',
-    //   component: () => import('@/pages/Publish')
-    // },{
-    //   path:'/message',
-    //   name:'message',
-    //   component: () => import('@/pages/Message')
-    // },{
-    //   path:'/me',
-    //   name:'me',
-    //   component: () => import('@/pages/Me')
-    // },{
-    //   path:'/login',
-    //   name:'login',
-    //   component: () => import('@/pages/Login')
-    // },
-    // {
-    //   path:'*',
-    //   redirect:'/404'
-    // }
-  ]
+    },{
+        path:'/FeedBack',
+        name:'FeedBack',
+        component: () => import('@/pages/FeedBack')
+    },{
+        path:'*',
+        redirect:'/404'
+    }
+    ]
 })

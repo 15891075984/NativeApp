@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-03-25 22:59:55
+ * @LastEditTime: 2020-03-26 09:12:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -126,7 +126,7 @@ export default {
 	data () {
 		return {
 			show: true,
-			status:true,
+			status:0,
 			likeActive: false,
 			collectActive: false,
 			message:'',
@@ -143,7 +143,8 @@ export default {
 	},
 	computed:{
 		...mapState({
-			goods:'goods'
+			goods:'goods',
+			user:'user',
 		}),
 	},
 	mounted () {
@@ -167,9 +168,6 @@ export default {
 			if (this.sendMessage) {
 				this.messageState = false
 			}
-		},
-		handleStatus () {
-
 		},
 		//发送评论
 		submitMessage() {
@@ -259,7 +257,35 @@ export default {
 		//取消评价
 		cancelMessage () {
 			this.messageState = false
-		}
+		},
+
+		//关注
+        handleStatus () {
+			this.status = this.status ? 0 : 1
+			console.log(this.goods.goods)
+            const data = {
+                uid:this.user.userInfo.uid,
+                followid: this.goods.goods.userId,
+                status: this.status
+            }
+            axios({
+                url:'/api/Graph',
+                method:'POST',
+                data,
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }).then(res=>{
+                
+            })
+            //this.$emit('updateStatus', this.userValue.uid, this.status)
+            //TODO 切换关注状态
+            // axios.get('/api/Graph',{
+            //     params:{
+            //         uid: this.status
+            //     }
+            // })
+        },
 	}
 }
 </script>
@@ -423,5 +449,9 @@ export default {
 			border-radius: 8px;
 		}
 	}
+}
+.follow{
+	background: #ffda44;
+	border-radius: 5px;
 }
 </style>

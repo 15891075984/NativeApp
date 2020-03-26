@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-03-25 23:35:53
+ * @LastEditTime: 2020-03-26 09:58:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -119,8 +119,10 @@ export default {
             this.status = this.status ? 0 : 1
             const data = {
                 uid:this.user.userInfo.uid,
-                followid: this.userInfo.uid
+                followid: this.userInfo.uid,
+                status: this.status
             }
+            console.log(data)
             axios({
                 url:'/api/Graph',
                 method:'POST',

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-23 23:12:13
+ * @LastEditTime: 2020-03-26 11:10:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -12,7 +12,7 @@
     <mt-loadmore :top-method="loadTop"
                   topPullText='下拉加载...'
                   topLoadingText='释放刷新...'
-                  ref="loadmore" topDistance="100">
+                  ref="loadmore" :topDistance="100">
     <div>
     <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
       <!-- <li v-for="item in list" style="height:40px">{{ item }}</li> -->
@@ -55,6 +55,8 @@
 import tabBar from '../components/tabBar'
 import headerBar from '../components/headerBar'
 import { Loadmore,Indicator } from 'mint-ui';
+import { mapState } from 'vuex';
+import axios from '../utils/request'
 export default {
   components: {
       tabBar,
@@ -66,6 +68,15 @@ export default {
       list:[1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8,1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8]
     }
   },
+  computed: {
+    ...mapState({
+      user:'user'
+    })
+  },
+  mounted () {
+    this.getMessageList()
+  },
+
   methods: {
     loadTop() {
       this.$refs.loadmore.onTopLoaded();
@@ -80,6 +91,10 @@ export default {
       this.$router.push({
         name:'Chat'
       })
+    },
+
+    getMessageList () {
+      axios.get(`/api/message/notification/${this.user.userInfo.uid}`)
     }
   }
 }

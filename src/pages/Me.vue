@@ -50,9 +50,9 @@
 		</div>
 		<div class="list" v-if="login">
 			<ul class="itemlist">
-				<li class="item item8">我的公益</li>
+				<!-- <li class="item item8">我的公益</li> -->
 				<li class="item item9">闲鱼Family</li>
-				<li class="item item10">帮助与反馈</li>
+				<li class="item item10 " @click="goFeedBack">帮助与反馈</li>
 			</ul>
 		</div>
 		<div class="list">
@@ -223,7 +223,13 @@ export default {
 					}
 				})
 		})
-    },
+	},
+	
+	goFeedBack () {
+		this.$router.push({
+			name:'FeedBack'
+		})
+	}
   }
 }
 </script>
@@ -466,5 +472,8 @@ ul,li {
 }
 .icon-success{
 	background-image: url('../assets/img/对号.png');
+}
+.goFeedBack{
+
 }
 </style>
