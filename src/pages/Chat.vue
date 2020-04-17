@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-25 16:36:31
+ * @LastEditTime: 2020-03-26 20:21:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -29,22 +29,9 @@
                     </li>
                 </ul>
             </mt-loadmore>
-            <!-- <ul style="padding-bottom: 100px; " ref="chat-ul">
-                <li class="chat-item" v-for="(item,index) in list" :key="index">
-                    <div class="item-you" v-if="index % 2 == 0">
-                        <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
-                        <p class="item-message">{{item}}</p>
-                    </div>
-                    <div class="item-me" v-else>
-                        <p class="item-message">{{item}}</p>
-                        <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
-                    </div>
-                </li>
-            </ul> -->
         </div>
         <div class="chat-input">
             <div class="textarea-wrapper">
-                <!--pre 文本通常会保留空格和换行符。-->
                 <pre class="content">{{value}}</pre>
                 <textarea
                     v-model="value"
@@ -57,8 +44,11 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
 import headerBar from '../components/headerBar'
 import { CellSwipe,Loadmore   } from 'mint-ui';
+import axios from '../utils/request'
+const socket=io('ws://47.93.117.14:9093')
 export default {
     components: {
         headerBar,
@@ -69,11 +59,17 @@ export default {
         return {
             allLoaded:true,
             count: 0,
-            value:'',
-            list:[]
+            value:'socket',
+            list:[],
         }
     },
     mounted () {
+        //主动去触发后端的事件，发送参数text
+        socket.emit('message',{text:'socket'})
+        //给后端定义的事件，等待后端触发
+        socket.on('receMsg',function(data){
+            console.log(data)
+        })
         // const from = this.$route.params.meta.from
         // if (from === 'goods'){
         //     console.log('goods')
@@ -93,22 +89,8 @@ export default {
         },
         //加载之前聊天记录
         loadTop () {
-            this.count ++
-            const data = `${this.count}我真的对她又爱又恨..
-
-                        之前觉得这个红好村哦 素颜涂得
-
-                        但是皮肤养白了点涂就更显白了emm竟然还有一点点喜欢？？ 我一般都薄涂一遍再从中间叠加 这样还挺好看的
-
-                        厚涂绝美哈 薄涂就一般 哑光颜色好看但是干的也快 害
-
-                        今天闲出屁来999叠涂雕牌唇蜜01 太好看了我去`
-            const tempArr = []
-            for(let i =0;i<=1;i++) {
-                tempArr.push(data)
-            }
-            console.log(tempArr.concat(tempArr))
-            this.list = tempArr.concat(this.list)
+            const userId = this.$router
+            axios.get(`/api/message/chat/history/${userId}`)
         }
     }
 }

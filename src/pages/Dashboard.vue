@@ -99,7 +99,7 @@ export default {
 					keyword: this.value
 				}
 			}).then(res=>{
-				if (res.code !==0) return 
+				if (res.code !==0) return
 				if(res.data && Object.keys(res.data).length !==0 ) {
 					this.userList = res.data.users
 					this.goodsList = res.data.product.slice(0, 6)

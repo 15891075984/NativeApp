@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-25 22:03:01
+ * @LastEditTime: 2020-04-17 15:32:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\main.js
@@ -82,6 +82,8 @@ router.beforeEach((to, from, next) => {
     // }
     next()
 });
+
+
 
 new Vue({
     router,
