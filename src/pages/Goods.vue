@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-04-19 10:16:06
+ * @LastEditTime: 2020-04-19 10:24:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -372,7 +372,7 @@ export default {
 		}
 	}
 	.goods-message{
-		padding-bottom: 50px;
+		padding-bottom: 80px;
 		.message-title{
 			font-size: 16px;
 			font-weight: 600;
