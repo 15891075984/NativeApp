@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-04-19 10:06:04
+ * @LastEditTime: 2020-04-19 10:16:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -46,7 +46,7 @@
 					<div class="message-title">
 						全部留言
 					</div>
-					<div class="message-item" v-for="item in goods.leaveMessage">
+					<div class="message-item" v-for="item in leaveMessage">
 						<div class="item-img">
 							<img :src="item.parentComments.icon" alt="" >
 						</div>
@@ -157,6 +157,10 @@ export default {
 			goods:'goods',
 			user:'user',
 		}),
+		leaveMessage () {
+			console.log(this.goods.leaveMessage)
+			return this.goods.leaveMessage
+		}
 	},
 	mounted () {
 		this.goodsId = this.$route.params.goodsId

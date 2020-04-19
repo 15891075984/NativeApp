@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-04-19 09:28:17
+ * @LastEditTime: 2020-04-19 10:16:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -26,7 +26,8 @@ const goods = {
         goods:{
         },
         //用户购买数量
-        goodsCount:1
+        goodsCount:1,
+        leaveMessage:[]
     },
     mutations: {
         setProductTag (state, data) {
@@ -47,7 +48,6 @@ const goods = {
         setLeaveMessage (state, data) {
             if (data && Object.keys(data).length !== 0 ) {
                 state.leaveMessage = data
-                console.log('leavemessage', data)
             }
         }
     },
