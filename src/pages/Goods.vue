@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-03-26 09:12:03
+ * @LastEditTime: 2020-04-19 10:06:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -46,13 +46,24 @@
 					<div class="message-title">
 						全部留言
 					</div>
-					<div class="message-item" v-for="item in goods.goods.leaveMessages">
+					<div class="message-item" v-for="item in goods.leaveMessage">
 						<div class="item-img">
-							<img src="../assets/img/avatar.jpg" alt="" >
+							<img :src="item.parentComments.icon" alt="" >
 						</div>
-						<div class="item-name">
-							<p class="name">{{item.uname}}</p>
-							<div class="message">{{item.message}}</div>
+						<div class="item-name" @click="handleMessageState(item.parentComments.commentId)">
+							<div class="name" >
+								<div style="line-height:18px;margin-bottom:5px">{{item.parentComments.uname}}</div>
+								<div style="line-height:14px;font-size:12px;color:#ccc">{{item.parentComments.createTime}}</div>
+							</div>
+							<div style="position:absolute;right:25px"></div>
+							<div class="message">{{item.parentComments.message}}</div>
+							<div class="children-message" v-if="item.childrenComments.length >= 1">
+								<div v-for="ite in item.childrenComments" @click="handleMessageState(item.parentComments.commentId)">
+									{{ite.uname}} : 
+									{{ite.message}}
+								</div>
+								
+							</div>
 						</div>
 					</div>
 				</div>
@@ -65,7 +76,7 @@
 					<i :class="['iconfont','icon-dianzan',{iconActive:likeActive}]"></i>
 					<span>点赞</span>
 				</div>
-				<div class="goods-item-message items" @click="handleMessageState">
+				<div class="goods-item-message items" @click="handleMessageState(null)">
 					<i :class="['iconfont','icon-liuyan']"></i>
 					<span>留言</span>
 				</div>
@@ -149,16 +160,20 @@ export default {
 	},
 	mounted () {
 		this.goodsId = this.$route.params.goodsId
-        this.getGoodsDetail()
+		this.getGoodsDetail()
+		this.goodsId = 892
+		this.getLeaveMessage({id: this.goodsId})
 	},
 	methods: {
 		...mapActions({
-			getGoods:'goods/getGoods'
+			getGoods:'goods/getGoods',
+			getLeaveMessage: 'goods/getLeaveMessage'
 		}),
 		getGoodsDetail () {
 			this.getGoods({goodsId:this.goodsId})
 		},
-		handleMessageState() {
+		handleMessageState(value) {
+			this.commitId = value
 			this.messageState = true
 			this.$nextTick(()=>{
 				this.$refs['goodsmessage'].focus()
@@ -171,14 +186,18 @@ export default {
 		},
 		//发送评论
 		submitMessage() {
-			if( !this.message ) return 
-
+			if( !this.message ) return
 			const data = {
 				productId:this.goods.goods.id,
 				message: this.message
 			}
+			let url = '/api/leaveMessage'
+			if ( this.commitId ) {
+				data.commentPid = this.commitId,
+				url = '/api/productComment/addProductComment'
+			}
 			axios({
-				url:'/api/leaveMessage',
+				url,
 				method: 'post',
 				data,
 				header:{
@@ -190,6 +209,7 @@ export default {
 				this.$nextTick(()=>{
 					this.messageState = false
 				})
+				this.getLeaveMessage({id: this.goodsId})
 				if(res.code !==0 ) return 
 				if( res.data && Object.keys(res.data)){}
 			})
@@ -240,12 +260,14 @@ export default {
 		},
 		//我想要，去聊天
 		goChat () {
+			
 			this.$router.push({
 				name:'Chat',
 			})
 		},
 		//去购买
 		goBuyPage() {
+			console.log(this.goods.leaveMessage)
 			this.popupVisible = true
 		},
 		//去购买
@@ -369,6 +391,7 @@ export default {
 			}
 			.item-name{
 				padding-left: 10px;
+				position: relative;
 				font-size: 16px;
 				.name{
 					line-height: 50px;
@@ -453,5 +476,12 @@ export default {
 .follow{
 	background: #ffda44;
 	border-radius: 5px;
+}
+.children-message{
+	margin-top: 5px;
+	border-top: .5px solid #eee;
+	padding-top: 7px;
+	padding-left: 10px;
+	
 }
 </style>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-25 23:39:47
+ * @LastEditTime: 2020-04-19 09:28:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -23,7 +23,8 @@ const goods = {
             productPic:[]
         },
         //goods: 
-        goods:{},
+        goods:{
+        },
         //用户购买数量
         goodsCount:1
     },
@@ -39,9 +40,14 @@ const goods = {
             state.upload.productPic.splice(index, 1)
         },
         setGoods(state, data) {
-            console.log(data)
             if (data && Object.keys(data).length !== 0 ) {
                 state.goods = data
+            }
+        },
+        setLeaveMessage (state, data) {
+            if (data && Object.keys(data).length !== 0 ) {
+                state.leaveMessage = data
+                console.log('leavemessage', data)
             }
         }
     },
@@ -84,6 +90,13 @@ const goods = {
 				if( res.code !== 0) return
                 commit('setGoods', res.data)
 			})
+        },
+
+        getLeaveMessage({state,commit},params) {
+            axios.get(`/api/productComment/${params.id}`).then( res => {
+                if( res.code !== 0) return
+                commit('setLeaveMessage', res.data)
+            })
         }
     },
 
