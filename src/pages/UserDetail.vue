@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-03-26 09:58:59
+ * @LastEditTime: 2020-04-20 12:25:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -37,10 +37,9 @@
             </div>
             <div class="content-nav">
                 <mt-navbar v-model="selected">
-                    <mt-tab-item id="1">她的58</mt-tab-item>
-                    <mt-tab-item id="2">帖子0</mt-tab-item>
+                    <mt-tab-item id="1">她的{{count.mineNum}}</mt-tab-item>
                     <mt-tab-item id="3">评价857</mt-tab-item>
-                    <mt-tab-item id="4">动态639</mt-tab-item>
+                    <mt-tab-item id="4">动态{{count.allNum}}</mt-tab-item>
                 </mt-navbar>
             </div>
         </div>
@@ -48,9 +47,6 @@
             <mt-tab-container v-model="selected" class="content">
                 <mt-tab-container-item id="1">
                     <goodsListRow :goods="goodsList"></goodsListRow>
-                </mt-tab-container-item>
-                <mt-tab-container-item id="2">
-                    <mt-cell v-for="n in 6" :title="'帖子 ' + n" />
                 </mt-tab-container-item>
                 <mt-tab-container-item id="3">
                     <evaluateList v-for="item in 2"></evaluateList>
@@ -81,10 +77,14 @@ export default {
         return {
             userId: '',
             status: 0,
-            selected: '2',
+            selected: '1',
             goodsList: [],
             dynamicList: [],
-            userInfo:{}
+            userInfo:{},
+            count: {
+                allNum: 0,
+                mineNum: 0,
+            }
         }
     },
     mounted () {
@@ -106,6 +106,7 @@ export default {
             }).then( res =>{
                 if (res.code !== 0 ) return 
                 this.goodsList = res.data.productInfoVos
+                this.count.mineNum = res.data.mineNum
             })
             axios.get(`/api/homePage/userInfo/${this.userId}`).then(res=>{
                 if(res.code !== 0) return
@@ -149,6 +150,7 @@ export default {
             }).then( res =>{
                 if (res.code !== 0 ) return
                 this.dynamicList = res.data.dynamic
+                this.count.allNum = res.data.allNum
             })
         },
 
