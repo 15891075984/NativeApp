@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-03-26 10:01:55
+ * @LastEditTime: 2020-04-21 19:30:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -17,23 +17,27 @@
 				class="search"
 				style="height:100%"
 				@change.native="handleSearch"
-				@keyup.enter.native="handleSearch"
+				@keyup.enter.native="goGoodsList()"
 				placeholder="搜索宝贝/鱼塘/用户">
 			</mt-search>
 			<div class="search-list" v-if="value.length > 0">
-				<li v-for="item in goodsList.slice(0,4)" class="search-user search-goods" style="padding:10px 15px 10px 15px">
+				<li v-for="item in goodsList.slice(0,4)" 
+				class="search-user search-goods" 
+				style="padding:10px 15px 10px 15px" 
+				@click="goUserDetail(item)"
+				v-if="goodsList.length >= 1">
 					<div class="search-user-avatar">
 						<img src="../assets/img/avatar.jpg" alt="">
 					</div>
 					<div class="search-user-content" style="padding-left:10px;line-height:20px;flex:1">
 						<div class="search-goods-name" style="line-height:30px;text-align:left">{{item.productName}}</div>
-						<div class="search-goods-content" style="text-align:left">杜瓦瓶发票开发票个屁</div>
+						<div class="search-goods-content" style="text-align:left"></div>
 					</div>
 					<div >
 						<mt-button type="default"  @click="handleStatus" :class="{follow: status === 0}">{{status === 0 ? '取关' : '关注'}}</mt-button>
 					</div>
 				</li>
-				<li v-for="item in goodsList" style="" class="search-goods">
+				<li v-for="item in goodsList" style="" class="search-goods" @click="goGoodsList(item.productName)">
 					<div class="search-goods-name">{{item.productName}}</div>
 					<div class="search-goods-content">{{item.productContent}}</div>
 				</li>
@@ -45,7 +49,7 @@
 			v-infinite-scroll="loadMore"
 			infinite-scroll-disabled="loading"
 			infinite-scroll-distance="50">
-			<goodsCard :news="goodsHomeList"></goodsCard>
+			<goodsCard :news="goodsHomeList" style="padding-bottom:18px"></goodsCard>
 		</ul>
         
     </div>
@@ -81,10 +85,40 @@ export default {
 			loadingNears: false,
 			status:1,
 			page: 1,
-            result : [],
+            result : [{
+				id: 123,
+				url: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3325225940,3785640195&fm=26&gp=0.jpg'
+			},
+			{
+				id: 123,
+				url: 'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1887790499,2593561230&fm=26&gp=0.jpg'
+			},
+			{
+				id: 123,
+				url: 'https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3900027128,2614373896&fm=26&gp=0.jpg'
+			},{
+				id: 123,
+				url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587478574022&di=dccf031d1447c85265189498f71b0a83&imgtype=0&src=http%3A%2F%2Fwww.51psj.com.cn%2Fuploadfile%2F2019%2F1024%2F20191024081740807.jpg'
+			}],
 			goodsList: [],
 			userList:[],
-			goodsHomeList:[]
+			goodsHomeList:[{
+				id:1,
+				name:'个人工诶',
+				time:'2020-02-02',
+				price: 999,
+				desc: '佛我华为噢IG和日哦打 ',
+				add: 12,
+				kind: '电子仪器'
+			},{
+				id:1,
+				name:'个人工诶',
+				time:'2020-02-02',
+				price: 999,
+				desc: '佛我华为噢IG和日哦打 ',
+				add: 12,
+				kind: '电子仪器'
+			}]
         }
 	},
 	computed:{
@@ -134,7 +168,22 @@ export default {
 			// 	Indicator.close()
 			// }, 1000);
 		},
-
+		goGoodsList (value) {
+			this.$router.push({
+				name: 'goodsList',
+				params: {
+					search: this.value
+				}
+			})
+		},
+		goUserDetail (value) {
+			this.$router.push({
+				name: 'UserDetail',
+				params: {
+					userId: value.userId
+				}
+			})
+		},
 		handleSearch () {
 			axios.get('/api/search',{
 				params:{
@@ -150,6 +199,11 @@ export default {
 	},
 	mounted () {
 		// this.getGoodsList()
+		axios.get('/api/search',{
+			params:{
+					keyword: ''
+				}
+		})
 	}
 }
 </script>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-03-26 10:15:29
+ * @LastEditTime: 2020-04-21 19:13:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -68,6 +68,10 @@ export default new Router({
         name:'goods',
         component: () => import('@/pages/Goods')
     },{
+        path:'/goodsList/:search',
+        name:'goodsList',
+        component: () => import('@/pages/GoodsList')
+    },{
         path:'/follow/:followId',
         name:'follow',
         component: () => import('@/pages/Follow')
@@ -96,7 +100,7 @@ export default new Router({
         name:'myLike',
         component: () => import('@/pages/myLike')
     },{
-        path:'/Chat',
+        path:'/Chat/:uid',
         name:'Chat',
         meta: { requiresAuth: true },
         component: () => import('@/pages/Chat')

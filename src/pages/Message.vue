@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-26 11:10:04
+ * @LastEditTime: 2020-04-21 18:07:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -15,23 +15,22 @@
                   ref="loadmore" :topDistance="100">
     <div>
     <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
-      <!-- <li v-for="item in list" style="height:40px">{{ item }}</li> -->
-      <li class="message-item" v-for="item in 10" @click="goChatting(item)">
+      <li class="message-item" v-for="item in list" @click="goChatting(item.uid)">
         <div>
-          <img src="../assets/img/avatar.jpg" alt=""  class="avatar">
+          <img :src="item.icon" alt=""  class="avatar">
         </div>
         <div style="display: flex;flex: 1; border-bottom: 0.5px solid #eee;padding-bottom:5px">
           <div class="left" style="flex: 1;padding:3px 0 5px 10px">
-            <div class="username" style="font-weight:700;margin-bottom:8px">咱大山里的果实</div>
+            <div class="username" style="font-weight:700;margin-bottom:8px">{{item.name}}</div>
             <div class="message" style="color:#aaa;margin-bottom:5px">
-              你有一条新消息{{item}}
+              你有一条新消息
             </div>
             <div class="time"  style="color:#aaa;font-size:12px">
-              4小时前
+              {{item.timeDf}}前
             </div>
           </div>
           <div class="right">
-            <img src="../assets/img/avatar.jpg" alt="" style="width: 70px;height: 70px;">
+            <img :src="item.img" alt="" style="width: 70px;height: 70px;">
           </div>
         </div>
       </li>
@@ -65,7 +64,7 @@ export default {
   data () {
     return {
       allLoaded:true,
-      list:[1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8,1,2,3,4,5,6,,56,54,6,45,6,54,6,54,7,6,867,8,67,8]
+      list:[]
     }
   },
   computed: {
@@ -87,14 +86,19 @@ export default {
       },2000)
     },
 
-    goChatting () {
+    goChatting (value) {
       this.$router.push({
-        name:'Chat'
+        name:'Chat',
+        params: {
+          uid: value
+        }
       })
     },
 
     getMessageList () {
-      axios.get(`/api/message/notification/${this.user.userInfo.uid}`)
+      axios.get(`/api/message/notification/${this.user.userInfo.uid}`).then(res=>{
+        this.list = res.data
+      })
     }
   }
 }

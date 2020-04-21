@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:54:06
- * @LastEditTime: 2020-03-10 11:31:47
+ * @LastEditTime: 2020-04-21 19:23:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\swipper.vue
@@ -36,7 +36,7 @@ export default {
             this.$router.push({
                 name: 'goods',
                 params: {
-                    goodsId : 123
+                    goodsId : item.id
                 }
             })
         }

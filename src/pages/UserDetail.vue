@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-04-20 12:25:43
+ * @LastEditTime: 2020-04-21 18:57:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue

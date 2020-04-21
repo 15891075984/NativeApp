@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:12:15
- * @LastEditTime: 2020-03-23 00:57:57
+ * @LastEditTime: 2020-04-21 18:13:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\vue.config.js
@@ -23,7 +23,11 @@ module.exports = {
             '/':{
                 target:'http://47.93.117.14:8080/second-hand/',
                 changeOrigin:true
-            }
+            },
+            '/socket':{
+              target:'http://47.93.117.14:9091/',
+              changeOrigin:true
+          }
         }
     },
 

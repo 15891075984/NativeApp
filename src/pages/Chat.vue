@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-26 20:21:00
+ * @LastEditTime: 2020-04-21 18:42:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -48,7 +48,7 @@ import io from 'socket.io-client'
 import headerBar from '../components/headerBar'
 import { CellSwipe,Loadmore   } from 'mint-ui';
 import axios from '../utils/request'
-const socket=io('ws://47.93.117.14:9093')
+
 export default {
     components: {
         headerBar,
@@ -64,12 +64,35 @@ export default {
         }
     },
     mounted () {
+        this.uid = this.$route.params.uid
+        // this.socket=io('ws://47.93.117.14:8080/second-hand/chat/'+ this.uid)
+        // this.socket.on('open', function(){
+        //     console.log(8888)
+        // });
+        // this.socket.on('event', function(data){});
+        var ws = new WebSocket('ws://47.93.117.14:8080/second-hand/chat/'+ this.uid);
+        ws.onopen = function() {
+            // Web Socket 已连接上，使用 send() 方法发送数据
+              var data = {"userId":"36","message":"你好,4号,我是张小坚"}
+                  // Web Socket 已连接上，使用 send() 方法发送数据
+                  ws.send(JSON.stringify(data));
+                  console.log("发送数据"+data);
+        };
+        ws.onmessage = function (evt) {
+            console.log(888,evt)
+            var received_msg = evt.data;
+            console.log(received_msg)
+        };
+        // ws.onclose = function() {
+        //     // 关闭 websocket
+        //     console.log("连接已关闭...");
+        // };
         //主动去触发后端的事件，发送参数text
-        socket.emit('message',{text:'socket'})
-        //给后端定义的事件，等待后端触发
-        socket.on('receMsg',function(data){
-            console.log(data)
-        })
+        // socket.emit('message',{text:'socket'})
+        // //给后端定义的事件，等待后端触发
+        // socket.on('receMsg',function(data){
+        //     console.log(data)
+        // })
         // const from = this.$route.params.meta.from
         // if (from === 'goods'){
         //     console.log('goods')
