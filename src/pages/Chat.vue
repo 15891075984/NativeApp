@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-04-22 21:03:25
+ * @LastEditTime: 2020-04-22 21:59:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -18,12 +18,12 @@
                             :topDistance="50"  ref="loadmore">
                 <ul style="padding-bottom: 160px;padding-top:50px;" ref="chat-ul">
                     <li class="chat-item" v-for="(item,index) in list" :key="index">
-                        <div class="item-you" v-if="index % 2 == 0">
+                        <div class="item-you" v-if="handleFromOrTo(item)">
                             <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
-                            <p class="item-message">{{item}}</p>
+                            <p class="item-message">{{item.message}}</p>
                         </div>
                         <div class="item-me" v-else>
-                            <p class="item-message">{{item}}</p>
+                            <p class="item-message">{{item.message}}</p>
                             <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
                         </div>
                     </li>
@@ -82,8 +82,12 @@ export default {
         this.ws.onmessage = function (evt) {
             console.log(888,evt)
             var received_msg = evt.data;
-            this.list.push(received_msg)
+            this.list.push({
+                fromUid: 'hjghjkg',
+                message: received_msg
+            })
         };
+        this.loadTop()
         // ws.onclose = function() {
         //     // 关闭 websocket
         //     console.log("连接已关闭...");
@@ -100,13 +104,19 @@ export default {
         // }
     },
     methods: {
+        handleFromOrTo (item) {
+            return !(item.fromUid == this.uid)
+        },
         submit () {
             if( !this.value ) return
             var data = {userId:36,message:this.value}
             this.ws.send(JSON.stringify(data));
             console.log("发送数据", data);
             
-            this.list.push(this.value)
+            this.list.push({
+                fromUid: this.uid,
+                message: this.value
+            })
             this.value = ''
             const height = this.$refs['chat-ul'].offsetHeight
             this.$nextTick(()=>{
@@ -116,10 +126,11 @@ export default {
         },
         //加载之前聊天记录
         loadTop () {
-            axios.get(`/api/message/chat/history/${this.uid}`)
+            axios.get(`/api/message/chat/history`)
             .then( res => {
-                res.data = [1,2,3,45,]
-                this.list = res.data.concat(this.list)
+                //let data = JSON.parse(res.data)
+                let keys = Object.keys(res.data)
+                this.list = res.data[keys[0]]
             })
         }
     }
