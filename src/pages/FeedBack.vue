@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-03-26 10:49:45
+ * @LastEditTime: 2020-04-22 12:35:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -49,6 +49,7 @@ export default {
             showMore:false,
             username:'',
             email:'',
+            introduction:'',
             phone:'',
             moreValue:'',
             descBtnList:['页面信息有误','App不稳定','支付遇到问题','吐槽App功能','账户相关问题','其他']
@@ -56,14 +57,32 @@ export default {
     },
     methods: {
         handleSubmit () {
-            MessageBox({
+            let date = new Date().getFullYear() + '-' +new Date().getMonth() + '-' +new Date().getDate()+ '用户反馈'
+            const data = {
+                title: date,
+                content: this.value.join(',')+','+this.introduction,
+                username: this.username,
+                email: this.email,
+                mobile: this.phone
+            }
+            axios({
+                url: '/api/feedback/add',
+                method: 'post',
+                header:{
+					'Content-Type':'application/json'
+                },
+                data
+            }).then(res=>{
+                MessageBox({
                 title:'提示',
                 message:'反馈成功，我们工作人员会24小时内联系您',
-            }).then( confirm =>{
-                this.$router.push({
-                    name:'me'
+                }).then( confirm =>{
+                    this.$router.push({
+                        name:'me'
                 })
+                
             })
+            
         }
     },
     watch: {
