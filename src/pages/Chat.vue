@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-04-22 21:59:46
+ * @LastEditTime: 2020-04-22 22:41:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -72,19 +72,36 @@ export default {
         // });
         // this.socket.on('event', function(data){});
         this.ws = new WebSocket('ws://47.93.117.14:8080/second-hand/chat/'+ this.uid);
+        var _that = this
         this.ws.onopen = function() {
             // Web Socket 已连接上，使用 send() 方法发送数据
 //               var data = {"userId":"36","message":"你好,4号,我是张小坚"}
 //                   // Web Socket 已连接上，使用 send() 方法发送数据
 //                   this.ws.send(JSON.stringify(data));
-                  console.log("链接scoket");
+         const height = _that.$refs['chat-ul'].offsetHeight
+            console.log(height)
+            _that.$nextTick(()=>{
+                //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
+                _that.$refs['chat'].scrollTop = (0 , 99999)
+            })
         };
+        
         this.ws.onmessage = function (evt) {
-            console.log(888,evt)
-            var received_msg = evt.data;
-            this.list.push({
-                fromUid: 'hjghjkg',
-                message: received_msg
+            if (evt.data === '发送成功' || evt.data === '出现错误 ：连接已经存在') {return}
+            var received_msg = JSON.parse(evt.data);
+            var message = received_msg.message
+            console.log(message)
+            let datass = JSON.stringify(_that.list)
+            _that.list = JSON.parse(datass)
+            _that.list.push({
+                fromUid: 'grejw',
+                message
+            })
+            const height = _that.$refs['chat-ul'].offsetHeight
+            console.log(height)
+            _that.$nextTick(()=>{
+                //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
+                _that.$refs['chat'].scrollTop = (0 , height)
             })
         };
         this.loadTop()
@@ -102,6 +119,10 @@ export default {
         // if (from === 'goods'){
         //     console.log('goods')
         // }
+        setTimeout(()=>{
+            const height = _that.$refs['chat-ul'].offsetHeight
+            this.$refs['chat'].scrollTop = (0 , height)
+        },300)
     },
     methods: {
         handleFromOrTo (item) {
