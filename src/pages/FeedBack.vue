@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-04-22 12:35:56
+ * @LastEditTime: 2020-04-22 12:44:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -76,11 +76,11 @@ export default {
                 MessageBox({
                 title:'提示',
                 message:'反馈成功，我们工作人员会24小时内联系您',
-                }).then( confirm =>{
-                    this.$router.push({
-                        name:'me'
+            }).then( confirm =>{
+                this.$router.push({
+                    name:'me'
                 })
-                
+            })
             })
             
         }
