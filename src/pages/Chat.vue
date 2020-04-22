@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-04-21 18:42:53
+ * @LastEditTime: 2020-04-22 21:03:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
  -->
 <template>
     <div style="height:100vh;overflow:auto;padding:10px 0;background:#eee" ref="chat">
-        <headerBar title="与坚弟弟聊天"></headerBar>
+        <headerBar title="与弟弟聊天"></headerBar>
         
         <div class="chat-wrapper" ref="chat-wrap">
             <mt-loadmore    :top-method="loadTop"
@@ -61,6 +61,7 @@ export default {
             count: 0,
             value:'socket',
             list:[],
+            uid:''
         }
     },
     mounted () {
@@ -70,18 +71,18 @@ export default {
         //     console.log(8888)
         // });
         // this.socket.on('event', function(data){});
-        var ws = new WebSocket('ws://47.93.117.14:8080/second-hand/chat/'+ this.uid);
-        ws.onopen = function() {
+        this.ws = new WebSocket('ws://47.93.117.14:8080/second-hand/chat/'+ this.uid);
+        this.ws.onopen = function() {
             // Web Socket 已连接上，使用 send() 方法发送数据
-              var data = {"userId":"36","message":"你好,4号,我是张小坚"}
-                  // Web Socket 已连接上，使用 send() 方法发送数据
-                  ws.send(JSON.stringify(data));
-                  console.log("发送数据"+data);
+//               var data = {"userId":"36","message":"你好,4号,我是张小坚"}
+//                   // Web Socket 已连接上，使用 send() 方法发送数据
+//                   this.ws.send(JSON.stringify(data));
+                  console.log("链接scoket");
         };
-        ws.onmessage = function (evt) {
+        this.ws.onmessage = function (evt) {
             console.log(888,evt)
             var received_msg = evt.data;
-            console.log(received_msg)
+            this.list.push(received_msg)
         };
         // ws.onclose = function() {
         //     // 关闭 websocket
@@ -101,6 +102,9 @@ export default {
     methods: {
         submit () {
             if( !this.value ) return
+            var data = {userId:36,message:this.value}
+            this.ws.send(JSON.stringify(data));
+            console.log("发送数据", data);
             
             this.list.push(this.value)
             this.value = ''
@@ -112,8 +116,11 @@ export default {
         },
         //加载之前聊天记录
         loadTop () {
-            const userId = this.$router
-            axios.get(`/api/message/chat/history/${userId}`)
+            axios.get(`/api/message/chat/history/${this.uid}`)
+            .then( res => {
+                res.data = [1,2,3,45,]
+                this.list = res.data.concat(this.list)
+            })
         }
     }
 }

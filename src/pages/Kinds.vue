@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 18:02:00
- * @LastEditTime: 2020-03-08 18:37:25
+ * @LastEditTime: 2020-04-22 20:47:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Kinds.vue
@@ -29,25 +29,16 @@ export default {
     },
     data () {
         return {
-            kinds:[
-                "技能服务",
-                "其他闲置",
-                "农用物资",
-                "生鲜水果",
-                "童鞋",
-                "园艺植物",
-                "五金工具",
-                "电子零件",
-                "动漫/周边",
-                "宠物/用品",
-                "网络设备",
-                "服饰配件",
-                "珠宝首饰",
-                "古董首饰",
-                "箱包",
-                "钟表眼镜",
-                "女士鞋靴",
-            ]   }
+            kinds:["农用/园艺",
+                        "电子/网络",
+                        "五金工具",
+                        "生鲜水果",
+                        "宠物/用品",
+                        "动漫/周边",
+                        "技能服务",
+                        "服饰/鞋包",
+                        "其他闲置",
+                        "珠宝/饰品"]  }
     },
     computed:{
         ...mapState({

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 22:33:30
- * @LastEditTime: 2020-04-22 12:44:09
+ * @LastEditTime: 2020-04-22 12:44:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Follow.vue
@@ -82,7 +82,6 @@ export default {
                 })
             })
             })
-            
         }
     },
     watch: {

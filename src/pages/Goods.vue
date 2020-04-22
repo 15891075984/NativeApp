@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-04-19 10:24:55
+ * @LastEditTime: 2020-04-22 21:07:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -74,15 +74,15 @@
 			<div class="goods-item-left">
 				<div class="goods-bottom-like items" @click="handleLike">
 					<i :class="['iconfont','icon-dianzan',{iconActive:likeActive}]"></i>
-					<span>点赞</span>
+					<span style="font-size:12px">点赞</span>
 				</div>
 				<div class="goods-item-message items" @click="handleMessageState(null)">
 					<i :class="['iconfont','icon-liuyan']"></i>
-					<span>留言</span>
+					<span style="font-size:12px">留言</span>
 				</div>
 				<div class="goods-item-collect items" @click="handleCollect">
 					<i :class="['iconfont','icon-shoucang-active',{iconActive:collectActive}]"></i>
-					<span>收藏</span>
+					<span style="font-size:12px">收藏</span>
 				</div>
 			</div>
 			<div class="goods-item-right" @click="goChat">
