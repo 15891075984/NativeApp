@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-04-22 22:41:14
+ * @LastEditTime: 2020-04-22 22:57:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import io from 'socket.io-client'
 import headerBar from '../components/headerBar'
 import { CellSwipe,Loadmore   } from 'mint-ui';
 import axios from '../utils/request'
