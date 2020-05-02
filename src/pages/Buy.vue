@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-25 16:39:27
- * @LastEditTime: 2020-05-02 10:20:12
+ * @LastEditTime: 2020-05-02 20:51:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Buy.vue
@@ -71,7 +71,8 @@ export default {
     },
     computed:{
         ...mapState({
-            goods:'goods'
+            goods:'goods',
+            user:'user'
         })
     },
     methods: {
@@ -79,7 +80,7 @@ export default {
             const params = {
                 orderid: this.orderId,
                 productid: this.goods.goods.id.toString(),
-                uid: '36',
+                uid: this.user.userInfo.uid,
             }
             axios({
                 url: '/api/order',
@@ -87,7 +88,7 @@ export default {
                 data: {...params},
                 headers: {'Content-Type': 'application/json'}
             }).then(res => {
-                // if(res.code !== 0) return
+                if(res.code !== 0) return
                 MessageBox.confirm('下单成功，去支付').then(action => {
                     axios({
                         url: '/api/order/pay',
@@ -95,7 +96,7 @@ export default {
                         data: {...params},
                         headers: {'Content-Type': 'application/json'}
                     }).then(response => {
-                        // if(response.code !== 0) return
+                        if(response.code !== 0) return
                         MessageBox.alert('付款成功').then(action => {
                             this.$router.push('me')
                         })

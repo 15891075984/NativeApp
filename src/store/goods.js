@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-04-27 16:09:51
+ * @LastEditTime: 2020-05-02 19:02:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -17,10 +17,12 @@ const goods = {
         upload: {
             productName:'',
             productPrice:'',
+            productNum:'',
             productContent:'',
             productTag:'',
             productStatus:0,
-            productPic:[]
+            productPic:[],
+            tagId:0
         },
         //goods: 
         goods:{
@@ -95,6 +97,7 @@ const goods = {
         },
 
         getLeaveMessage({state,commit},params) {
+            //params.id = 892
             axios.get(`/api/productComment/${params.id}`).then( res => {
                 if( res.code !== 0) return
                 commit('setLeaveMessage', res.data)

@@ -24,7 +24,7 @@
 						<span class="num" >{{user.userInfo.fansNum}}</span>
 						<span class="numname">粉丝数</span>
 					</div>
-					<div class="numbox">
+					<div class="numbox" @click="handleAccountSheetVisible">
 						<span class="num">{{accountNum}}</span>
 						<span class="numname">余额</span>
 					</div>
@@ -51,7 +51,7 @@
 		<div class="list" v-if="login">
 			<ul class="itemlist">
 				<!-- <li class="item item8">我的公益</li> -->
-				<li class="item item9">闲鱼Family</li>
+				<!-- <li class="item item9">闲鱼Family</li> -->
 				<li class="item item10 " @click="goFeedBack">帮助与反馈</li>
 			</ul>
 		</div>
@@ -67,6 +67,10 @@
 		<mt-actionsheet
 			:actions="actions"
 			v-model="sheetVisible">
+		</mt-actionsheet>
+		<mt-actionsheet
+			:actions="accountSheet"
+			v-model="accountSheetVisible">
 		</mt-actionsheet>
 	</div>
      <tabBar></tabBar>
@@ -95,6 +99,16 @@ export default {
 				name: '从相册中选择',
 		        method : this.img
 			}],
+			accountVisible: false,
+			accountSheetVisible: false,
+			accountDeposit: false,
+			accountSheet: [{
+		        name: '充值',
+		        method : this.setSheetVisible
+				},{
+				name: '提现',
+		        method : this.setDeposit
+			}],
 		}
 	},
 	computed:{
@@ -116,8 +130,43 @@ export default {
 		img () {
 			this.loadImg('image/jpeg,image/jpg,image/png')
 		},
+		recharge () {
+			this.accountSheetVisible = true
+		},
 		setSheetVisible () {
-			this.sheetVisible = false
+			// this.sheetVisible = false
+			MessageBox.prompt('请输入充值金额').then(({ value, action }) => {
+				const params = {
+					amount: value
+				}
+				axios({
+					url: '/api/account/credit',
+					method: 'post',
+					data: {...params},
+					headers: {'Content-Type': 'application/json'}
+				}).then(res => {
+					if (res.code !== 0) return
+				})
+			});
+		},
+		setDeposit () {
+			// this.accountDeposit = true
+			MessageBox.prompt('请输入提现金额').then(({ value, action }) => {
+				const params = {
+					amount: value
+				}
+				axios({
+					url: '/api/account/debit',
+					method: 'post',
+					data: {...params},
+					headers: {'Content-Type': 'application/json'}
+				}).then(res => {
+					if (res.code !== 0) return
+				})
+			});
+		},
+		handleAccountSheetVisible () {
+			this.accountSheetVisible = true
 		},
 		loadImg (params) {
 			let vm = this;

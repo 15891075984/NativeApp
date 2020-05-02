@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-04-27 16:17:23
+ * @LastEditTime: 2020-05-02 18:24:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -35,6 +35,8 @@
           <div class="price">
             <mt-button type="default" style="width:90%;margin-left:5%;border-radius:20px;background:#ffda44;color:#fff">开个价</mt-button>
             <mt-field label="商品价格" placeholder="请输入商品价格" type="number" v-model="goods.upload.productPrice" style="margin-top:30px"></mt-field>
+            <mt-field label="商品数量" placeholder="请输入商品数量" type="number" v-model="goods.upload.productNum"></mt-field>
+            
             <div @click="goKinds">
               <mt-cell title="分类" label="选择类别" is-link
                       :value="goods.upload.productTag"
@@ -137,18 +139,16 @@ export default {
     },
 
     handleclick () {
-      // const filter = this.goods.upload.filter(item => {
-      //   return !item
-      // })
-      // for(let key in this.goods.upload) {
-      //   if ( this.goods.upload[key] !== 0 && !this.goods.upload[key] ) {
-      //     Indicator.open(`${key}不能为空`);
-      //     setTimeout(()=>{
-      //       Indicator.close()
-      //     },1000)
-      //     return
-      //   }
-      // }
+      for(let key in this.goods.upload) {
+        //循环判空，用户提示文案
+        if ( this.goods.upload[key] !== 0 && !this.goods.upload[key] ) {
+          Indicator.open(`${key}不能为空`);
+          setTimeout(()=>{
+            Indicator.close()
+          },1000)
+          return
+        }
+      }
       this.submitPublish(this.$router)
     }
   }

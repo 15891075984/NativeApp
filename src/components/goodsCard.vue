@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 12:31:54
- * @LastEditTime: 2020-05-02 11:04:29
+ * @LastEditTime: 2020-05-02 18:00:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsCard.vue
@@ -14,20 +14,20 @@
                 <img src="../assets/img/avatar.jpg" class="avatar" alt="">
             </div>
     		<div class="info">
-    			<p class="title">{{data.name}}</p>
-    			<p class="time">{{data.time}}</p>
+    			<p class="title">{{data.productName}}</p>
+    			<p class="time">{{data.updateTime}}</p>
     		</div>
-    		<span class="price">￥{{data.price}}</span>
+    		<span class="price">￥{{data.productPrice}}</span>
     	</div>
     	<div class="imgbox">
-    		<img :src="data.img" class="show" alt="" style="width: 100%;border-radius:8px" v-lazy="data.img">
+    		<img :src="data.picList[0].productPic" class="show" alt="" style="width: 100%;border-radius:8px" v-lazy="data.picList[0].productPic">
     	</div>
     	<div class="detail">
-    		<p class="desc">{{data.desc}}</p>
+    		<p class="desc">{{data.productContent}}</p>
     	</div>
     	<div class="bottom">
-    		<div class="addr">{{data.add}}</div>
-    		<div class="kind">{{data.kind}}</div>
+    		<!-- <div class="addr">{{12}}</div> -->
+    		<div class="kind">{{data.productTag}}</div>
     		<div class="star" v-if="data.star !== '' ">{{data.star}}{{data.num}}</div>
     	</div>
     </div>

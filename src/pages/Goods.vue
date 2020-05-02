@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-04-26 12:23:34
+ * @LastEditTime: 2020-05-02 18:56:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -193,10 +193,11 @@ export default {
 			if( !this.message ) return
 			const data = {
 				productId:this.goods.goods.id,
-				message: this.message
+				message: this.message,
+				commentPid: 0
 			}
-			let url = '/api/leaveMessage'
-			if ( this.commitId ) {
+			let url = '/api/productComment/addProductComment'
+			if ( this.commitId !== 0) {
 				data.commentPid = this.commitId,
 				url = '/api/productComment/addProductComment'
 			}
@@ -214,8 +215,7 @@ export default {
 					this.messageState = false
 				})
 				this.getLeaveMessage({id: this.goodsId})
-				if(res.code !==0 ) return 
-				if( res.data && Object.keys(res.data)){}
+				if(res.code !==0 ) return
 			})
 		},
 		//去用户详情

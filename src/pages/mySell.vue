@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 22:11:00
+ * @LastEditTime: 2020-05-02 18:35:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -35,10 +35,8 @@ export default {
     mounted () {
         //TODO 用户去拉取发布列表
         axios.get('/api/userSale').then(res => {
-            if (res.code !==0 ) return 
-            if (res.data && Object.keys(res.data).length !==0 ) {
-                this.mySellData = res.data
-            }
+            if (res.code !==0 ) return
+            this.mySellData = res.data
             this.mySellData.map(item=>{
                 item.sellerHeaderPicture = this.user.userInfo.icon
                 item.sellerName = this.user.userInfo.uname

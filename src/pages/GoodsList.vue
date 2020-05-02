@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-21 18:16:44
- * @LastEditTime: 2020-04-21 19:11:08
+ * @LastEditTime: 2020-05-02 18:38:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\GoodsList.vue
@@ -17,8 +17,8 @@
             placeholder="搜索宝贝/用户">
 		</mt-search>
         <ul >
-            <goodsListRow :goods="goodsList" v-if ="goodsList.length" style="min-height:90vh"></goodsListRow>
-            <div v-else></div>
+            <goodsListRow :goods="goodsList"  style="min-height:90vh"></goodsListRow>
+            <!-- <div v-else></div> -->
         </ul>
     </div>
 </template>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-05-02 10:57:18
+ * @LastEditTime: 2020-05-02 18:34:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -43,15 +43,27 @@
 				</li>
 			</div>
 		</div>
-        <myswipper :swiperData="result"></myswipper>
-
+        <!-- <myswipper :swiperData="result"></myswipper> -->
+		<div>
+			<Swiper :autoPlay='true' :showIndicator='true' interval="2500" duration="500">
+				<Slide v-for="(data,index) in result" :key="index" >
+					<img :src="data.picList[0].productPic" style="width:100%;height:150px" @click="handleClickImg(data)">
+				</Slide>
+			</Swiper>
+			<!-- <Swipe :auto="4000">
+				<SwipeItem v-for="(data,index) in result" :key="index">
+					<img :src="data.picList[0].productPic" style="width:100%;height:150px" @click="handleClickImg(data)">
+				</SwipeItem>
+			</Swipe> -->
+		</div>
+		
 		<ul	style="overflow:auto;height:66vh;padding-top:5px;padding-bottom:20px;background:#eee"
 			v-infinite-scroll="loadMore"
 			infinite-scroll-disabled="loading"
 			infinite-scroll-distance="50">
 			<goodsCard :news="goodsHomeList" style="padding-bottom:18px"></goodsCard>
 		</ul>
-        
+
     </div>
     <tabBar></tabBar>
 </div>
@@ -65,17 +77,20 @@ import { Swiper, Slide } from 'vue-swiper-component';
 import myswipper from '../components/swipper'
 import goodsCard from '../components/goodsCard'
 import axios from '../utils/request'
+import { Swipe, SwipeItem } from 'mint-ui';
 export default {
     components: {
         tabBar,
         Search,
         Cell,
         myswipper,
-        Swiper,
-        Slide,
-        TabItem,
+		TabItem,
+		Swiper,
+		Slide,
         Navbar,
-        goodsCard
+		goodsCard,
+		Swipe,
+		SwipeItem
     },
     data () {
         return {
@@ -85,50 +100,19 @@ export default {
 			loadingNears: false,
 			status:1,
 			page: 1,
-            result : [{
-				id: 123,
-				url: 'https://img.alicdn.com/simba/img/TB1VUUjzhv1gK0jSZFFSuv0sXXa.jpg'
-				},
-				{
-					id: 123,
-					url: 'https://img.alicdn.com/simba/img/TB1eY4DEeT2gK0jSZFvSutnFXXa.jpg'
-				},
-				{
-					id: 123,
-					url: 'https://img.alicdn.com/simba/img/TB1hjkunY3nBKNjSZFMSuuUSFXa.jpg'
-				},{
-					id: 123,
-					url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587478574022&di=dccf031d1447c85265189498f71b0a83&imgtype=0&src=http%3A%2F%2Fwww.51psj.com.cn%2Fuploadfile%2F2019%2F1024%2F20191024081740807.jpg'
+            result:[{
+				picList:[{productPic:''}]
+			},{
+				picList:[{productPic:''}]
+			},{
+				picList:[{productPic:''}]
+			},{
+				picList:[{productPic:''}]
 			}],
 			goodsList: [],
 			userList:[],
 			goodsHomeList:[{
-				id:1,
-				name:'鸿心尔克潮流鞋子',
-				time:'2020-02-02',
-				price: 129,
-				desc: '鸿心尔克夏季新鞋子',
-				add: 12,
-				kind: '服饰/鞋包',
-				img: 'https://img.alicdn.com/tps/i4/TB1.YBbD2b2gK0jSZK9SuuEgFXa.jpg_240x240q90.jpg'
-			},{
-				id:1,
-				name:'秋季外套',
-				time:'2020-02-02',
-				price: 1299,
-				desc: '今秋外套穿什么，复古民族风毛衣外套一件搞定 ',
-				add: 12,
-				kind: '服饰/鞋包',
-				img: 'https://img.alicdn.com/tfscom/i2/11140421/TB2B9UoX5P85uJjSZFKXXcw7FXa_!!11140421.jpg_180x180xzq90.jpg_.webp'
-			},{
-				id:3,
-				name:'头毛衫',
-				time:'2020-02-02',
-				price: 399,
-				desc: '秋冬新风尚时尚气质款马海毛套头毛衫 ',
-				add: 12,
-				kind: '服饰/鞋包',
-				img: 'https://img.alicdn.com/tfscom/i1/2103587316/TB2bi0Ub_SPY1JjSZPcXXXIwpXa_!!2103587316.jpg_180x180xzq90.jpg_.webp'
+				picList:[{productPic:''}]
 			}]
         }
 	},
@@ -145,10 +129,8 @@ export default {
 				}
 			}).then(res=>{
 				if (res.code !==0) return
-				if(res.data && Object.keys(res.data).length !==0 ) {
-					this.userList = res.data.users
-					this.goodsList = res.data.product.slice(0, 6)
-				}
+				this.userList = res.data.users
+				this.goodsList = res.data.product.slice(0, 6)
 			})
 		}
 	},
@@ -208,8 +190,16 @@ export default {
 			this.status = this.status ? 0 : 1
 		},
 		getHome () {
-			axios.get('/api/home').then(res=>{
-				console.log(888,res)
+			axios.get('/home').then(res=>{
+				if(res.code !== 0) return
+				res.data.product.records.forEach(item => {
+					if(!item.picList.length) {
+						item.picList[0] = {}
+						item.picList[0]['productPic'] = ''
+					}
+				})
+				this.result = res.data.product.records.splice(0,4)
+				this.goodsHomeList = res.data.product.records
 			})
 		}
 	},

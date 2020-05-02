@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-05-02 09:30:33
+ * @LastEditTime: 2020-05-02 18:35:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -110,9 +110,7 @@ export default {
             })
             axios.get(`/api/homePage/userInfo/${this.userId}`).then(res=>{
                 if(res.code !== 0) return
-                if(res.data && Object.keys(res.data).length !== 0) {
-                    this.userInfo = res.data
-                }
+                this.userInfo = res.data
             })
         },
         //关注
