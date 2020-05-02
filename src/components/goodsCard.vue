@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 12:31:54
- * @LastEditTime: 2020-05-02 10:58:17
+ * @LastEditTime: 2020-05-02 11:04:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsCard.vue
@@ -20,7 +20,7 @@
     		<span class="price">￥{{data.price}}</span>
     	</div>
     	<div class="imgbox">
-    		<img :src="data.img" class="show" alt="" style="width: 100%">
+    		<img :src="data.img" class="show" alt="" style="width: 100%;border-radius:8px" v-lazy="data.img">
     	</div>
     	<div class="detail">
     		<p class="desc">{{data.desc}}</p>
