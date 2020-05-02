@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 23:03:59
+ * @LastEditTime: 2020-04-26 12:40:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -67,7 +67,6 @@ export default {
         }),
         ...mapMutations({
             'setPublishImg':'goods/setPublishImg',
-            
         }),
         deleteMyPublish() {
             axios.delete(`/api/product/delete/${this.goods.buyId}`)

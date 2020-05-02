@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-04-22 21:07:34
+ * @LastEditTime: 2020-04-26 12:23:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -165,7 +165,7 @@ export default {
 	mounted () {
 		this.goodsId = this.$route.params.goodsId
 		this.getGoodsDetail()
-		this.goodsId = 892
+		//this.goodsId = 892
 		this.getLeaveMessage({id: this.goodsId})
 	},
 	methods: {

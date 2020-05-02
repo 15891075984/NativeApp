@@ -39,7 +39,7 @@ export default {
                 this.myCollectData = res.data
             }
             this.myCollectData.map(item=>{
-                item.sellerHeaderPicture = this.user.userInfo.icon
+                item.userHeaderPicture = this.user.userInfo.icon
                 item.sellerName = this.user.userInfo.uname
             })
         })

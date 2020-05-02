@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-04-19 10:16:35
+ * @LastEditTime: 2020-04-27 16:09:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -41,14 +41,16 @@ const goods = {
             state.upload.productPic.splice(index, 1)
         },
         setGoods(state, data) {
-            if (data && Object.keys(data).length !== 0 ) {
-                state.goods = data
-            }
+            // if (data && Object.keys(data).length !== 0 ) {
+            //     state.goods = data
+            // }
+            state.goods = data
         },
         setLeaveMessage (state, data) {
-            if (data && Object.keys(data).length !== 0 ) {
-                state.leaveMessage = data
-            }
+            // if (data && Object.keys(data).length !== 0 ) {
+            //     state.leaveMessage = data
+            // }
+            state.leaveMessage = data
         }
     },
     actions: {

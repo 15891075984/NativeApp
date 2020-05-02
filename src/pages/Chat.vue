@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-04-22 22:57:39
+ * @LastEditTime: 2020-05-02 10:24:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
  -->
 <template>
     <div style="height:100vh;overflow:auto;padding:10px 0;background:#eee" ref="chat">
-        <headerBar title="与弟弟聊天"></headerBar>
+        <headerBar title="与随遇而安聊天"></headerBar>
         
         <div class="chat-wrapper" ref="chat-wrap">
             <mt-loadmore    :top-method="loadTop"
@@ -58,7 +58,7 @@ export default {
         return {
             allLoaded:true,
             count: 0,
-            value:'socket',
+            value:'',
             list:[],
             uid:''
         }
@@ -78,13 +78,12 @@ export default {
 //                   // Web Socket 已连接上，使用 send() 方法发送数据
 //                   this.ws.send(JSON.stringify(data));
          const height = _that.$refs['chat-ul'].offsetHeight
-            console.log(height)
             _that.$nextTick(()=>{
                 //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
                 _that.$refs['chat'].scrollTop = (0 , 99999)
             })
         };
-        
+        this.loadTop()
         this.ws.onmessage = function (evt) {
             if (evt.data === '发送成功' || evt.data === '出现错误 ：连接已经存在') {return}
             var received_msg = JSON.parse(evt.data);
@@ -103,7 +102,7 @@ export default {
                 _that.$refs['chat'].scrollTop = (0 , height)
             })
         };
-        this.loadTop()
+        
         // ws.onclose = function() {
         //     // 关闭 websocket
         //     console.log("连接已关闭...");
@@ -118,10 +117,20 @@ export default {
         // if (from === 'goods'){
         //     console.log('goods')
         // }
-        setTimeout(()=>{
-            const height = _that.$refs['chat-ul'].offsetHeight
-            this.$refs['chat'].scrollTop = (0 , height)
-        },300)
+        // setTimeout(()=>{
+        //     const height = _that.$refs['chat-ul'].offsetHeight
+        //     this.$refs['chat'].scrollTop = (0 , height)
+        // },700)
+    },
+    destroyed () {
+        axios({
+                url: `/api/message/chat/read/${this.uid}`,
+                method: 'post',
+                header:{
+					'Content-Type':'application/json'
+                }
+            })
+        
     },
     methods: {
         handleFromOrTo (item) {
@@ -132,7 +141,6 @@ export default {
             var data = {userId:36,message:this.value}
             this.ws.send(JSON.stringify(data));
             console.log("发送数据", data);
-            
             this.list.push({
                 fromUid: this.uid,
                 message: this.value
@@ -151,6 +159,11 @@ export default {
                 //let data = JSON.parse(res.data)
                 let keys = Object.keys(res.data)
                 this.list = res.data[keys[0]]
+                this.$nextTick(()=>{
+                //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
+                this.$refs['chat'].scrollTop = (0 , 99999)
+            })
+                
             })
         }
     }

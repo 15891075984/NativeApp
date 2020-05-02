@@ -16,10 +16,6 @@
 					</div>
 				</div>
 				<div class="flex">
-					<div class="numbox">
-						<span class="num">{{user.userInfo.startNum}}</span>
-						<span class="numname">被赞数</span>
-					</div>
 					<div class="numbox" @click="goFollow">
 						<span class="num">{{user.userInfo.followNum}}</span>
 						<span class="numname">关注数</span>
@@ -27,6 +23,10 @@
 					<div class="numbox" @click="goFans">
 						<span class="num" >{{user.userInfo.fansNum}}</span>
 						<span class="numname">粉丝数</span>
+					</div>
+					<div class="numbox">
+						<span class="num">{{accountNum}}</span>
+						<span class="numname">余额</span>
 					</div>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 		</div>
 		<div class="list">
 			<ul class="itemlist">
-				<li class="item item7">设置</li>
+				<li class="item item7" @click="handleGoSetting">我的主页</li>
 			</ul>
 		</div>
 		<div class="buttonwrap">
@@ -86,6 +86,7 @@ export default {
 	data () {
 		return {
 			login: true,
+			accountNum: 99.98,
 			sheetVisible: false,
 			actions: [{
 		        name: '拍照',
@@ -228,6 +229,14 @@ export default {
 	goFeedBack () {
 		this.$router.push({
 			name:'FeedBack'
+		})
+	},
+	handleGoSetting () {
+		this.$router.push({
+			name:'UserDetail',
+			params: {
+				userId: this.user.userInfo.uid
+			}
 		})
 	}
   }

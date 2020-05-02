@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-04-21 18:57:14
+ * @LastEditTime: 2020-05-02 09:30:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -38,7 +38,7 @@
             <div class="content-nav">
                 <mt-navbar v-model="selected">
                     <mt-tab-item id="1">她的{{count.mineNum}}</mt-tab-item>
-                    <mt-tab-item id="3">评价857</mt-tab-item>
+                    <!-- <mt-tab-item id="3">评价857</mt-tab-item> -->
                     <mt-tab-item id="4">动态{{count.allNum}}</mt-tab-item>
                 </mt-navbar>
             </div>

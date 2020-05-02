@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-25 16:39:27
- * @LastEditTime: 2020-03-26 09:14:59
+ * @LastEditTime: 2020-05-02 10:20:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Buy.vue
@@ -42,7 +42,7 @@
                     实付款: 
                     <span class="red">￥{{goods.goods.productPrice * goods.goodsCount}}</span>
                 </div>
-                <div class="submit" @click="handleSubmit">确定</div>
+                <div class="submit" @click="handleSubmit">立即下单</div>
             </div>
         </div>
     </div>
@@ -52,14 +52,22 @@
 import headerBar from '../components/headerBar'
 import {mapState,mapActions,Range} from 'vuex'
 import { CellSwipe,Loadmore,MessageBox  } from 'mint-ui';
+import axios from '../utils/request'
 export default {
     components: {
         headerBar
     },
+    data () {
+        return {
+            orderId: null
+        }
+    },
     mounted () {
         if (Object.keys(this.goods.goods).length ===0 ) {
             this.$router.go(-1)
+            return
         }
+        this.getOrderId(this.goods.goods.id)
     },
     computed:{
         ...mapState({
@@ -68,9 +76,41 @@ export default {
     },
     methods: {
         handleSubmit () {
-            MessageBox.alert('购买成功').then(action => {
-                this.$router.push('me')
-            });
+            const params = {
+                orderid: this.orderId,
+                productid: this.goods.goods.id.toString(),
+                uid: '36',
+            }
+            axios({
+                url: '/api/order',
+                method: 'post',
+                data: {...params},
+                headers: {'Content-Type': 'application/json'}
+            }).then(res => {
+                // if(res.code !== 0) return
+                MessageBox.confirm('下单成功，去支付').then(action => {
+                    axios({
+                        url: '/api/order/pay',
+                        method: 'post',
+                        data: {...params},
+                        headers: {'Content-Type': 'application/json'}
+                    }).then(response => {
+                        // if(response.code !== 0) return
+                        MessageBox.alert('付款成功').then(action => {
+                            this.$router.push('me')
+                        })
+                    })
+                });
+            })
+        },
+        getOrderId (goodsId) {
+            const params = {
+                productId: goodsId
+            }
+            axios.get('/api/order/getId',params).then(res => {
+                if (res.code !== 0 ) return
+                this.orderId = res.message
+            })
         }
     }
 }

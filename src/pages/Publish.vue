@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-03-23 01:02:26
+ * @LastEditTime: 2020-04-27 16:17:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -137,6 +137,18 @@ export default {
     },
 
     handleclick () {
+      // const filter = this.goods.upload.filter(item => {
+      //   return !item
+      // })
+      // for(let key in this.goods.upload) {
+      //   if ( this.goods.upload[key] !== 0 && !this.goods.upload[key] ) {
+      //     Indicator.open(`${key}不能为空`);
+      //     setTimeout(()=>{
+      //       Indicator.close()
+      //     },1000)
+      //     return
+      //   }
+      // }
       this.submitPublish(this.$router)
     }
   }

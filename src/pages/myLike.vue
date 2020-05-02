@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 22:43:41
+ * @LastEditTime: 2020-04-26 12:35:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -39,10 +39,10 @@ export default {
                 this.myLikeData = res.data
                 console.log(this.myLikeData)
             }
-            // this.myLikeData.map(item=>{
-            //     //item.sellerHeaderPicture = this.user.userInfo.icon
-            //     //item.sellerName = this.user.userInfo.uname
-            // })
+            this.myLikeData.map(item=>{
+                item.userHeaderPicture = this.user.userInfo.icon
+                item.sellerName = this.user.userInfo.uname
+            })
         })
     },
     computed:{

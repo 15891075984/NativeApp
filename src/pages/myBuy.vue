@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-03-25 22:13:39
+ * @LastEditTime: 2020-04-26 12:32:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -40,7 +40,7 @@ export default {
                 this.myBuyData = res.data
             }
             this.myBuyData.map(item=>{
-                item.sellerHeaderPicture = this.user.userInfo.icon
+                item.userHeaderPicture = this.user.userInfo.icon
                 item.sellerName = this.user.userInfo.uname
             })
         })
