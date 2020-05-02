@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 12:31:54
- * @LastEditTime: 2020-04-21 18:54:21
+ * @LastEditTime: 2020-05-02 10:58:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsCard.vue
@@ -17,10 +17,10 @@
     			<p class="title">{{data.name}}</p>
     			<p class="time">{{data.time}}</p>
     		</div>
-    		<span class="price">{{data.price}}</span>
+    		<span class="price">￥{{data.price}}</span>
     	</div>
     	<div class="imgbox">
-    		<img src="../assets/img/avatar.jpg" class="show" alt="">
+    		<img :src="data.img" class="show" alt="" style="width: 100%">
     	</div>
     	<div class="detail">
     		<p class="desc">{{data.desc}}</p>
@@ -112,8 +112,8 @@ export default {
 }
 .imgbox {
 	margin-top: .4rem;
-	width: 22rem;
-	height: 20rem;
+	/* width: 22rem;
+	height: 20rem; */
 }
 .imgbox .show{
 	width: 100%;
