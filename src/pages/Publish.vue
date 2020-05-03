@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-02 18:24:14
+ * @LastEditTime: 2020-05-03 16:55:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -143,6 +143,13 @@ export default {
         //循环判空，用户提示文案
         if ( this.goods.upload[key] !== 0 && !this.goods.upload[key] ) {
           Indicator.open(`${key}不能为空`);
+          setTimeout(()=>{
+            Indicator.close()
+          },1000)
+          return
+        }
+        if (this.goods.upload.productPic.length <= 0) {
+          Indicator.open(`请选择上传图片`);
           setTimeout(()=>{
             Indicator.close()
           },1000)
