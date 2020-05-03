@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-05-02 18:34:51
+ * @LastEditTime: 2020-05-03 14:27:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -43,19 +43,14 @@
 				</li>
 			</div>
 		</div>
-        <!-- <myswipper :swiperData="result"></myswipper> -->
-		<div>
+        <myswipper :swiperData="result"></myswipper>
+		<!-- <div>
 			<Swiper :autoPlay='true' :showIndicator='true' interval="2500" duration="500">
 				<Slide v-for="(data,index) in result" :key="index" >
 					<img :src="data.picList[0].productPic" style="width:100%;height:150px" @click="handleClickImg(data)">
 				</Slide>
 			</Swiper>
-			<!-- <Swipe :auto="4000">
-				<SwipeItem v-for="(data,index) in result" :key="index">
-					<img :src="data.picList[0].productPic" style="width:100%;height:150px" @click="handleClickImg(data)">
-				</SwipeItem>
-			</Swipe> -->
-		</div>
+		</div> -->
 		
 		<ul	style="overflow:auto;height:66vh;padding-top:5px;padding-bottom:20px;background:#eee"
 			v-infinite-scroll="loadMore"

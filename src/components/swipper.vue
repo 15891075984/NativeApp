@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:54:06
- * @LastEditTime: 2020-05-02 13:01:32
+ * @LastEditTime: 2020-05-03 14:28:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\swipper.vue
@@ -34,12 +34,12 @@ export default {
     methods: {
         handleClickImg (item) {
             console.log(8888,this.swiperData)
-            // this.$router.push({
-            //     name: 'goods',
-            //     params: {
-            //         goodsId : item.id
-            //     }
-            // })
+            this.$router.push({
+                name: 'goods',
+                params: {
+                    goodsId : item.id
+                }
+            })
         }
     }
 }
