@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-02 10:46:27
+ * @LastEditTime: 2020-05-05 19:32:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -136,10 +136,16 @@ export default {
             return !(item.fromUid == this.uid)
         },
         submit () {
+            let _that = this
             if( !this.value ) return
             var data = {userId:36,message:this.value}
             this.ws.send(JSON.stringify(data));
             console.log("发送数据", data);
+            if (this.list instanceof Array) {
+
+            }else {
+                this.list = []
+            }
             this.list.push({
                 fromUid: this.uid,
                 message: this.value

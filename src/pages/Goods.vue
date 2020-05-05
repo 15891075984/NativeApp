@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-05 17:46:47
+ * @LastEditTime: 2020-05-05 19:23:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -286,6 +286,9 @@ export default {
 			
 			this.$router.push({
 				name:'Chat',
+				params: {
+					uid: this.goods.goods.userId
+				}
 			})
 		},
 		//去购买
