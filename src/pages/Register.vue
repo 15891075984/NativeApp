@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 20:53:54
- * @LastEditTime: 2020-03-22 15:27:07
+ * @LastEditTime: 2020-05-05 18:03:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Register.vue
@@ -37,10 +37,10 @@ export default {
     },
     data () {
         return {
-            username:"123456",
-            password:"123456",
-            repeatPassword:"123456",
-            email:"123456@qq.com"
+            username:"",
+            password:"",
+            repeatPassword:"",
+            email:""
         }
     },
     methods: {

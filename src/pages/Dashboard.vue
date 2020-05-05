@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-05-05 17:50:54
+ * @LastEditTime: 2020-05-05 17:56:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -27,11 +27,11 @@
 				@click="goUserDetail(item)"
 				v-if="userList.length >= 1">
 					<div class="search-user-avatar">
-						<img :src="item.icon" alt="">
+						<img :src="item.icon" alt="" style="width: 50px ;height:50px">
 					</div>
-					<div class="search-user-content" style="padding-left:10px;line-height:20px;flex:1">
-						<div class="search-goods-name" style="line-height:30px;text-align:left">{{item.productName}}</div>
-						<div class="search-goods-content" style="text-align:left"></div>
+					<div class="search-user-content" style="padding-left:30px;line-height:20px;flex:1">
+						<div class="search-goods-name" style="line-height:30px;text-align:left">{{item.uname}}</div>
+						<div class="search-goods-content" style="text-align:left">{{item.userResume}}</div>
 					</div>
 					<!-- <div >
 						<mt-button type="default"  @click="handleStatus" :class="{follow: status === 0}">{{status === 0 ? '取关' : '关注'}}</mt-button>
@@ -169,7 +169,7 @@ export default {
 			this.$router.push({
 				name: 'UserDetail',
 				params: {
-					userId: value.userId
+					userId: value.uid
 				}
 			})
 		},
