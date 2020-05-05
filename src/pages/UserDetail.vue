@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-05-05 18:54:46
+ * @LastEditTime: 2020-05-05 19:00:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -76,7 +76,7 @@ export default {
     data () {
         return {
             userId: '',
-            status: 0,
+            status: 1,
             selected: '1',
             goodsList: [],
             dynamicList: [],
