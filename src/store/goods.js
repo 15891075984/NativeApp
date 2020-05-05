@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-05-02 19:02:18
+ * @LastEditTime: 2020-05-05 17:14:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -60,7 +60,7 @@ const goods = {
         submitPublish ({ state , rootState}, router) {
             let params = {...state.upload}
             params.userAddress = rootState.user.userAddress
-            params.userName = rootState.user.username
+            params.userName = rootState.user.userInfo.uname
             params.userId = rootState.user.userInfo.uid
             params.productPic = params.productPic.flat(Infinity)
             // params = Object.assign(params, rootState.user.userInfo )

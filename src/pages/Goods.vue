@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-02 18:56:37
+ * @LastEditTime: 2020-05-05 17:46:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -17,9 +17,9 @@
 				<p class="uname">{{goods.goods.userName}}</p>
 				<p class="address">{{goods.goods.userAddress}}</p>
 			</div>
-			<div class="goods-follow">
+			<!-- <div class="goods-follow">
 				<mt-button type="default" @click="handleStatus" :class="{follow: status === 0}">{{status ? '关注' : '取关'}}</mt-button>
-			</div>
+			</div> -->
 		</div>
 		<div class="goods-content">
 			<div class="goods-price">
@@ -229,7 +229,28 @@ export default {
 		},
 		//点赞
 		handleLike() {
-			this.likeActive = !this.likeActive
+			// axios
+			// /second-hand/api/userPraise/praiseStatus
+			let data = {
+				productId: this.goods.goods.id,
+				status: 1
+			}
+			if (this.collectActive) {
+				//取消点赞
+			}else {
+				//点赞
+				data.status = 0
+			}
+			axios({
+				url:'/api/userPraise/praiseStatus',
+				method:'POST',
+				data,
+				header:{
+					'Content-Type':'application/json'
+				}
+			}).then(res=>{
+				this.likeActive = !this.likeActive
+			})
 		},
 		//收藏
 		handleCollect () {
@@ -254,9 +275,7 @@ export default {
 				}
 			}).then(res=>{
 				this.collectActive = !this.collectActive
-				console.log(this.collectActive)
 			})
-			
 		},
 		//留言
 		handleMessage () {

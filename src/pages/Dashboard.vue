@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-05-05 16:26:44
+ * @LastEditTime: 2020-05-05 17:50:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -21,21 +21,21 @@
 				placeholder="搜索宝贝/用户">
 			</mt-search>
 			<div class="search-list" v-if="value.length > 0">
-				<li v-for="item in goodsList.slice(0,4)" 
+				<li v-for="item in userList" 
 				class="search-user search-goods" 
 				style="padding:10px 15px 10px 15px" 
 				@click="goUserDetail(item)"
-				v-if="goodsList.length >= 1">
+				v-if="userList.length >= 1">
 					<div class="search-user-avatar">
-						<img src="../assets/img/avatar.jpg" alt="">
+						<img :src="item.icon" alt="">
 					</div>
 					<div class="search-user-content" style="padding-left:10px;line-height:20px;flex:1">
 						<div class="search-goods-name" style="line-height:30px;text-align:left">{{item.productName}}</div>
 						<div class="search-goods-content" style="text-align:left"></div>
 					</div>
-					<div >
+					<!-- <div >
 						<mt-button type="default"  @click="handleStatus" :class="{follow: status === 0}">{{status === 0 ? '取关' : '关注'}}</mt-button>
-					</div>
+					</div> -->
 				</li>
 				<li v-for="item in goodsList" style="" class="search-goods" @click="goGoodsList(item.productName)">
 					<div class="search-goods-name">{{item.productName}}</div>
@@ -125,7 +125,7 @@ export default {
 			}).then(res=>{
 				if (res.code !==0) return
 				this.userList = res.data.users
-				this.goodsList = res.data.product.slice(0, 6)
+				this.goodsList = res.data.product
 			})
 		}
 	},

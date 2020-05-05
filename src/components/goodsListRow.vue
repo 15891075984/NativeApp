@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 12:15:01
- * @LastEditTime: 2020-04-21 19:17:39
+ * @LastEditTime: 2020-05-05 17:09:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsListRow.vue
@@ -11,7 +11,7 @@
     <div class="wrapper">
         <div class="goods-item" v-for="item in goods" @click="goGoodsDetail(item)">
             <div class="img">
-                <img class="img"  v-lazy="item.productPic[0]" :src="item.productPic[0]" alt="" >
+                <img class="img"  v-lazy="item.productPic" :src="item.productPic" alt="" >
             </div>
             <div class="goods-content">
                 <div class="desc">{{item.productContent}}</div>

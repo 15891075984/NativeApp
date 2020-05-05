@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-04-26 12:40:02
+ * @LastEditTime: 2020-05-05 17:22:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -72,7 +72,7 @@ export default {
             axios.delete(`/api/product/delete/${this.goods.buyId}`)
         },
         downMyPublish () {
-
+            
         },
         upMyPublish () {
 

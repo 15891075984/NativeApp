@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-07 21:23:24
- * @LastEditTime: 2020-05-05 09:27:34
+ * @LastEditTime: 2020-05-05 17:13:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\store\user.js
@@ -12,7 +12,7 @@ const user = {
     types: {},
     state: {
         isLogin: true,
-        username: '334',
+        username: '',
         selected: "闲鱼",
         userAddress:"",
         userInfo:{
