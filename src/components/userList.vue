@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-03-18 20:40:09
+ * @LastEditTime: 2020-05-05 19:11:43
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \SellingPlat_APP\src\components\userList.vue
+ -->
 
 <template>
     <div class="user">
@@ -7,7 +15,7 @@
             <p class="desc">{{userValue.userResume || '这个人很懒，什么都没留下'}}</p>
         </div>
         <div class="follow">
-            <mt-button type="default" @click="handleStatus" :class="{follow: status === 0}">{{status ? '关注' : '取关'}}</mt-button>
+            <!-- <mt-button type="default" @click="handleStatus" :class="{follow: status === 0}">{{status ? '关注' : '取关'}}</mt-button> -->
         </div>
         <!-- <div class="sex">{{userValue.userSex ? '男': '女'}}</div> -->
     </div>
@@ -68,7 +76,7 @@ export default {
     border-radius: 50%;
 }
 .user .username{
-    margin-left: 15px;
+    margin-left: 25px;
     font-size: 16px;
     flex:1
 }

@@ -216,7 +216,7 @@ export default {
 		this.$router.push({
 			name: 'follow',
 			params: {
-				followId:this.user.userInfo.id
+				followId:this.user.userInfo.uid
 			}
 		})
 	},
@@ -225,7 +225,7 @@ export default {
 		this.$router.push({
 			name: 'fans',
 			params: {
-				fansId:this.user.userInfo.id
+				fansId:this.user.userInfo.uid
 			}
 		})
 	},
