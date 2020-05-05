@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-04-17 15:22:04
+ * @LastEditTime: 2020-05-05 09:12:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -56,8 +56,8 @@ export default {
                 data: {...params},
                 headers: {'Content-Type': 'application/json'}
             }).then( res => {
-                if (res.code !== 0 ) return
                 Indicator.close()
+                if (res.code !== 0 ) return
                 if (res && res.data.length >= 1){
                     window.localStorage["token"] = JSON.stringify(res.data);
                     this.getUserInfo()

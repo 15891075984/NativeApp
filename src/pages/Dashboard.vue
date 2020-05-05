@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-05-03 14:27:41
+ * @LastEditTime: 2020-05-05 16:26:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -18,7 +18,7 @@
 				style="height:100%"
 				@change.native="handleSearch"
 				@keyup.enter.native="goGoodsList()"
-				placeholder="搜索宝贝/鱼塘/用户">
+				placeholder="搜索宝贝/用户">
 			</mt-search>
 			<div class="search-list" v-if="value.length > 0">
 				<li v-for="item in goodsList.slice(0,4)" 
@@ -96,18 +96,18 @@ export default {
 			status:1,
 			page: 1,
             result:[{
-				picList:[{productPic:''}]
+				picList:[]
 			},{
-				picList:[{productPic:''}]
+				picList:[]
 			},{
-				picList:[{productPic:''}]
+				picList:[]
 			},{
-				picList:[{productPic:''}]
+				picList:[]
 			}],
 			goodsList: [],
 			userList:[],
 			goodsHomeList:[{
-				picList:[{productPic:''}]
+				picList:[]
 			}]
         }
 	},
@@ -157,10 +157,11 @@ export default {
 			// }, 1000);
 		},
 		goGoodsList (value) {
+			console.log(11111,value)
 			this.$router.push({
 				name: 'goodsList',
 				params: {
-					search: this.value
+					search: value
 				}
 			})
 		},

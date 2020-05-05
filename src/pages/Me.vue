@@ -25,7 +25,7 @@
 						<span class="numname">粉丝数</span>
 					</div>
 					<div class="numbox" @click="handleAccountSheetVisible">
-						<span class="num">{{accountNum}}</span>
+						<span class="num">{{user.userInfo.balance}}</span>
 						<span class="numname">余额</span>
 					</div>
 				</div>
@@ -81,7 +81,7 @@
 import tabBar from '../components/tabBar'
 import axios from '../utils/request'
 import { Field,Button, Cell,Indicator, MessageBox, Actionsheet, Toast } from 'mint-ui';
-import { mapState, mapMutations} from 'vuex';
+import { mapState, mapMutations, mapActions} from 'vuex';
 export default {
 	components: {
 		tabBar,
@@ -90,7 +90,6 @@ export default {
 	data () {
 		return {
 			login: true,
-			accountNum: 99.98,
 			sheetVisible: false,
 			actions: [{
 		        name: '拍照',
@@ -117,13 +116,16 @@ export default {
 		})
 	},
 	mounted () {
-		console.log(this.user)
+		this.getUserInfo()
 	},
 	methods: {
 		...mapMutations({
 			setUserInfoAvatar:'user/setUserInfoAvatar',
-			setHandle:'user/setHandle',
+			setHandle:'user/setHandle'
 		}),
+		...mapActions({
+            'getUserInfo':'user/getUserInfo'
+        }),
 		photo () {
 			this.loadImg("image/jpg;capture=camera")
 		},
@@ -146,6 +148,7 @@ export default {
 					headers: {'Content-Type': 'application/json'}
 				}).then(res => {
 					if (res.code !== 0) return
+					this.getUserInfo()
 				})
 			});
 		},
@@ -162,6 +165,7 @@ export default {
 					headers: {'Content-Type': 'application/json'}
 				}).then(res => {
 					if (res.code !== 0) return
+					this.getUserInfo()
 				})
 			});
 		},

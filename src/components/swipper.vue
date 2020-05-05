@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:54:06
- * @LastEditTime: 2020-05-03 14:28:28
+ * @LastEditTime: 2020-05-05 16:29:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\swipper.vue
@@ -12,7 +12,7 @@
     <div>
         <Swiper :autoPlay='true' :showIndicator='true' interval="2500" duration="500">
             <Slide v-for="(item,index) in swiperData" :key="index" >
-                <img :src="item.picList[0].productPic" style="width:100%;height:150px" @click="handleClickImg(item)">
+                <img :src="item.picList[0]" style="width:100%;height:150px" @click="handleClickImg(item)">
             </Slide>
         </Swiper>
     </div>

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-07 21:23:24
- * @LastEditTime: 2020-03-27 20:03:52
+ * @LastEditTime: 2020-05-05 09:27:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\store\user.js
@@ -31,7 +31,8 @@ const user = {
             updateTime: null,
             userResume: "",
             userSex: 0,
-            userAddress: "广东省中山市"
+            userAddress: "广东省中山市",
+            balance: 0
         },
         previousAvatar:'',
         handle:'delete',

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-02 09:27:18
+ * @LastEditTime: 2020-05-05 09:26:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -105,6 +105,13 @@ export default {
     },
     getUnread () {
       axios.get(`/api/message/chat/unread`).then(res=>{
+        console.log(res)
+        // this.list = res.data
+      })
+    },
+    getNotification () {
+      axios.get(`/api/message/notification/${this.user.userInfo.uid}`).then(res=>{
+        console.log(res)
         // this.list = res.data
       })
     }

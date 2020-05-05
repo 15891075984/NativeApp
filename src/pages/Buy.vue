@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-25 16:39:27
- * @LastEditTime: 2020-05-02 20:51:53
+ * @LastEditTime: 2020-05-05 09:22:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Buy.vue
@@ -80,7 +80,7 @@ export default {
             const params = {
                 orderid: this.orderId,
                 productid: this.goods.goods.id.toString(),
-                uid: this.user.userInfo.uid,
+                uid: this.user.userInfo.uid.toString(),
             }
             axios({
                 url: '/api/order',
