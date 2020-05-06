@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-06 17:21:01
+ * @LastEditTime: 2020-05-06 18:31:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -284,11 +284,11 @@ export default {
 		},
 		//我想要，去聊天
 		goChat () {
-			
 			this.$router.push({
 				name:'Chat',
 				params: {
-					uid: this.goods.goods.userId
+					uid: this.goods.goods.userId,
+					to: this.user.userInfo.uid
 				}
 			})
 		},
