@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-05 09:26:41
+ * @LastEditTime: 2020-05-06 10:58:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -15,18 +15,19 @@
                   ref="loadmore" :topDistance="100">
     <div>
     <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
-      <li class="message-item" v-for="item in list" @click="goChatting(item.uid)">
+      <li class="message-item" v-for="item in list" @click="goChatting(item[0].fromUid)">
         <div>
           <img :src="item.icon" alt=""  class="avatar">
         </div>
         <div style="display: flex;flex: 1; border-bottom: 0.5px solid #eee;padding-bottom:5px">
           <div class="left" style="flex: 1;padding:3px 0 5px 10px">
-            <div class="username" style="font-weight:700;margin-bottom:8px">{{item.name}}</div>
+            <!-- <div class="username" style="font-weight:700;margin-bottom:8px"></div> -->
             <div class="message" style="color:#aaa;margin-bottom:5px">
               你有一条新消息
+              <div style="color:#525252">{{item[0].message}}</div>
             </div>
             <div class="time"  style="color:#aaa;font-size:12px">
-              {{item.timeDf}}前
+              时间：{{item[0].createTime}}
             </div>
           </div>
           <div class="right">
@@ -64,7 +65,7 @@ export default {
   data () {
     return {
       allLoaded:true,
-      list:[]
+      list:{}
     }
   },
   computed: {
@@ -75,17 +76,17 @@ export default {
   mounted () {
     
     this.getUnread()
-    this.getMessageList()
+    // this.getMessageList()
   },
 
   methods: {
     loadTop() {
       this.$refs.loadmore.onTopLoaded();
-      Indicator.open('正在加载数据中...')
-      setTimeout(()=>{
-        this.list.splice(0,0,'334')
-        Indicator.close()
-      },2000)
+      // Indicator.open('正在加载数据中...')
+      // setTimeout(()=>{
+      //   this.list.splice(0,0,'334')
+      //   Indicator.close()
+      // },2000)
     },
 
     goChatting (value) {
@@ -98,7 +99,6 @@ export default {
     },
 
     getMessageList () {
-      console.log(999,this.user.userInfo)
       axios.get(`/api/message/notification/${this.user.userInfo.uid}`).then(res=>{
         this.list = res.data
       })
@@ -106,7 +106,7 @@ export default {
     getUnread () {
       axios.get(`/api/message/chat/unread`).then(res=>{
         console.log(res)
-        // this.list = res.data
+        this.list = res.data
       })
     },
     getNotification () {

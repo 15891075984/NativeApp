@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-05 19:23:46
+ * @LastEditTime: 2020-05-06 11:29:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -242,7 +242,7 @@ export default {
 				data.status = 0
 			}
 			axios({
-				url:'/api/userPraise/praiseStatus',
+				url:'/api/userPraise/priseStatus',
 				method:'POST',
 				data,
 				header:{

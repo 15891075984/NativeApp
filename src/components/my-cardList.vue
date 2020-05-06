@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-05 17:22:07
+ * @LastEditTime: 2020-05-06 11:32:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -26,14 +26,14 @@
                     </div>
                     <div class="update-time">
                         发布时间:{{goods.productCreateTime}}
-                    </div>
+                     </div>
                 </div>
             </div>
             <div class="item-delete" style="right:60px" v-if="user.handle === 'down'">
                 <mt-button  plain type="primary" size="small" @click="upMyPublish" class="delete-btn">上架</mt-button>
             </div>
             <div class="item-delete">
-                <mt-button v-if="user.handle === 'delete' || user.handle === 'down'" plain type="danger" size="small" @click="deleteMyPublish" class="delete-btn">删除</mt-button>
+                <mt-button v-if="user.handle === 'deleteBuy' || user.handle === 'deleteSell' || user.handle === 'deletePublish'" plain type="danger" size="small" @click="deleteMyPublish(user.handle)" class="delete-btn">删除</mt-button>
                 <mt-button v-else plain type="primary" size="small" @click="downMyPublish" class="delete-btn">下架</mt-button>
             </div>
     </div>
@@ -68,11 +68,21 @@ export default {
         ...mapMutations({
             'setPublishImg':'goods/setPublishImg',
         }),
-        deleteMyPublish() {
-            axios.delete(`/api/product/delete/${this.goods.buyId}`)
+        deleteMyPublish(validate) {
+            console.log(validate)
+            if (validate === 'deleteBuy') {
+                axios.delete(`/api/userBuy/${this.goods.id}`)
+            }
+            if (validate === 'deleteSell') {
+                axios.delete(`/api/userSale/${this.goods.id}`)
+            }
+            // axios.delete(`/api/product/delete/${this.goods.id}`)
         },
         downMyPublish () {
-            
+            axios.get(`/api/product/changeStatus/${this.goods.id}`).then( res => {
+                if (res.code !== 0) return
+                this.$router.go(-1)
+            })
         },
         upMyPublish () {
 

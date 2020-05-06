@@ -191,11 +191,11 @@ export default {
 		this.$router.push('/myCollect')
 	},
 	goMySell() {
-		this.setHandle('delete')
+		this.setHandle('deleteSell')
 		this.$router.push('/mySell')
 	},
 	goMyBuy() {
-		this.setHandle('delete')
+		this.setHandle('deleteBuy')
 		this.$router.push('/myBuy')
 	},
 

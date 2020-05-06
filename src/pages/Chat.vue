@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-05 19:32:57
+ * @LastEditTime: 2020-05-06 11:02:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -69,6 +69,7 @@ export default {
         //     console.log(8888)
         // });
         // this.socket.on('event', function(data){});
+        this.loadTop()
         this.ws = new WebSocket('ws://47.93.117.14:8080/second-hand/chat/'+ this.uid);
         var _that = this
         this.ws.onopen = function() {
@@ -82,12 +83,11 @@ export default {
                 _that.$refs['chat'].scrollTop = (0 , 99999)
             })
         };
-        this.loadTop()
+        
         this.ws.onmessage = function (evt) {
             if (evt.data === '发送成功' || evt.data === '出现错误 ：连接已经存在') {return}
             var received_msg = JSON.parse(evt.data);
             var message = received_msg.message
-            console.log(message)
             let datass = JSON.stringify(_that.list)
             _that.list = JSON.parse(datass)
             _that.list.push({
@@ -95,10 +95,9 @@ export default {
                 message
             })
             const height = _that.$refs['chat-ul'].offsetHeight
-            console.log(height)
             _that.$nextTick(()=>{
                 //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
-                _that.$refs['chat'].scrollTop = (0 , height)
+                _that.$refs['chat'].scrollTop = (0 , 99999)
             })
         };
         
@@ -141,11 +140,11 @@ export default {
             var data = {userId:36,message:this.value}
             this.ws.send(JSON.stringify(data));
             console.log("发送数据", data);
-            if (this.list instanceof Array) {
+            // if (this.list instanceof Array) {
 
-            }else {
-                this.list = []
-            }
+            // }else {
+            //     this.list = []
+            // }
             this.list.push({
                 fromUid: this.uid,
                 message: this.value
@@ -162,8 +161,14 @@ export default {
             axios.get(`/api/message/chat/history`)
             .then( res => {
                 //let data = JSON.parse(res.data)
+                let index = 0
                 let keys = Object.keys(res.data)
-                this.list = res.data[keys[0]]
+                keys.forEach((item,ind) => {
+                    if (item === this.uid) {
+                        index = ind
+                    }
+                })
+                this.list = res.data[keys[index]]
                 this.$nextTick(()=>{
                 //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
                 this.$refs['chat'].scrollTop = (0 , 99999)
