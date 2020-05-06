@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 18:17:18
+ * @LastEditTime: 2020-05-06 20:00:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -133,7 +133,7 @@ export default {
     },
     destroyed () {
         axios({
-                url: `/api/message/chat/read/${this.uid}`,
+                url: `/api/message/chat/read/${this.toUid}`,
                 method: 'post',
                 header:{
 					'Content-Type':'application/json'
