@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 18:18:26
+ * @LastEditTime: 2020-05-06 20:23:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -15,19 +15,19 @@
                   ref="loadmore" :topDistance="100">
     <div>
     <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
-      <li class="message-item" v-for="item in list" @click="goChatting(item[0].toUid, item[0].fromUid)">
+      <li class="message-item" v-for="item in userList" @click="goChatting(item.toUid, item.uid)">
         <div>
-          <img :src="calcAvatarPath(item[0].toUid)" alt=""  class="avatar">
+          <img :src="item.icon" alt=""  class="avatar">
         </div>
         <div style="display: flex;flex: 1; border-bottom: 0.5px solid #eee;padding-bottom:5px">
           <div class="left" style="flex: 1;padding:3px 0 5px 10px">
             <!-- <div class="username" style="font-weight:700;margin-bottom:8px"></div> -->
             <div class="message" style="color:#aaa;margin-bottom:5px">
               你有一条新消息
-              <div style="color:#525252">{{item[0].message}}</div>
+              <!-- <div style="color:#525252">{{item[0].message}}</div> -->
             </div>
-            <div class="time"  style="color:#aaa;font-size:12px">
-              时间：{{item[0].createTime}}
+            <div class="time"  style="color:#aaa;font-size:12px;margin-top: 15px">
+              时间：{{item.updateTime}}
             </div>
           </div>
           <div class="right">
