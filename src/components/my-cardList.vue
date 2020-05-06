@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-06 14:36:41
+ * @LastEditTime: 2020-05-06 15:02:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -29,7 +29,7 @@
                      </div>
                 </div>
             </div>
-            <div class="item-delete" style="right:60px" v-if="user.handle === 'down'">
+            <div class="item-delete" style="right:60px" v-if="currentRoute === 'down'">
                 <mt-button  plain type="primary" size="small" @click="upMyPublish" class="delete-btn">上架</mt-button>
             </div>
             <div class="item-delete">
@@ -99,7 +99,10 @@ export default {
             })
         },
         upMyPublish () {
-
+            axios.get(`/api/product/republish/${this.goods.id}`).then( res => {
+                if (res.code !== 0) return
+                this.$router.go(-1)
+            })
         },
         goGoodDetail () {
             this.$router.push({

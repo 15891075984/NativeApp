@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-06 13:55:28
+ * @LastEditTime: 2020-05-06 17:21:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -11,7 +11,7 @@
 		<headerBar title="宝贝详情"></headerBar>
 		<div class="goods-title">
 			<div class="goods-avatar"  @click="goUserDetail">
-				<img src="./../assets/img/avatar.jpg" alt="" style="width:50px;height:50px;border-radius:7px">
+				<img :src="goods.goods.icon" alt="" style="width:50px;height:50px;border-radius:7px" v-lazy="goods.goods.icon">
 			</div>
 			<div class="goods-username"  @click="goUserDetail">
 				<p class="uname">{{goods.goods.userName}}</p>

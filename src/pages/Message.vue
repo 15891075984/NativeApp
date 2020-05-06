@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 10:58:07
+ * @LastEditTime: 2020-05-06 18:18:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -15,9 +15,9 @@
                   ref="loadmore" :topDistance="100">
     <div>
     <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
-      <li class="message-item" v-for="item in list" @click="goChatting(item[0].fromUid)">
+      <li class="message-item" v-for="item in list" @click="goChatting(item[0].toUid, item[0].fromUid)">
         <div>
-          <img :src="item.icon" alt=""  class="avatar">
+          <img :src="calcAvatarPath(item[0].toUid)" alt=""  class="avatar">
         </div>
         <div style="display: flex;flex: 1; border-bottom: 0.5px solid #eee;padding-bottom:5px">
           <div class="left" style="flex: 1;padding:3px 0 5px 10px">
@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="right">
-            <img :src="item.img" alt="" style="width: 70px;height: 70px;">
+            <img :src="meAvator" alt="" style="width: 70px;height: 70px;">
           </div>
         </div>
       </li>
@@ -65,18 +65,23 @@ export default {
   data () {
     return {
       allLoaded:true,
-      list:{}
+      list:{},
+      userList: [],
+      avatar: ''
     }
   },
   computed: {
     ...mapState({
       user:'user'
-    })
+    }),
+    meAvator () {
+        return localStorage.meAvator
+    }
   },
   mounted () {
-    
     this.getUnread()
     // this.getMessageList()
+    this.getChatList()
   },
 
   methods: {
@@ -88,14 +93,42 @@ export default {
       //   Indicator.close()
       // },2000)
     },
-
-    goChatting (value) {
+    
+    getChatList () {
+      axios.get(`/api/message/chat/chatList`).then(res=>{
+        this.userList = res.data
+      })
+    },
+    goChatting (value, toUid) {
+      const tmpArr = this.userList.filter(item => {
+        if(item.toUid == value) {
+          return true
+        }
+      })
+      if (tmpArr.length > 0) {
+          localStorage.chatAvator = tmpArr[0].icon
+        }else {
+          localStorage.chatAvator = ''
+      }
       this.$router.push({
         name:'Chat',
         params: {
-          uid: value
+          uid: value,
+          to: toUid
         }
       })
+    },
+    calcAvatarPath (fromUid) {
+      const tmpArr = this.userList.filter(item => {
+        if(item.toUid == fromUid) {
+          return true
+        }
+      })
+      if (tmpArr.length > 0) {
+        return  tmpArr[0].icon
+      }else {
+        return ''
+      }
     },
 
     getMessageList () {

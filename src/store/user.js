@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-07 21:23:24
- * @LastEditTime: 2020-05-05 17:13:07
+ * @LastEditTime: 2020-05-06 18:15:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat\src\store\user.js
@@ -47,6 +47,7 @@ const user = {
         setUserInfo (state, data) {
             //解析ip地址成 真实地址 粒度 省市
             state.userInfo = data
+            localStorage.meAvator = data.icon
             state.previousAvatar = data.icon
             const userAddress = returnCitySN
             if(Object.keys(userAddress).length >= 1) {

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 11:02:30
+ * @LastEditTime: 2020-05-06 18:17:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -18,12 +18,12 @@
                 <ul style="padding-bottom: 160px;padding-top:50px;" ref="chat-ul">
                     <li class="chat-item" v-for="(item,index) in list" :key="index">
                         <div class="item-you" v-if="handleFromOrTo(item)">
-                            <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
+                            <img :src="chatAvator" alt="" style="width:30px;height:30px;border-radius:5px">
                             <p class="item-message">{{item.message}}</p>
                         </div>
                         <div class="item-me" v-else>
                             <p class="item-message">{{item.message}}</p>
-                            <img src="../assets/img/avatar.jpg" alt="" style="width:30px;height:30px;border-radius:5px">
+                            <img :src="meAvator" alt="" style="width:30px;height:30px;border-radius:5px">
                         </div>
                     </li>
                 </ul>
@@ -59,11 +59,21 @@ export default {
             count: 0,
             value:'',
             list:[],
-            uid:''
+            uid:'',
+            toUid: ''
+        }
+    },
+    computed: {
+        chatAvator () {
+            return localStorage.chatAvator
+        },
+        meAvator () {
+            return localStorage.meAvator
         }
     },
     mounted () {
         this.uid = this.$route.params.uid
+        this.toUid = this.$route.params.to
         // this.socket=io('ws://47.93.117.14:8080/second-hand/chat/'+ this.uid)
         // this.socket.on('open', function(){
         //     console.log(8888)
@@ -85,6 +95,7 @@ export default {
         };
         
         this.ws.onmessage = function (evt) {
+            console.log(evt)
             if (evt.data === '发送成功' || evt.data === '出现错误 ：连接已经存在') {return}
             var received_msg = JSON.parse(evt.data);
             var message = received_msg.message
@@ -137,7 +148,7 @@ export default {
         submit () {
             let _that = this
             if( !this.value ) return
-            var data = {userId:36,message:this.value}
+            var data = {userId:this.toUid,message:this.value}
             this.ws.send(JSON.stringify(data));
             console.log("发送数据", data);
             // if (this.list instanceof Array) {
@@ -158,7 +169,7 @@ export default {
         },
         //加载之前聊天记录
         loadTop () {
-            axios.get(`/api/message/chat/history`)
+            axios.get(`/api/message/chat/history/${this.uid}`)
             .then( res => {
                 //let data = JSON.parse(res.data)
                 let index = 0
@@ -168,7 +179,7 @@ export default {
                         index = ind
                     }
                 })
-                this.list = res.data[keys[index]]
+                this.list = res.data.reverse()
                 this.$nextTick(()=>{
                 //用户每次收发到消息，可以获取ul高度。。scroll跳转到最底部
                 this.$refs['chat'].scrollTop = (0 , 99999)

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-05-05 19:00:40
+ * @LastEditTime: 2020-05-06 18:20:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -84,13 +84,15 @@ export default {
             count: {
                 allNum: 0,
                 mineNum: 0,
-            }
+            },
+            followStatus: 0
         }
     },
     mounted () {
         this.userId = this.$route.params.userId
         this.getUserDetail()
         this.getDynamic()
+        this.followStatus()
     },
     computed:{
         ...mapState({
@@ -113,6 +115,13 @@ export default {
                 this.userInfo = res.data
             })
         },
+        followStatus () {
+            axios.get(`/api/homePage/mine/${this.userId}`).then(res=>{
+                if(res.code !== 0) return
+                this.followStatus = res.data
+            })
+        },
+        
         //关注
         handleStatus () {
             this.status = this.status ? 0 : 1
