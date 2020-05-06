@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-06 11:32:36
+ * @LastEditTime: 2020-05-06 14:36:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -33,8 +33,9 @@
                 <mt-button  plain type="primary" size="small" @click="upMyPublish" class="delete-btn">上架</mt-button>
             </div>
             <div class="item-delete">
-                <mt-button v-if="user.handle === 'deleteBuy' || user.handle === 'deleteSell' || user.handle === 'deletePublish'" plain type="danger" size="small" @click="deleteMyPublish(user.handle)" class="delete-btn">删除</mt-button>
-                <mt-button v-else plain type="primary" size="small" @click="downMyPublish" class="delete-btn">下架</mt-button>
+                <mt-button v-if="showDownMyPublish" plain type="primary" size="small" @click="downMyPublish" class="delete-btn">下架</mt-button>
+                <mt-button v-else plain type="danger" size="small" @click="deleteMyPublish(user.handle)" class="delete-btn">删除</mt-button>
+                
             </div>
     </div>
 </template>
@@ -49,17 +50,20 @@ export default {
         headerBar,
         Button
     },
-    props:['goods'],
+    props:['goods','currentRoute'],
     data () {
         return {}
     },
     mounted () {
-        console.log(this.user.handle)
+        console.log(this.currentRoute)
     },
     computed:{
         ...mapState({
             user:'user'
-        })
+        }),
+        showDownMyPublish () {
+            if (this.currentRoute === '/myPublish') return true
+        }
     },
     methods: {
         ...mapActions({
@@ -69,14 +73,24 @@ export default {
             'setPublishImg':'goods/setPublishImg',
         }),
         deleteMyPublish(validate) {
-            console.log(validate)
-            if (validate === 'deleteBuy') {
-                axios.delete(`/api/userBuy/${this.goods.id}`)
+            if (this.currentRoute === '/myBuy') {
+                axios.delete(`/api/userBuy/${this.goods.buyId}`).then( res => {
+                    if (res.code !== 0) return
+                    this.$router.go(-1)
+                })
             }
-            if (validate === 'deleteSell') {
-                axios.delete(`/api/userSale/${this.goods.id}`)
+            if (this.currentRoute === '/mySell') {
+                axios.delete(`/api/userSale/${this.goods.id}`).then( res => {
+                    if (res.code !== 0) return
+                    this.$router.go(-1)
+                })
             }
-            // axios.delete(`/api/product/delete/${this.goods.id}`)
+            if (this.currentRoute === '/myDown') {
+            axios.delete(`/api/product/delete/${this.goods.id}`).then( res => {
+                    if (res.code !== 0) return
+                    this.$router.go(-1)
+                })
+            }
         },
         downMyPublish () {
             axios.get(`/api/product/changeStatus/${this.goods.id}`).then( res => {

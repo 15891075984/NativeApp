@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-02 18:35:15
+ * @LastEditTime: 2020-05-06 14:07:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -10,7 +10,7 @@
     <div class="publish-list">
         <headerBar title="我赞过的"></headerBar>
         <div class="publish-item" v-for="(item) in myLikeData" :key="item.id">
-            <myCardList :goods="item"></myCardList>
+            <myCardList :goods="item" :currentRoute = "currentRoute"></myCardList>
       </div>
   </div>
 </template>
@@ -29,10 +29,12 @@ export default {
     },
     data () {
         return {
-            myLikeData:[]
+            myLikeData:[],
+            currentRoute: ''
         }
     },
     mounted () {
+        this.currentRoute = this.$route.path
         axios.get('/api/userPraise').then(res => {
             if (res.code !==0 ) return
             this.myLikeData = res.data

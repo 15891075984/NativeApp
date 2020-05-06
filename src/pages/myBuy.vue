@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-02 18:35:07
+ * @LastEditTime: 2020-05-06 14:05:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -10,7 +10,7 @@
     <div class="publish-list">
         <headerBar title="我买到的"></headerBar>
         <div class="publish-item" v-for="(item) in myBuyData" :key="item.id">
-            <myCardList :goods="item"></myCardList>
+            <myCardList :goods="item" :currentRoute = "currentRoute"></myCardList>
       </div>
   </div>
 </template>
@@ -29,11 +29,13 @@ export default {
     },
     data () {
         return {
-            myBuyData:[]
+            myBuyData:[],
+            currentRoute: ''
         }
     },
     mounted () {
         //TODO 用户去拉取发布列表
+        this.currentRoute = this.$route.path
         axios.get('/api/userBuy').then(res => {
             if (res.code !==0 ) return
 

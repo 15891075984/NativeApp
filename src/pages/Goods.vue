@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-06 11:29:08
+ * @LastEditTime: 2020-05-06 13:55:28
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -235,8 +235,9 @@ export default {
 				productId: this.goods.goods.id,
 				status: 1
 			}
-			if (this.collectActive) {
+			if (this.likeActive) {
 				//取消点赞
+				data.status = 1
 			}else {
 				//点赞
 				data.status = 0
