@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 20:14:15
+ * @LastEditTime: 2020-05-06 20:31:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
  -->
 <template>
     <div style="height:100vh;overflow:auto;padding:10px 0;background:#eee" ref="chat">
-        <headerBar title="与随遇而安聊天"></headerBar>
+        <headerBar :title="title"></headerBar>
         <div class="chat-wrapper" ref="chat-wrap">
             <mt-loadmore    :top-method="loadTop"
                             topPullText=""
@@ -60,7 +60,7 @@ export default {
             value:'',
             list:[],
             uid:'',
-            toUid: ''
+            toUid: '',
         }
     },
     computed: {
@@ -69,6 +69,9 @@ export default {
         },
         meAvator () {
             return localStorage.meAvator
+        },
+        title () {
+            return `与${localStorage.chatName}聊天`
         }
     },
     mounted () {

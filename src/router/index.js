@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-05-06 18:26:40
+ * @LastEditTime: 2020-05-06 21:28:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
@@ -117,6 +117,11 @@ export default new Router({
         name:'FeedBack',
         component: () => import('@/pages/FeedBack')
     },{
+        path:'/SysDetail/:id',
+        name:'SysDetail',
+        component: () => import('@/pages/SysDetail')
+    },
+    {
         path:'*',
         redirect:'/404'
     }

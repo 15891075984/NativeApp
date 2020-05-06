@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-06 18:31:53
+ * @LastEditTime: 2020-05-06 20:33:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -291,6 +291,7 @@ export default {
 					to: this.user.userInfo.uid
 				}
 			})
+			localStorage.chatName = this.goods.goods.userName
 		},
 		//去购买
 		goBuyPage() {

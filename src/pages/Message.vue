@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 20:23:27
+ * @LastEditTime: 2020-05-06 22:04:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -15,7 +15,23 @@
                   ref="loadmore" :topDistance="100">
     <div>
     <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
-      <li class="message-item" v-for="item in userList" @click="goChatting(item.toUid, item.uid)">
+      <li v-for="it in sysNotice" style="display:flex;padding: 7px 15px;margin-bottom:5px;color:#F9CE00;font-size:18px;line-height:20px" @click="goSysNotice(it)">
+        <div style="margin-right:20px">系统通知 : </div>
+        <div style="flex:1">{{it.title}}</div>
+      </li>
+      <li v-for="ite in noticeList" style="display:flex;padding: 7px 15px;margin-bottom:5px" @click="goGoods(ite)">
+        <div>
+          <img :src="ite.icon" alt="" class="avatar" style="width:50px;height:50px">
+        </div>
+        <div style="flex:1;margin-left:15px;padding-top:10px;color:#f40">
+          <div style="margin-bottom:6px">{{ite.name}}</div>
+          <p>发布了一条新的商品，快去看看吧</p>
+        </div>
+        <div class="right">
+          <img :src="ite.icon" alt="" style="width: 70px;height: 70px;">
+        </div>
+      </li>
+      <li class="message-item" v-for="item in userList" @click="goChatting(item.toUid, item.uid, item.name)" >
         <div>
           <img :src="item.icon" alt=""  class="avatar">
         </div>
@@ -54,7 +70,7 @@
 <script>
 import tabBar from '../components/tabBar'
 import headerBar from '../components/headerBar'
-import { Loadmore,Indicator } from 'mint-ui';
+import { Loadmore, Indicator, Popup } from 'mint-ui';
 import { mapState } from 'vuex';
 import axios from '../utils/request'
 export default {
@@ -67,7 +83,9 @@ export default {
       allLoaded:true,
       list:{},
       userList: [],
-      avatar: ''
+      avatar: '',
+      noticeList: [],
+      sysNotice: []
     }
   },
   computed: {
@@ -79,9 +97,18 @@ export default {
     }
   },
   mounted () {
-    this.getUnread()
-    // this.getMessageList()
-    this.getChatList()
+    //this.getUnread()
+    if(!this.user.userInfo.uid){
+      setTimeout(()=>{
+        this.getNotification()
+        this.getChatList()
+        this.getSystemNotice()
+      },300)
+    }else{
+      this.getNotification()
+      this.getChatList()
+      this.getSystemNotice()
+    }
   },
 
   methods: {
@@ -92,14 +119,40 @@ export default {
       //   this.list.splice(0,0,'334')
       //   Indicator.close()
       // },2000)
+      this.getNotification()
+      this.getChatList()
+      this.getSystemNotice()
     },
-    
+    goSysNotice (value) {
+
+      localStorage.sysDetail = JSON.stringify(value)
+      this.$router.push({
+        name:'SysDetail',
+        params: {
+          id: value.noticeId
+        }
+      })
+    },
     getChatList () {
       axios.get(`/api/message/chat/chatList`).then(res=>{
         this.userList = res.data
       })
     },
-    goChatting (value, toUid) {
+
+    goGoods (value) {
+      this.$router.push({
+				name:'goods',
+				params: {
+					goodsId: value.productId
+				}
+			})
+    },
+    getSystemNotice () {
+      axios.get('/api/notice/query').then(res=> {
+        this.sysNotice = res.data.splice(0,1)
+      })
+    },
+    goChatting (value, toUid, username) {
       const tmpArr = this.userList.filter(item => {
         if(item.toUid == value) {
           return true
@@ -110,6 +163,7 @@ export default {
         }else {
           localStorage.chatAvator = ''
       }
+      localStorage.chatName = username
       this.$router.push({
         name:'Chat',
         params: {
@@ -130,22 +184,14 @@ export default {
         return ''
       }
     },
-
-    getMessageList () {
-      axios.get(`/api/message/notification/${this.user.userInfo.uid}`).then(res=>{
-        this.list = res.data
-      })
-    },
     getUnread () {
       axios.get(`/api/message/chat/unread`).then(res=>{
-        console.log(res)
         this.list = res.data
       })
     },
     getNotification () {
       axios.get(`/api/message/notification/${this.user.userInfo.uid}`).then(res=>{
-        console.log(res)
-        // this.list = res.data
+        this.noticeList = res.data
       })
     }
   }
