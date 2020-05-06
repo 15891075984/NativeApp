@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 20:00:19
+ * @LastEditTime: 2020-05-06 20:14:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -93,9 +93,7 @@ export default {
                 _that.$refs['chat'].scrollTop = (0 , 99999)
             })
         };
-        
         this.ws.onmessage = function (evt) {
-            console.log(evt)
             if (evt.data === '发送成功' || evt.data === '出现错误 ：连接已经存在') {return}
             var received_msg = JSON.parse(evt.data);
             var message = received_msg.message
@@ -133,7 +131,7 @@ export default {
     },
     destroyed () {
         axios({
-                url: `/api/message/chat/read/${this.toUid}`,
+                url: `/api/message/chat/read/${this.uid}`,
                 method: 'post',
                 header:{
 					'Content-Type':'application/json'
