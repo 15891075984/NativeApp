@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-06 15:02:31
+ * @LastEditTime: 2020-05-07 08:52:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -29,7 +29,7 @@
                      </div>
                 </div>
             </div>
-            <div class="item-delete" style="right:60px" v-if="currentRoute === 'down'">
+            <div class="item-delete" style="right:60px" v-if="currentRoute === '/myDown'">
                 <mt-button  plain type="primary" size="small" @click="upMyPublish" class="delete-btn">上架</mt-button>
             </div>
             <div class="item-delete">

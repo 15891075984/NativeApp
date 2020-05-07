@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-05-06 18:20:42
+ * @LastEditTime: 2020-05-07 08:46:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -22,8 +22,8 @@
                     <p class="name">{{userInfo.uname}}</p>
                     <p class="apptest">已认证</p>
                 </div>
-                <div class="" style="margin-top:11px;">
-                    <mt-button type="default" @click="handleStatus" :class="{follow: status === 0}">{{status ? '关注' : '取关'}}</mt-button>
+                <div class="" style="margin-top:11px;" v-if="followStatus !== 2 ">
+                    <mt-button  type="default" @click="handleStatus" :class="{follow: followStatus !== 0}">{{followStatus === 1 ? '关注' : '取关'}}</mt-button>
                 </div>
             </div>
             <div class="header-desc ">
@@ -92,7 +92,7 @@ export default {
         this.userId = this.$route.params.userId
         this.getUserDetail()
         this.getDynamic()
-        this.followStatus()
+        //this.setFollowStatus()
     },
     computed:{
         ...mapState({
@@ -109,26 +109,27 @@ export default {
                 if (res.code !== 0 ) return 
                 this.goodsList = res.data.productInfoVos
                 this.count.mineNum = res.data.mineNum
+                this.followStatus = res.data.state
             })
             axios.get(`/api/homePage/userInfo/${this.userId}`).then(res=>{
                 if(res.code !== 0) return
                 this.userInfo = res.data
             })
         },
-        followStatus () {
-            axios.get(`/api/homePage/mine/${this.userId}`).then(res=>{
-                if(res.code !== 0) return
-                this.followStatus = res.data
-            })
-        },
+        // setFollowStatus () {
+        //     axios.get(`/api/homePage/mine/${this.userId}`).then(res=>{
+        //         if(res.code !== 0) return
+        //         this.followStatus = res.data
+        //     })
+        // },
         
         //关注
         handleStatus () {
-            this.status = this.status ? 0 : 1
+            this.followStatus = this.followStatus ? 0 : 1
             const data = {
                 followid:this.user.userInfo.uid,
                 uid: this.userId,
-                status: this.status
+                status: this.followStatus
             }
             axios({
                 url:'/api/Graph',
