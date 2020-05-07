@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-05-05 18:03:03
+ * @LastEditTime: 2020-05-07 09:01:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { Field,Button,Indicator  } from 'mint-ui';
+import { Field,Button,Indicator,Toast  } from 'mint-ui';
 import headerBar from '../components/headerBar'
 import axios from '../utils/request'
 import { mapActions } from 'vuex'
@@ -45,6 +45,21 @@ export default {
             'getUserInfo':'user/getUserInfo'
         }),
         handleSubmit () {
+            if( !this.username ) {
+                Toast({
+                    message: '请输入用户名',
+                    duration: 2000,
+                    position: 'bottom',
+                });
+                return
+            }else if ( !this.password ){
+                Toast({
+                    message: '请输入密码',
+                    duration: 2000,
+                    position: 'bottom',
+                });
+                return
+            }
             const params = {
                 username: this.username,
                 password: this.password
