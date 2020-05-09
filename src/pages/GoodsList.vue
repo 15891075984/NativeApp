@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-04-21 18:16:44
- * @LastEditTime: 2020-05-04 12:29:46
+ * @LastEditTime: 2020-05-09 20:04:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\GoodsList.vue
@@ -14,10 +14,10 @@
             style="height:100%"
             @change.native="handleSearch"
             @keyup.enter.native="handleSearch()"
-            placeholder="搜索宝贝/用户">
+            placeholder="搜索宝贝">
 		</mt-search>
         <ul >
-            <goodsListRow :goods="goodsList"  style="min-height:90vh"></goodsListRow>
+            <goodsListRow :goods="goodsList"  style="min-height:60vh;max-height:85vh;overflow-y:scroll;padding-bottom:330px;margin-bottom:30px"></goodsListRow>
             <!-- <div v-else></div> -->
         </ul>
     </div>
@@ -50,6 +50,9 @@ export default {
 			}).then(res=>{
                 this.goodsList = res.data.product
                 this.userList = res.data.users
+                this.goodsList.forEach(item => {
+                    item.productPic = item.productPic[0]
+                })
 			})
 		},
     }

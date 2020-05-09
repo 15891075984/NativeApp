@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 12:15:01
- * @LastEditTime: 2020-05-05 17:09:38
+ * @LastEditTime: 2020-05-09 20:05:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsListRow.vue
@@ -11,7 +11,7 @@
     <div class="wrapper">
         <div class="goods-item" v-for="item in goods" @click="goGoodsDetail(item)">
             <div class="img">
-                <img class="img"  v-lazy="item.productPic" :src="item.productPic" alt="" >
+                <img class="img"  v-lazy="item.productPic" :src="item.productPic" alt="">
             </div>
             <div class="goods-content">
                 <div class="desc">{{item.productContent}}</div>
@@ -31,11 +31,10 @@ export default {
     props:['goods'],
     methods: {
         goGoodsDetail (value) {
-            console.log(value)
 			this.$router.push({
 				name: 'goods',
 				params: {
-					goodsId: value.userId
+					goodsId: value.productId
 				}
 			})
 		},
@@ -48,6 +47,10 @@ export default {
     background: #eee;
     display: flex;
     flex-wrap: wrap;
+    min-height: 70vh;
+    max-height: 90vh;
+    padding-bottom: 45px;
+    overflow-y: auto;
     .goods-item{
         width: 50%;
         box-sizing: border-box;
@@ -57,6 +60,7 @@ export default {
             border-radius: 9px 9px 0 0;
             border-bottom: 0;
             width: 100%;
+            height: 200px;
         }
         .goods-content{
             background: #fff;

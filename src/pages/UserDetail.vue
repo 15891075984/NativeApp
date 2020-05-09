@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-05-09 16:24:23
+ * @LastEditTime: 2020-05-09 20:00:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -44,14 +44,14 @@
             </div>
         </div>
         <div >
-            <mt-tab-container v-model="selected" class="content">
-                <mt-tab-container-item id="1">
+            <mt-tab-container v-model="selected" >
+                <mt-tab-container-item id="1" class="content">
                     <goodsListRow :goods="goodsList"></goodsListRow>
                 </mt-tab-container-item>
                 <mt-tab-container-item id="3">
                     <evaluateList v-for="item in 2"></evaluateList>
                 </mt-tab-container-item>
-                <mt-tab-container-item id="4">
+                <mt-tab-container-item id="4" class="content" style="padding-bottom:80px">
                     <dynamicList v-for="item in dynamicList" :dynamic="item"></dynamicList>
                 </mt-tab-container-item>
             </mt-tab-container>
@@ -232,7 +232,7 @@ export default {
         font-size: 14px;
         color: #000;
         padding: 0;
-        padding-bottom: 82px;
+        padding-bottom: 40px;
         height: 72vh;
         overflow: auto;
         margin-top: 3px;
