@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 20:31:08
+ * @LastEditTime: 2020-05-09 15:59:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -18,7 +18,7 @@
                 <ul style="padding-bottom: 160px;padding-top:50px;" ref="chat-ul">
                     <li class="chat-item" v-for="(item,index) in list" :key="index">
                         <div class="item-you" v-if="handleFromOrTo(item)">
-                            <img :src="chatAvator" alt="" style="width:30px;height:30px;border-radius:5px">
+                            <img :src="chatAvator" alt="" @click = "goUserInfo" style="width:30px;height:30px;border-radius:5px">
                             <p class="item-message">{{item.message}}</p>
                         </div>
                         <div class="item-me" v-else>
@@ -145,6 +145,14 @@ export default {
     methods: {
         handleFromOrTo (item) {
             return !(item.fromUid == this.uid)
+        },
+        goUserInfo (item) {
+            this.$router.push({
+                name: 'UserDetail',
+                params: {
+                    userId:this.uid
+                }
+            })
         },
         submit () {
             let _that = this

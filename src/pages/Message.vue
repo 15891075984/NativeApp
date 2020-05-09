@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 12:20:00
- * @LastEditTime: 2020-05-06 22:04:23
+ * @LastEditTime: 2020-05-09 16:42:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\notFound.vue
@@ -9,12 +9,12 @@
 <template>
   <div >
      <headerBar title="我的消息"></headerBar>
-    <mt-loadmore :top-method="loadTop"
+    <!-- <mt-loadmore :top-method="loadTop"
                   topPullText='下拉加载...'
                   topLoadingText='释放刷新...'
-                  ref="loadmore" :topDistance="100">
-    <div>
-    <ul style="margin-top: 80px; height:88vh;overflow:auto;margin-bottom:70px" >
+                  ref="loadmore" :topDistance="0"> -->
+    <div style="margin-top: 40px; height:80vh;overflow-y:auto;padding-top:25px;padding-bottom:370px">
+    <ul >
       <li v-for="it in sysNotice" style="display:flex;padding: 7px 15px;margin-bottom:5px;color:#F9CE00;font-size:18px;line-height:20px" @click="goSysNotice(it)">
         <div style="margin-right:20px">系统通知 : </div>
         <div style="flex:1">{{it.title}}</div>
@@ -28,7 +28,7 @@
           <p>发布了一条新的商品，快去看看吧</p>
         </div>
         <div class="right">
-          <img :src="ite.icon" alt="" style="width: 70px;height: 70px;">
+          <img :src="ite.img" alt="" style="width: 70px;height: 70px;">
         </div>
       </li>
       <li class="message-item" v-for="item in userList" @click="goChatting(item.toUid, item.uid, item.name)" >
@@ -52,16 +52,16 @@
         </div>
       </li>
     </ul>
-    <div slot="top" class="mint-loadmore-top ">
+    <!-- <div slot="top" class="mint-loadmore-top ">
       <div v-show="allLoaded !== 'loading'">
         加载最新...
         <div style="height:40px;" class="an">
           <img src="../assets/img/加载4.png" alt="" style="height:100%">
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
-  </mt-loadmore>
+  <!-- </mt-loadmore> -->
     <tabBar></tabBar>
   </div>
   

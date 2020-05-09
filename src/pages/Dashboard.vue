@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-05-05 17:56:51
+ * @LastEditTime: 2020-05-09 16:26:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -56,7 +56,7 @@
 			v-infinite-scroll="loadMore"
 			infinite-scroll-disabled="loading"
 			infinite-scroll-distance="50">
-			<goodsCard :news="goodsHomeList" style="padding-bottom:18px"></goodsCard>
+			<goodsCard :news="goodsHomeList" style="padding-bottom:45px"></goodsCard>
 		</ul>
 
     </div>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-05-07 08:46:23
+ * @LastEditTime: 2020-05-09 16:24:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -232,7 +232,7 @@ export default {
         font-size: 14px;
         color: #000;
         padding: 0;
-        padding-bottom: 30px;
+        padding-bottom: 82px;
         height: 72vh;
         overflow: auto;
         margin-top: 3px;
