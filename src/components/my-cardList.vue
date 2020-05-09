@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-07 08:52:11
+ * @LastEditTime: 2020-05-09 20:34:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
@@ -34,7 +34,7 @@
             </div>
             <div class="item-delete">
                 <mt-button v-if="showDownMyPublish" plain type="primary" size="small" @click="downMyPublish" class="delete-btn">下架</mt-button>
-                <mt-button v-else plain type="danger" size="small" @click="deleteMyPublish(user.handle)" class="delete-btn">删除</mt-button>
+                <mt-button v-if="showDeleteBtn" plain type="danger" size="small" @click="deleteMyPublish(user.handle)" class="delete-btn">删除</mt-button>
                 
             </div>
     </div>
@@ -63,6 +63,15 @@ export default {
         }),
         showDownMyPublish () {
             if (this.currentRoute === '/myPublish') return true
+        },
+        showDeleteBtn () {
+            const btnArr = ['/myBuy','/mySell','/myDown']
+            const tmp = btnArr.filter(item=>{
+                if (this.currentRoute === item) {
+                    return true
+                }
+            })
+            return tmp.length >= 1 ? true: false
         }
     },
     methods: {
