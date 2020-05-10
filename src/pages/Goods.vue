@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-09 16:03:09
+ * @LastEditTime: 2020-05-10 11:59:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -73,7 +73,7 @@
 		<div class="goods-bottom" v-if="!messageState">
 			<div class="goods-item-left">
 				<div class="goods-bottom-like items" @click="handleLike">
-					<i :class="['iconfont','icon-dianzan',{iconActive:likeActive}]"></i>
+					<i :class="['iconfont','icon-dianzan',{iconActive:this.goods.goods.praiseStatus === 0 ? true : false}]"></i>
 					<span style="font-size:12px">点赞</span>
 				</div>
 				<div class="goods-item-message items" @click="handleMessageState(null)">
@@ -81,7 +81,7 @@
 					<span style="font-size:12px">留言</span>
 				</div>
 				<div class="goods-item-collect items" @click="handleCollect">
-					<i :class="['iconfont','icon-shoucang-active',{iconActive:collectActive}]"></i>
+					<i :class="['iconfont','icon-shoucang-active',{iconActive:this.goods.goods.collectStatus === 0 ? true : false}]"></i>
 					<span style="font-size:12px">收藏</span>
 				</div>
 			</div>
@@ -129,7 +129,7 @@
 	</div>
 </template>
 <script>
-import {mapState,mapActions,Range} from 'vuex'
+import {mapState,mapActions,Range,mapMutations} from 'vuex'
 import headerBar from '../components/headerBar'
 import axios from '../utils/request'
 import { Field,Indicator,Popup } from 'mint-ui';
@@ -138,8 +138,8 @@ export default {
 		return {
 			show: true,
 			status:0,
-			likeActive: false,
-			collectActive: false,
+			//likeActive: false,
+			//collectActive: false,
 			message:'',
 			messageState: false,
 			sendMessage: false,
@@ -160,7 +160,13 @@ export default {
 		leaveMessage () {
 			console.log(this.goods.leaveMessage)
 			return this.goods.leaveMessage
-		}
+		},
+		// likeActive () {
+		// 	return this.goods.goods.praiseStatus === 0 ? true : false
+		// },
+		// collectActive () {
+		// 	return this.goods.goods.collectStatus === 0 ? true : false
+		// }
 	},
 	mounted () {
 		this.goodsId = this.$route.params.goodsId
@@ -172,6 +178,9 @@ export default {
 		...mapActions({
 			getGoods:'goods/getGoods',
 			getLeaveMessage: 'goods/getLeaveMessage'
+		}),
+		...mapMutations({
+			setGoodsStatus: 'goods/setGoodsStatus'
 		}),
 		getGoodsDetail () {
 			this.getGoods({goodsId:this.goodsId})
@@ -235,7 +244,7 @@ export default {
 				productId: this.goods.goods.id,
 				status: 1
 			}
-			if (this.likeActive) {
+			if (this.goods.goods.praiseStatus == 0) {
 				//取消点赞
 				data.status = 1
 			}else {
@@ -250,7 +259,11 @@ export default {
 					'Content-Type':'application/json'
 				}
 			}).then(res=>{
-				this.likeActive = !this.likeActive
+				//this.likeActive = !this.likeActive
+				this.setGoodsStatus({
+					type: 'praiseStatus',
+					value: this.goods.goods.praiseStatus === 0 ? 1 : 0
+				})
 			})
 		},
 		//收藏
@@ -259,13 +272,13 @@ export default {
 				productId: this.goods.goods.id,
 				status: 1
 			}
-			console.log(222,this.collectActive)
-			if (this.collectActive) {
-				//取消点赞
+			//console.log(222,this.collectActive)
+			if (this.goods.goods.collectStatus == 0) {
+				//取消收藏
+				data.status = 1
 			}else {
-				//点赞
+				//收藏
 				data.status = 0
-				
 			}
 			axios({
 				url:'/api/userCollect/collectStatus',
@@ -275,7 +288,11 @@ export default {
 					'Content-Type':'application/json'
 				}
 			}).then(res=>{
-				this.collectActive = !this.collectActive
+				//this.collectActive = !this.collectActive
+				this.setGoodsStatus({
+					type: 'collectStatus',
+					value: this.goods.goods.collectStatus === 0 ? 1 : 0
+				})
 			})
 		},
 		//留言

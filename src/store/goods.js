@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-05-05 17:14:31
+ * @LastEditTime: 2020-05-10 11:45:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\store\goods.js
@@ -53,6 +53,9 @@ const goods = {
             //     state.leaveMessage = data
             // }
             state.leaveMessage = data
+        },
+        setGoodsStatus (state, data) {
+            state.goods[data.type] = data.value
         }
     },
     actions: {
