@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 10:15:22
- * @LastEditTime: 2020-05-06 14:07:42
+ * @LastEditTime: 2020-05-12 15:17:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \SellingPlat_APP\src\pages\PublishList.vue
+ * @FilePath: \SellingPlat_APP\src\pa22ges\PublishList.vue
  -->
 <template>
     <div class="publish-list">
