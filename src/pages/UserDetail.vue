@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 11:00:04
- * @LastEditTime: 2020-05-09 20:00:35
+ * @LastEditTime: 2020-05-12 21:59:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\UserDetail.vue
@@ -46,7 +46,7 @@
         <div >
             <mt-tab-container v-model="selected" >
                 <mt-tab-container-item id="1" class="content">
-                    <goodsListRow :goods="goodsList"></goodsListRow>
+                    <goodsListRow :goods="goodsList" :path="$route.name"></goodsListRow>
                 </mt-tab-container-item>
                 <mt-tab-container-item id="3">
                     <evaluateList v-for="item in 2"></evaluateList>

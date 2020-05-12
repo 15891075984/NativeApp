@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-22 12:15:01
- * @LastEditTime: 2020-05-09 20:05:46
+ * @LastEditTime: 2020-05-12 21:59:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsListRow.vue
@@ -28,9 +28,12 @@
 
 <script>
 export default {
-    props:['goods'],
+    props:['goods','path'],
     methods: {
         goGoodsDetail (value) {
+            if (this.path === 'UserDetail') {
+                value.productId = value.id
+            }
 			this.$router.push({
 				name: 'goods',
 				params: {
