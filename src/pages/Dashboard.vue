@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 11:24:25
- * @LastEditTime: 2020-05-12 13:58:31
+ * @LastEditTime: 2020-05-09 16:26:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Dashboard.vue
@@ -186,7 +186,7 @@ export default {
 			this.status = this.status ? 0 : 1
 		},
 		getHome () {
-			axios.get('/second-hand/home').then(res=>{
+			axios.get('/home').then(res=>{
 				if(res.code !== 0) return
 				res.data.product.records.forEach(item => {
 					if(!item.picList.length) {

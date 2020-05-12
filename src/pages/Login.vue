@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-08 14:09:12
- * @LastEditTime: 2020-05-12 13:53:48
+ * @LastEditTime: 2020-05-07 09:01:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Login.vue
@@ -66,7 +66,7 @@ export default {
             }
             Indicator.open('加载中...');
             axios({
-                url: '/second-hand/login',
+                url: '/login',
                 method: 'post',
                 data: {...params},
                 headers: {'Content-Type': 'application/json'}
