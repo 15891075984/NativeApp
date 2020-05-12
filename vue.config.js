@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:12:15
- * @LastEditTime: 2020-04-21 18:13:26
+ * @LastEditTime: 2020-05-12 13:57:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\vue.config.js
@@ -20,10 +20,14 @@ module.exports = {
         public: 'http://localhost:8080',
         //sockHost: 'http://172.16.17.54:8080',
         proxy: {
-            '/':{
-                target:'http://47.93.117.14:8080/second-hand/',
+            '/second-hand':{
+                target:'http://47.93.117.14:8080/',
                 changeOrigin:true
             },
+            '/api/':{
+              target:'http://47.93.117.14:8080/second-hand/',
+              //changeOrigin:true
+          },
             '/socket':{
               target:'http://47.93.117.14:9091/',
               changeOrigin:true

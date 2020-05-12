@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-13 20:53:54
- * @LastEditTime: 2020-05-05 18:03:25
+ * @LastEditTime: 2020-05-12 13:59:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Register.vue
@@ -95,7 +95,7 @@ export default {
             }
             Indicator.open('注册中...');
             axios({
-                url: '/register',
+                url: '/second-hand/register',
                 method: 'post',
                 data: {...params},
                 headers: {'Content-Type': 'application/json'}
