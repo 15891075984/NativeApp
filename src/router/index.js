@@ -1,24 +1,18 @@
 /*
  * @Author: your name
  * @Date: 2020-02-19 15:06:38
- * @LastEditTime: 2020-05-06 21:28:20
+ * @LastEditTime: 2020-05-13 18:04:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \App\src\router\index.js
  */
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Index from '@/pages/Index'
-// import Category from '@/pages/Category'
-// import Search from '@/pages/Search'
-// import Buy from '@/pages/Buy'
-// import NotFound from '@/pages/notFound'
-// import Fishpond from '@pages/Fishpond'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
+    routes: [{
         path: '/',
         name:'index',
         redirect:'/dashboard'

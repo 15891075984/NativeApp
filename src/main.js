@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-04-17 15:32:57
+ * @LastEditTime: 2020-05-13 17:04:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\main.js
@@ -36,22 +36,6 @@ Vue.use(VueI18n);
 Vue.use(Mint)
 // Vue.use(Lazyload)
 Vue.use(VueAwesomeSwiper)
-// const uploaderConfig = {
-//     // file uploader service url
-//     uploadFileUrl: 'http://xxx/upload/publicFileUpload',
-//     // file delete service url
-//     deleteFileUrl: 'http://xxx/upload/deleteUploadFile',
-//     // set the way to show upload message(upload fail message)
-//     showMessage: (vue, message) => {
-//       //using v-dialogs to show message
-//         vue.$dlg.alert(message, {messageType: 'error'});
-//         }
-//     };
-//   // install plugin with options
-//   Vue.use(vUploader, uploaderConfig);
-const i18n = new VueI18n({
-    locale: 'zh'
-});
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
     const routerName = to.name
@@ -70,16 +54,6 @@ router.beforeEach((to, from, next) => {
         Toast('未查询到用户登录，请登录')
         return
     }
-    if ( path ==='/myPublish' ) {
-        router.app.$options.store.commit('user/setHandle','publish')
-    }
-    if ( path ==='/myDown' ) {
-        router.app.$options.store.commit('user/setHandle','down')
-    }
-    // else if (to.meta.permission) {
-    //     // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已
-    //     role === 'admin' ? next() : next('/403');
-    // }
     next()
 });
 

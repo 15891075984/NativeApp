@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-03-08 11:14:35
- * @LastEditTime: 2020-03-25 15:22:57
+ * @LastEditTime: 2020-05-13 17:18:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\utils\request.js
@@ -29,8 +29,7 @@ axios.interceptors.request.use(config=>{
         return config
     }
     if (localStorage.token) { //判断token是否存在
-        //config.setH
-        console.log(JSON.parse(localStorage.token))
+        //config.setHeaders
         config.headers.token = JSON.parse(localStorage.token);  //将token设置成请求头
     }
     return config

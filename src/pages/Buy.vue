@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-25 16:39:27
- * @LastEditTime: 2020-05-05 09:22:22
+ * @LastEditTime: 2020-05-15 08:38:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Buy.vue
@@ -106,9 +106,9 @@ export default {
         },
         getOrderId (goodsId) {
             const params = {
-                productId: goodsId
+                productid: goodsId
             }
-            axios.get('/api/order/getId',params).then(res => {
+            axios({url:'/api/order/getId',params}).then(res => {
                 if (res.code !== 0 ) return
                 this.orderId = res.message
             })
