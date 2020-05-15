@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 11:11:37
- * @LastEditTime: 2020-05-10 11:59:14
+ * @LastEditTime: 2020-05-15 10:04:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\pages\Goods.vue
@@ -59,7 +59,7 @@
 							<div class="message">{{item.parentComments.message}}</div>
 							<div class="children-message" v-if="item.childrenComments.length >= 1">
 								<div v-for="ite in item.childrenComments" @click="handleMessageState(item.parentComments.commentId)">
-									{{ite.uname}} : 
+									{{ite.uname}}@{{ite.toUname}} : 
 									{{ite.message}}
 								</div>
 								
