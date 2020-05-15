@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-03-10 12:31:54
- * @LastEditTime: 2020-05-05 16:27:53
+ * @LastEditTime: 2020-05-15 17:22:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \SellingPlat_APP\src\components\goodsCard.vue
@@ -11,7 +11,7 @@
       <div class="mt-cell" v-for="data in news" :key="data.id" @click="goGoodsDetail(data)">
     	<div class="head" style="display:flex">
             <div class="head-img">
-                <img src="../assets/img/avatar.jpg" class="avatar" alt="">
+                <img :src="data.icon" class="avatar" alt="" v-lazy="data.icon">
             </div>
     		<div class="info">
     			<p class="title">{{data.productName}}</p>
